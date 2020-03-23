@@ -32,12 +32,12 @@ dependencies {
     api project (':extensions')
 
     //Uncategory
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.appcompat:appcompat:$app_compat_version"
-    implementation "androidx.core:core-ktx:$core_ktx_version"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api "androidx.appcompat:appcompat:$app_compat_version"
+    api "androidx.core:core-ktx:$core_ktx_version"
 
     //Layout
-    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
+    api "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
 
     //Test
     testImplementation "junit:junit:$junit_version"
