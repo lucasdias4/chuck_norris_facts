@@ -1,3 +1,4 @@
 rootProject.name='chuck norris facts'
 include ':app'
 include ':home'
+include ':extensions'
