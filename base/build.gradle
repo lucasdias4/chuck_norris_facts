@@ -29,7 +29,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //Modules
-    implementation project (':extensions')
+    api project (':extensions')
 
     //Uncategory
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
