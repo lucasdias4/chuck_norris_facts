@@ -39,6 +39,15 @@ dependencies {
     //Layout
     api "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
 
+    //Coroutines
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+
+    //Koin
+    api "org.koin:koin-android:$koin_version"
+    api "org.koin:koin-android-viewmodel:$koin_version"
+    api "org.koin:koin-core:$koin_version"
+
     //Test
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$junit_android_version"

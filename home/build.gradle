@@ -30,6 +30,7 @@ dependencies {
 
     //Modules
     api project (':base')
+    api project (':factcatalog')
 
     //Test
     testImplementation "junit:junit:$junit_version"
