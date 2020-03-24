@@ -1,7 +1,6 @@
 package com.lucasdias.chucknorrisfacts
 
 import android.app.Application
-import android.util.Log
 import com.lucasdias.factcatalog.di.factCatalogModule
 import com.lucasdias.log.LogApp
 import org.koin.android.ext.koin.androidContext
