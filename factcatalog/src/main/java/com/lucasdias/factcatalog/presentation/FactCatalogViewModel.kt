@@ -1,8 +1,8 @@
 package com.lucasdias.factcatalog.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.lucasdias.factcatalog.domain.usecase.SearchFactsBySubjectFromApi
+import com.lucasdias.log.LogApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,7 +17,7 @@ internal class FactCatalogViewModel(
         CoroutineScope(coroutineContext).launch {
             val result = searchFactsBySubjectFromApi.invoke(subject = "water")
             result?.facts?.forEach {
-                Log.i("Request result", "${it.categories}")
+                LogApp.i("Request result", "${it.categories}")
             }
         }
     }
