@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="icon_height_toolbar_content_layout">40dp</dimen>
+    <dimen name="icon_width_toolbar_content_layout">40dp</dimen>
+    <dimen name="icon_margin_start_toolbar_content_layout">16dp</dimen>
+
+    <dimen name="back_button_height_toolbar_content_layout">24dp</dimen>
+    <dimen name="back_button_width_toolbar_content_layout">24dp</dimen>
+    <dimen name="back_button_margin_start_toolbar_content_layout">16dp</dimen>
+    <dimen name="icon_padding_start_with_back_button_toolbar_content_layout">16dp</dimen>
+
+    <dimen name="title_margin_start_toolbar_content_layout">8dp</dimen>
+    <dimen name="title_padding_bottom_toolbar_content_layout">5dp</dimen>
+
+    <dimen name="separetor_height_toolbar_content_layout">2dp</dimen>
+
+    <dimen name="title_without_icon_padding_start_toolbar_content_layout">16dp</dimen>
+</resources>

@@ -1,4 +1,6 @@
 <resources>
+    <string name="toolbar_title_home">Chuck Norris Facts</string>
+
     <string name="bottom_navigation_facts">facts</string>
     <string name="bottom_navigation_search">search</string>
 </resources>

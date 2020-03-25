@@ -10,9 +10,11 @@ import com.lucasdias.bottomnavigation.model.BottomNavigationOption
 import com.lucasdias.extensions.bind
 import com.lucasdias.extensions.toast
 import com.lucasdias.factcatalog.presentation.FactCatalogFragment
+import com.lucasdias.toolbar.Toolbar
 
 class HomeActivity : AppCompatActivity() {
 
+    private val toolbarContainer by bind<FrameLayout>(R.id.toolbar_container_home_activity)
     private val fragmentContainer by bind<FrameLayout>(R.id.fragment_container_home_activity)
     private val bottomNavigationContainer
             by bind<FrameLayout>(R.id.bottom_navigation_container_home_activity)
@@ -23,6 +25,7 @@ class HomeActivity : AppCompatActivity() {
 
         val factCatalogFragment = FactCatalogFragment.newInstance()
         changeFragment(factCatalogFragment)
+        initToolbar()
         initBottomNavigation()
     }
 
@@ -31,6 +34,18 @@ class HomeActivity : AppCompatActivity() {
             .beginTransaction()
             .replace(fragmentContainer.id, fragment)
             .commit()
+    }
+
+    private fun initToolbar() {
+        val toolbarIcon = resources.getDrawable(R.drawable.ic_toolbar, null)
+        val toolbarTitle = resources.getString(R.string.toolbar_title_home)
+        val toolbarTitleStyle = R.style.DefaultToolbarTitle
+        val toolbarColor = R.color.lightWhite
+        Toolbar.initializeToolbar(this@HomeActivity, toolbarContainer, supportActionBar)
+        Toolbar.setToolbarColor(this@HomeActivity, toolbarColor)
+        Toolbar.setToolbarIcon(this@HomeActivity, toolbarIcon)
+        Toolbar.setToolbarTitle(this@HomeActivity, toolbarTitle)
+        Toolbar.setToolbarTitleStyle(this@HomeActivity, toolbarTitleStyle)
     }
 
     private fun initBottomNavigation() {

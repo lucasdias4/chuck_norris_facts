@@ -1,10 +1,10 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    buildToolsVersion "29.0.2"
+
 
     defaultConfig {
         minSdkVersion 21
@@ -29,10 +29,17 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //Modules
-    api project (':base')
-    api project (':bottomnavigation')
-    api project (':factcatalog')
-    api project (':toolbar')
+    implementation project(':extensions')
+
+    //Uncategory
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.appcompat:appcompat:$app_compat_version"
+    implementation "androidx.core:core-ktx:$core_ktx_version"
+
+    //Layout
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
+    implementation "com.google.android.material:material:$material_version"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:$coordinator_layout_version"
 
     //Test
     testImplementation "junit:junit:$junit_version"

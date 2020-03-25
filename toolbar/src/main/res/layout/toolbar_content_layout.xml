@@ -1,0 +1,53 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar_content_layout"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    tools:visibility="visible">
+
+    <ImageView
+        android:id="@+id/back_button_toolbar_content_layout"
+        android:layout_width="@dimen/back_button_width_toolbar_content_layout"
+        android:layout_height="@dimen/back_button_height_toolbar_content_layout"
+        android:layout_marginStart="@dimen/back_button_margin_start_toolbar_content_layout"
+        android:src="@drawable/toolbar_back_button"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/icon_toolbar_content_layout"
+        android:layout_width="@dimen/icon_width_toolbar_content_layout"
+        android:layout_height="@dimen/icon_height_toolbar_content_layout"
+        android:layout_marginStart="@dimen/icon_margin_start_toolbar_content_layout"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/back_button_toolbar_content_layout"
+        app:layout_constraintEnd_toStartOf="@+id/title_toolbar_content_layout"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/title_toolbar_content_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/title_margin_start_toolbar_content_layout"
+        android:paddingBottom="@dimen/title_padding_bottom_toolbar_content_layout"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/icon_toolbar_content_layout"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <View
+        android:id="@+id/separator_toolbar_content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/separetor_height_toolbar_content_layout"
+        android:background="@drawable/bottom_shadow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

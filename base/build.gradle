@@ -39,6 +39,8 @@ dependencies {
 
     //Layout
     api "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
+    api "com.google.android.material:material:$material_version"
+
 
     //Coroutines
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
