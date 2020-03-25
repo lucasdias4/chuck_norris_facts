@@ -29,6 +29,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //Modules
+    api project (':connectivity')
     api project (':extensions')
     api project (':log')
 

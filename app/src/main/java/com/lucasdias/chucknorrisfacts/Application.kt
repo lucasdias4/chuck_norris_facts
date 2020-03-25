@@ -2,6 +2,7 @@ package com.lucasdias.chucknorrisfacts
 
 import android.app.Application
 import com.lucasdias.factcatalog.di.factCatalogModule
+import com.lucasdias.home.di.homeModule
 import com.lucasdias.log.LogApp
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.logger.AndroidLogger
@@ -20,7 +21,8 @@ class Application : Application() {
             logger(koinLogger())
             modules(
                 listOf(
-                    factCatalogModule
+                    factCatalogModule,
+                    homeModule
                 )
             )
         }

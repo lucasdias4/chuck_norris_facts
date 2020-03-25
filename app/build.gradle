@@ -38,8 +38,9 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //Modules
-    implementation project (':home')
     implementation project (':base')
+    implementation project (':factcatalog')
+    implementation project (':home')
 
     //Test
     testImplementation "junit:junit:$junit_version"
