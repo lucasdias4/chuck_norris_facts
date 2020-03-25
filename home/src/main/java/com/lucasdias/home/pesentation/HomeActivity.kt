@@ -30,8 +30,6 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var snackbar: Snackbar
     private lateinit var snackbarText: TextView
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -100,7 +98,6 @@ class HomeActivity : AppCompatActivity() {
         snackbar.setText(getString(R.string.connectivity_off_snackbar))
         snackbar.show()
     }
-
 
     private fun initToolbar() {
         val toolbarIcon = resources.getDrawable(R.drawable.ic_toolbar, null)
