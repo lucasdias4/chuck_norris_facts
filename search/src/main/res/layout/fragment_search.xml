@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/search_motion_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mediumWhite"
+    app:layoutDescription="@xml/fragment_search_motion_scene"
+    tools:context=".presentation.SearchFragment">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_area_search_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/input_area_margin_top_search_fragment"
+        android:fontFamily="@font/roboto_regular"
+        android:paddingStart="@dimen/input_area_margin_top_padding_start_search_fragment"
+        android:paddingEnd="@dimen/input_area_margin_top_padding_end_search_fragment"
+        app:hintTextColor="@color/mediumGray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_edit_text_search_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:hint="@string/input_edit_text_hint_search_fragment"
+            android:maxLines="1"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:textSize="@dimen/input_edit_text_text_size_search_fragment" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/description_text_search_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        android:text="@string/description_text_search_fragment"
+        android:textColor="@color/darkBlack"
+        android:textSize="@dimen/description_text_search_fragment"
+        app:layout_constraintBottom_toTopOf="@id/historic_list_search_fragment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_area_search_fragment" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/historic_list_search_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/history_list_height_search_fragment"
+        android:layout_marginTop="@dimen/history_margin_top_search_fragment"
+        app:layout_constraintBottom_toTopOf="@id/search_button_search_fragment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/description_text_search_fragment" />
+
+    <Button
+        android:id="@+id/search_button_search_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/search_button_margin_start_search_fragment"
+        android:layout_marginTop="@dimen/search_button_margin_top_search_fragment"
+        android:layout_marginEnd="@dimen/search_button_margin_end_search_fragment"
+        android:layout_marginBottom="@dimen/search_button_margin_bottom_search_fragment"
+        android:background="@drawable/buttom_custom_shape"
+        android:text="@string/button_to_search_search_fragment"
+        android:textColor="@color/lightGray"
+        android:textSize="@dimen/search_button_text_size_search_fragment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.motion.widget.MotionLayout>

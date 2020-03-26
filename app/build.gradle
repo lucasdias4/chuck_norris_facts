@@ -41,6 +41,7 @@ dependencies {
     implementation project (':base')
     implementation project (':factcatalog')
     implementation project (':home')
+    implementation project (':search')
 
     //Test
     testImplementation "junit:junit:$junit_version"

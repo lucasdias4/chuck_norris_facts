@@ -42,8 +42,6 @@ dependencies {
 
     //Layout
     implementation "androidx.cardview:cardview:$card_view_version"
-    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
-    implementation "androidx.recyclerview:recyclerview:$recycler_view_version"
 
     //Result
     implementation "com.github.kittinunf.result:result:$result_version"

@@ -1,10 +1,10 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    buildToolsVersion "29.0.2"
+
 
     defaultConfig {
         minSdkVersion 21
@@ -29,28 +29,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //Modules
-    api project (':connectivity')
-    api project (':extensions')
-    api project (':log')
-
-    //Uncategory
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api "androidx.appcompat:appcompat:$app_compat_version"
-    api "androidx.core:core-ktx:$core_ktx_version"
-
-    //Layout
-    api "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
-    api "com.google.android.material:material:$material_version"
-    implementation "androidx.recyclerview:recyclerview:$recycler_view_version"
-
-    //Coroutines
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
-
-    //Koin
-    api "org.koin:koin-android:$koin_version"
-    api "org.koin:koin-android-viewmodel:$koin_version"
-    api "org.koin:koin-core:$koin_version"
+    implementation project(':base')
 
     //Test
     testImplementation "junit:junit:$junit_version"

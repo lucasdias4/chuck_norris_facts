@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    Search Fragment-->
+    <dimen name="input_area_margin_top_search_fragment">30dp</dimen>
+    <dimen name="input_area_margin_top_padding_start_search_fragment">30dp</dimen>
+    <dimen name="input_area_margin_top_padding_end_search_fragment">30dp</dimen>
+    <dimen name="input_edit_text_text_size_search_fragment">20sp</dimen>
+
+    <dimen name="history_list_height_search_fragment">0dp</dimen>
+    <dimen name="history_margin_top_search_fragment">30dp</dimen>
+
+    <dimen name="search_button_text_size_search_fragment">18sp</dimen>
+    <dimen name="search_button_height_search_fragment">45dp</dimen>
+    <dimen name="search_button_margin_top_search_fragment">10dp</dimen>
+    <dimen name="search_button_margin_bottom_search_fragment">10dp</dimen>
+    <dimen name="search_button_margin_start_search_fragment">10dp</dimen>
+    <dimen name="search_button_margin_end_search_fragment">10dp</dimen>
+
+    <dimen name="search_button_top_left_radius">25dp</dimen>
+    <dimen name="search_button_top_right_radius">25dp</dimen>
+    <dimen name="search_button_bottom_left_radius">25dp</dimen>
+    <dimen name="search_button_bottom_right_radius">25dp</dimen>
+
+    <dimen name="description_text_search_fragment">18sp</dimen>
+
+    <!--    Search Item-->
+    <dimen name="item_text_size_search_fragment">20sp</dimen>
+    <dimen name="item_text_padding_start_search_fragment">20dp</dimen>
+    <dimen name="item_text_padding_end_search_fragment">20dp</dimen>
+    <dimen name="item_text_margin_search_fragment">8dp</dimen>
+    <dimen name="item_layout_height_search_fragment">45dp</dimen>
+</resources>

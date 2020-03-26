@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.lucasdias.bottomnavigation.BottomNavigation
 import com.lucasdias.bottomnavigation.model.BottomNavigationOption
@@ -16,6 +17,7 @@ import com.lucasdias.extensions.bind
 import com.lucasdias.extensions.toast
 import com.lucasdias.factcatalog.presentation.FactCatalogFragment
 import com.lucasdias.home.R
+import com.lucasdias.search.presentation.SearchFragment
 import com.lucasdias.toolbar.Toolbar
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -26,6 +28,8 @@ class HomeActivity : AppCompatActivity() {
     private val fragmentContainer by bind<FrameLayout>(R.id.fragment_container_home_activity)
     private val bottomNavigationContainer
             by bind<FrameLayout>(R.id.bottom_navigation_container_home_activity)
+    private lateinit var searchFragment: SearchFragment
+    private lateinit var factCatalogFragment: FactCatalogFragment
     private lateinit var connectivity: Connectivity
     private lateinit var snackbar: Snackbar
     private lateinit var snackbarText: TextView
@@ -34,13 +38,27 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        val factCatalogFragment = FactCatalogFragment.newInstance()
-        changeFragment(factCatalogFragment)
         initToolbar()
         initBottomNavigation()
         initConnectivityCallback()
         initConnectivitySnackbar()
         initConnectivityObserver()
+
+        startFactCatalogFragment()
+    }
+
+    private fun startFactCatalogFragment() {
+        factCatalogFragment = FactCatalogFragment.newInstance()
+        changeFragment(factCatalogFragment)
+    }
+
+        private fun startSearchFragment() {
+        val searchActionMethod = { searchText: String ->
+            selectBottomNavigationOptionProgrammatically(BottomNavigationEnum.RESULT.id)
+            toast("Pesquisa: $searchText")
+        }
+        searchFragment = SearchFragment.newInstance(searchActionMethod)
+        changeFragment(searchFragment)
     }
 
     private fun changeFragment(fragment: Fragment) {
@@ -121,18 +139,14 @@ class HomeActivity : AppCompatActivity() {
         )
 
         val resultOptionTitle = resources.getString(R.string.bottom_navigation_facts)
-        val resultOptionClickAction = {
-            toast("facts")
-        }
+        val resultOptionClickAction = { startFactCatalogFragment() }
         val resultOptionIcon = resources.getDrawable(
             R.drawable.bottom_navigation_facts_icon,
             null
         )
 
         val searchOptionTitle = resources.getString(R.string.bottom_navigation_search)
-        val searchOptionClickAction = {
-            toast("search")
-        }
+        val searchOptionClickAction = { startSearchFragment() }
         val searchOptionIcon = resources.getDrawable(
             R.drawable.bottom_navigation_search_icon,
             null
@@ -165,6 +179,11 @@ class HomeActivity : AppCompatActivity() {
             bottomNavigationContainer,
             bottomNavigationOptionList
         )
+    }
+
+    private fun selectBottomNavigationOptionProgrammatically(bottomNavigationOptionId: Int) {
+        val bottomNavigationView: BottomNavigationView? = BottomNavigation.getBottomNavigationView()
+        bottomNavigationView?.selectedItemId = bottomNavigationOptionId
     }
 
     private enum class BottomNavigationEnum(val id: Int) {
