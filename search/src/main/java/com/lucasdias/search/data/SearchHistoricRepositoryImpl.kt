@@ -2,7 +2,7 @@ package com.lucasdias.search.data
 
 import com.lucasdias.search.domain.repository.SearchHistoricRepository
 
-class SearchHistoricRepositoryImpl : SearchHistoricRepository {
+internal class SearchHistoricRepositoryImpl : SearchHistoricRepository {
 
     override fun getHistoric() = SearchHistoricCache.getHistoric()
 

@@ -3,7 +3,7 @@ package com.lucasdias.search.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
-object SearchHistoricCache {
+internal object SearchHistoricCache {
     private val searchHistoric = ArrayList<String>()
 
     private val historic = MutableLiveData<ArrayList<String>>()

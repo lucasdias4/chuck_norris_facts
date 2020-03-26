@@ -26,10 +26,10 @@ class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragmen
     private val viewModel by inject<SearchViewModel>()
     private val adapter: SearchAdapter by inject { parametersOf(searchClickMethod) }
     private val recyclerView by bind<RecyclerView>(R.id.historic_list_search_fragment)
-    private lateinit var layoutManager: RecyclerView.LayoutManager
     private val searchButton by bind<Button>(R.id.search_button_search_fragment)
     private val inputTextArea by bind<TextInputEditText>(R.id.input_edit_text_search_fragment)
     private val searchMotionLayout by bind<MotionLayout>(R.id.search_motion_layout)
+    private lateinit var layoutManager: RecyclerView.LayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater,

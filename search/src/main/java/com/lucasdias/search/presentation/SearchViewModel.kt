@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.lucasdias.search.domain.usecase.GetSearchHistoric
 import com.lucasdias.search.domain.usecase.SetSearchHistoric
 
-class SearchViewModel(
+internal class SearchViewModel(
     private val getSearchHistoric: GetSearchHistoric,
     private val setSearchHistoric: SetSearchHistoric
 ) : ViewModel() {

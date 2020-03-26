@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lucasdias.extensions.bind
 import com.lucasdias.search.R
 
-class SearchAdapter(private val searchActionMethod: ((String) -> Unit)?) :
+internal class SearchAdapter(private val searchActionMethod: ((String) -> Unit)?) :
         RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
     var searchList = mutableListOf<String>()

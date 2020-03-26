@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
+internal class HomeViewModel : ViewModel() {
 
     private var wasConnected = true
     private var showConnectivityOnSnackbar = MutableLiveData<Unit>()
