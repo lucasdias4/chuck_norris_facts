@@ -8,15 +8,19 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.lucasdias.connectivity.Connectivity
 import com.lucasdias.extensions.bind
 import com.lucasdias.factcatalog.R
+import com.lucasdias.factcatalog.di.FACT_CATALOG_CONNECTIVITY
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.qualifier.named
 
 class FactCatalogFragment : Fragment() {
 
     private val viewModel by viewModel<FactCatalogViewModel>()
     private val adapter by inject<FactCatalogAdapter>()
+    private val connectivity by inject<Connectivity>(named(FACT_CATALOG_CONNECTIVITY))
     private val recyclerView by bind<RecyclerView>(R.id.recycler_view_fact_catalog_fragment)
     private lateinit var layoutManager: LinearLayoutManager
 
@@ -36,10 +40,18 @@ class FactCatalogFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
         initViewModelObservers()
+        initConnectivityObserver()
     }
 
     fun updateSearch(searchText: String) {
         viewModel.searchFactsBySubject(subject = searchText)
+    }
+
+    private fun initRecyclerView() {
+        layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.setHasFixedSize(true)
+        recyclerView?.layoutManager = layoutManager
+        recyclerView?.adapter = adapter
     }
 
     private fun initViewModelObservers() {
@@ -50,10 +62,9 @@ class FactCatalogFragment : Fragment() {
         }
     }
 
-    private fun initRecyclerView() {
-        layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        recyclerView?.setHasFixedSize(true)
-        recyclerView?.layoutManager = layoutManager
-        recyclerView?.adapter = adapter
+    private fun initConnectivityObserver() {
+        connectivity.observe(this@FactCatalogFragment, Observer { hasNetworkConnectivity ->
+            viewModel.updateConnectivityStatus(hasNetworkConnectivity)
+        })
     }
 }

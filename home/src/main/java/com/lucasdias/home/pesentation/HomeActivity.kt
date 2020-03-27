@@ -16,20 +16,23 @@ import com.lucasdias.connectivity.Connectivity
 import com.lucasdias.extensions.bind
 import com.lucasdias.factcatalog.presentation.FactCatalogFragment
 import com.lucasdias.home.R
+import com.lucasdias.home.di.HOME_CONNECTIVITY
 import com.lucasdias.search.presentation.SearchFragment
 import com.lucasdias.toolbar.Toolbar
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.qualifier.named
 
 class HomeActivity : AppCompatActivity() {
 
     private val viewModel by viewModel<HomeViewModel>()
+    private val connectivity by inject<Connectivity>(named(HOME_CONNECTIVITY))
     private val toolbarContainer by bind<FrameLayout>(R.id.toolbar_container_home_activity)
     private val fragmentContainer by bind<FrameLayout>(R.id.fragment_container_home_activity)
     private val bottomNavigationContainer
             by bind<FrameLayout>(R.id.bottom_navigation_container_home_activity)
     private lateinit var searchFragment: SearchFragment
     private lateinit var factCatalogFragment: FactCatalogFragment
-    private lateinit var connectivity: Connectivity
     private lateinit var snackbar: Snackbar
     private lateinit var snackbarText: TextView
 
@@ -39,8 +42,8 @@ class HomeActivity : AppCompatActivity() {
 
         initToolbar()
         initBottomNavigation()
-        initConnectivityCallback()
         initConnectivitySnackbar()
+        initSnackbarObserver()
         initConnectivityObserver()
 
         startFactCatalogFragment()
@@ -67,8 +70,10 @@ class HomeActivity : AppCompatActivity() {
             .commit()
     }
 
-    private fun initConnectivityCallback() {
-        connectivity = Connectivity(application)
+    private fun initConnectivityObserver() {
+        connectivity.observe(this@HomeActivity, Observer { hasNetworkConnectivity ->
+            viewModel.mustShowConnectivitySnackbar(hasNetworkConnectivity)
+        })
     }
 
     private fun initConnectivitySnackbar() {
@@ -82,11 +87,7 @@ class HomeActivity : AppCompatActivity() {
         snackbarText.textAlignment = View.TEXT_ALIGNMENT_CENTER
     }
 
-    private fun initConnectivityObserver() {
-        connectivity.observe(this@HomeActivity, Observer { hasNetworkConnectivity ->
-            viewModel.mustShowConnectivitySnackbar(hasNetworkConnectivity)
-        })
-
+    private fun initSnackbarObserver() {
         viewModel.apply {
             showConnectivityOnSnackbar().observe(this@HomeActivity, Observer {
                 this@HomeActivity.showConnectivityOnSnackbar()

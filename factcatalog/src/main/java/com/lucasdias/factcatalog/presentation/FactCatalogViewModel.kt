@@ -14,14 +14,21 @@ internal class FactCatalogViewModel(
 ) : ViewModel() {
 
     private var coroutineContext = Dispatchers.IO
+    private var hasNetworkConnectivity = true
     private var factsLiveData = MutableLiveData<FactListResponse>()
 
     fun updateFactsLiveData(): LiveData<FactListResponse> = factsLiveData
 
     fun searchFactsBySubject(subject: String) {
-        CoroutineScope(coroutineContext).launch {
-            val result = searchFactsBySubjectFromApi.invoke(subject = subject)
-            factsLiveData.postValue(result)
+        if (hasNetworkConnectivity) {
+            CoroutineScope(coroutineContext).launch {
+                val result = searchFactsBySubjectFromApi.invoke(subject = subject)
+                factsLiveData.postValue(result)
+            }
         }
+    }
+
+    fun updateConnectivityStatus(hasNetworkConnectivity: Boolean) {
+        this.hasNetworkConnectivity = hasNetworkConnectivity
     }
 }

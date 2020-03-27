@@ -1,6 +1,7 @@
 package com.lucasdias.factcatalog.di
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.lucasdias.connectivity.Connectivity
 import com.lucasdias.factcatalog.BuildConfig.FACT_API_URL
 import com.lucasdias.factcatalog.data.fact.FactCatalogRepositoryImpl
 import com.lucasdias.factcatalog.data.fact.remote.FactCatalogService
@@ -11,12 +12,14 @@ import com.lucasdias.factcatalog.presentation.FactCatalogViewModel
 import java.util.concurrent.TimeUnit
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidApplication
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+const val FACT_CATALOG_CONNECTIVITY = "FACT_CATALOG_CONNECTIVITY"
 private const val FACT_CATALOG_RETROFIT = "FACT_CATALOG_RETROFIT"
 
 @Suppress("RemoveExplicitTypeArguments", "USELESS_CAST")
@@ -24,6 +27,12 @@ val factCatalogModule = module {
     viewModel {
         FactCatalogViewModel(
             get<SearchFactsBySubjectFromApi>()
+        )
+    }
+
+    factory(named(FACT_CATALOG_CONNECTIVITY)) {
+        Connectivity(
+            application = androidApplication()
         )
     }
 

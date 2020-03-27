@@ -14,13 +14,15 @@ internal class FactCatalogAdapter : RecyclerView.Adapter<FactCatalogAdapter.View
 
     private var factCatalog = mutableListOf<FactResponse>()
 
-    fun updateFactCatalog(factCatalog: FactListResponse) {
+    fun updateFactCatalog(factCatalog: FactListResponse?) {
         if (this.factCatalog.isNotEmpty()) {
             this.factCatalog.clear()
         }
 
-        this.factCatalog.addAll(factCatalog.facts)
-        notifyDataSetChanged()
+        factCatalog?.facts?.let { facts ->
+            this.factCatalog.addAll(facts)
+            notifyDataSetChanged()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
