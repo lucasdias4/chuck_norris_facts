@@ -36,14 +36,17 @@ class FactCatalogFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
         initViewModelObservers()
-        viewModel.searchFactsBySubject()
+    }
+
+    fun updateSearch(searchText: String) {
+        viewModel.searchFactsBySubject(subject = searchText)
     }
 
     private fun initViewModelObservers() {
         viewModel.apply {
             updateFactsLiveData().observe(this@FactCatalogFragment, Observer { facts ->
-                    adapter.updateFactCatalog(facts)
-                })
+                adapter.updateFactCatalog(facts)
+            })
         }
     }
 

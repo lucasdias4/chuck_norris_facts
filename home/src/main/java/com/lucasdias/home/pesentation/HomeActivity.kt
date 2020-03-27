@@ -14,7 +14,6 @@ import com.lucasdias.bottomnavigation.BottomNavigation
 import com.lucasdias.bottomnavigation.model.BottomNavigationOption
 import com.lucasdias.connectivity.Connectivity
 import com.lucasdias.extensions.bind
-import com.lucasdias.extensions.toast
 import com.lucasdias.factcatalog.presentation.FactCatalogFragment
 import com.lucasdias.home.R
 import com.lucasdias.search.presentation.SearchFragment
@@ -52,10 +51,10 @@ class HomeActivity : AppCompatActivity() {
         changeFragment(factCatalogFragment)
     }
 
-        private fun startSearchFragment() {
+    private fun startSearchFragment() {
         val searchActionMethod = { searchText: String ->
             selectBottomNavigationOptionProgrammatically(BottomNavigationEnum.RESULT.id)
-            toast("Pesquisa: $searchText")
+            factCatalogFragment.updateSearch(searchText)
         }
         searchFragment = SearchFragment.newInstance(searchActionMethod)
         changeFragment(searchFragment)
@@ -101,18 +100,24 @@ class HomeActivity : AppCompatActivity() {
 
     private fun showConnectivityOnSnackbar() {
         snackbar.duration = Snackbar.LENGTH_LONG
-        snackbar.view.setBackgroundColor(ContextCompat.getColor(this,
-            R.color.green
-        ))
+        snackbar.view.setBackgroundColor(
+            ContextCompat.getColor(
+                this,
+                R.color.green
+            )
+        )
         snackbar.setText(getString(R.string.connectivity_on_snackbar))
         snackbar.show()
     }
 
     private fun showConnectivityOffSnackbar() {
         snackbar.duration = Snackbar.LENGTH_INDEFINITE
-        snackbar.view.setBackgroundColor(ContextCompat.getColor(this,
-            R.color.red
-        ))
+        snackbar.view.setBackgroundColor(
+            ContextCompat.getColor(
+                this,
+                R.color.red
+            )
+        )
         snackbar.setText(getString(R.string.connectivity_off_snackbar))
         snackbar.show()
     }

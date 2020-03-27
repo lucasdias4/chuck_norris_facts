@@ -18,9 +18,9 @@ internal class FactCatalogViewModel(
 
     fun updateFactsLiveData(): LiveData<FactListResponse> = factsLiveData
 
-    fun searchFactsBySubject() {
+    fun searchFactsBySubject(subject: String) {
         CoroutineScope(coroutineContext).launch {
-            val result = searchFactsBySubjectFromApi.invoke(subject = "chicken")
+            val result = searchFactsBySubjectFromApi.invoke(subject = subject)
             factsLiveData.postValue(result)
         }
     }
