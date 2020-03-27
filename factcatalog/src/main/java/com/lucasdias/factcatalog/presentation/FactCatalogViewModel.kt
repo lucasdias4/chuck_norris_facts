@@ -1,8 +1,10 @@
 package com.lucasdias.factcatalog.presentation
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.lucasdias.factcatalog.data.fact.remote.response.FactListResponse
 import com.lucasdias.factcatalog.domain.usecase.SearchFactsBySubjectFromApi
-import com.lucasdias.log.LogApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -12,13 +14,14 @@ internal class FactCatalogViewModel(
 ) : ViewModel() {
 
     private var coroutineContext = Dispatchers.IO
+    private var factsLiveData = MutableLiveData<FactListResponse>()
+
+    fun updateFactsLiveData(): LiveData<FactListResponse> = factsLiveData
 
     fun searchFactsBySubject() {
         CoroutineScope(coroutineContext).launch {
-            val result = searchFactsBySubjectFromApi.invoke(subject = "water")
-            result?.facts?.forEach {
-                LogApp.i("Request result", "${it.categories}")
-            }
+            val result = searchFactsBySubjectFromApi.invoke(subject = "chicken")
+            factsLiveData.postValue(result)
         }
     }
 }

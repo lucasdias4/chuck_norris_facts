@@ -6,6 +6,7 @@ import com.lucasdias.factcatalog.data.fact.FactCatalogRepositoryImpl
 import com.lucasdias.factcatalog.data.fact.remote.FactCatalogService
 import com.lucasdias.factcatalog.domain.repository.FactCatalogRepository
 import com.lucasdias.factcatalog.domain.usecase.SearchFactsBySubjectFromApi
+import com.lucasdias.factcatalog.presentation.FactCatalogAdapter
 import com.lucasdias.factcatalog.presentation.FactCatalogViewModel
 import java.util.concurrent.TimeUnit
 import okhttp3.OkHttpClient
@@ -24,6 +25,10 @@ val factCatalogModule = module {
         FactCatalogViewModel(
             get<SearchFactsBySubjectFromApi>()
         )
+    }
+
+    factory {
+        FactCatalogAdapter()
     }
 
     factory {
