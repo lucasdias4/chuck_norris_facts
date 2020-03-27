@@ -1,11 +1,15 @@
 package com.lucasdias.factcatalog.di
 
+import androidx.room.Room
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.lucasdias.connectivity.Connectivity
 import com.lucasdias.factcatalog.BuildConfig.FACT_API_URL
 import com.lucasdias.factcatalog.data.fact.FactCatalogRepositoryImpl
+import com.lucasdias.factcatalog.data.fact.local.FactCatalogDao
+import com.lucasdias.factcatalog.data.fact.local.FactCatalogDatabase
 import com.lucasdias.factcatalog.data.fact.remote.FactCatalogService
 import com.lucasdias.factcatalog.domain.repository.FactCatalogRepository
+import com.lucasdias.factcatalog.domain.usecase.GetAllFactsFromDatabase
 import com.lucasdias.factcatalog.domain.usecase.SearchFactsBySubjectFromApi
 import com.lucasdias.factcatalog.presentation.FactCatalogAdapter
 import com.lucasdias.factcatalog.presentation.FactCatalogViewModel
@@ -13,20 +17,24 @@ import java.util.concurrent.TimeUnit
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
+import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-const val FACT_CATALOG_CONNECTIVITY = "FACT_CATALOG_CONNECTIVITY"
+internal const val FACT_CATALOG_CONNECTIVITY = "FACT_CATALOG_CONNECTIVITY"
 private const val FACT_CATALOG_RETROFIT = "FACT_CATALOG_RETROFIT"
+private const val FACT_CATALOG_DAO = "FACT_CATALOG_DAO"
+private const val FACT_CATALOG_DATABASE = "FACT_CATALOG_DATABASE"
 
 @Suppress("RemoveExplicitTypeArguments", "USELESS_CAST")
 val factCatalogModule = module {
     viewModel {
         FactCatalogViewModel(
-            get<SearchFactsBySubjectFromApi>()
+            get<SearchFactsBySubjectFromApi>(),
+            get<GetAllFactsFromDatabase>()
         )
     }
 
@@ -47,9 +55,28 @@ val factCatalogModule = module {
     }
 
     factory {
+        GetAllFactsFromDatabase(
+            get<FactCatalogRepository>()
+        )
+    }
+
+    factory {
         FactCatalogRepositoryImpl(
-            get<FactCatalogService>()
+            get<FactCatalogService>(),
+            get<FactCatalogDao>(named(FACT_CATALOG_DAO))
         ) as FactCatalogRepository
+    }
+
+    // Persistence
+    single(named(FACT_CATALOG_DATABASE)) {
+        Room.databaseBuilder(androidContext(), FactCatalogDatabase::class.java, FACT_CATALOG_DATABASE)
+            .fallbackToDestructiveMigration()
+            .allowMainThreadQueries()
+            .build()
+    }
+
+    single(named(FACT_CATALOG_DAO)) {
+        get<FactCatalogDatabase>(named(FACT_CATALOG_DATABASE)).factDao()
     }
 
     // Service

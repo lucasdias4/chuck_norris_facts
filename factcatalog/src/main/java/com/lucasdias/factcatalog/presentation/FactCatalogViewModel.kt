@@ -1,29 +1,28 @@
 package com.lucasdias.factcatalog.presentation
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.lucasdias.factcatalog.data.fact.remote.response.FactListResponse
+import com.lucasdias.factcatalog.domain.model.Fact
+import com.lucasdias.factcatalog.domain.usecase.GetAllFactsFromDatabase
 import com.lucasdias.factcatalog.domain.usecase.SearchFactsBySubjectFromApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 internal class FactCatalogViewModel(
-    private val searchFactsBySubjectFromApi: SearchFactsBySubjectFromApi
+    private val searchFactsBySubjectFromApi: SearchFactsBySubjectFromApi,
+    private val getAllFactsFromDatabase: GetAllFactsFromDatabase
 ) : ViewModel() {
 
     private var coroutineContext = Dispatchers.IO
     private var hasNetworkConnectivity = true
-    private var factsLiveData = MutableLiveData<FactListResponse>()
 
-    fun updateFactsLiveData(): LiveData<FactListResponse> = factsLiveData
+    fun updateFactsLiveData(): LiveData<List<Fact>> = getAllFactsFromDatabase()
 
     fun searchFactsBySubject(subject: String) {
         if (hasNetworkConnectivity) {
             CoroutineScope(coroutineContext).launch {
-                val result = searchFactsBySubjectFromApi.invoke(subject = subject)
-                factsLiveData.postValue(result)
+                searchFactsBySubjectFromApi.invoke(subject = subject)
             }
         }
     }

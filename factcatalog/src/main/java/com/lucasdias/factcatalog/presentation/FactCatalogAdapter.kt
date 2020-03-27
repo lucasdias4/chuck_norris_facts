@@ -7,22 +7,19 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.lucasdias.extensions.bind
 import com.lucasdias.factcatalog.R
-import com.lucasdias.factcatalog.data.fact.remote.response.FactListResponse
-import com.lucasdias.factcatalog.data.fact.remote.response.FactResponse
+import com.lucasdias.factcatalog.domain.model.Fact
 
 internal class FactCatalogAdapter : RecyclerView.Adapter<FactCatalogAdapter.ViewHolder>() {
 
-    private var factCatalog = mutableListOf<FactResponse>()
+    private var factCatalog = mutableListOf<Fact>()
 
-    fun updateFactCatalog(factCatalog: FactListResponse?) {
+    fun updateFactCatalog(facts: List<Fact>) {
         if (this.factCatalog.isNotEmpty()) {
             this.factCatalog.clear()
         }
 
-        factCatalog?.facts?.let { facts ->
             this.factCatalog.addAll(facts)
             notifyDataSetChanged()
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -46,7 +43,7 @@ internal class FactCatalogAdapter : RecyclerView.Adapter<FactCatalogAdapter.View
 
         private val content by bind<TextView>(itemView, R.id.fact_description_fact_list_item)
 
-        fun itemBind(fact: FactResponse) {
+        fun itemBind(fact: Fact) {
             content.text = fact.value
         }
     }
