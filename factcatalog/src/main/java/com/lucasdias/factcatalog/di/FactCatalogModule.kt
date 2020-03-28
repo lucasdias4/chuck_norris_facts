@@ -9,6 +9,7 @@ import com.lucasdias.factcatalog.data.fact.local.FactCatalogDao
 import com.lucasdias.factcatalog.data.fact.local.FactCatalogDatabase
 import com.lucasdias.factcatalog.data.fact.remote.FactCatalogService
 import com.lucasdias.factcatalog.domain.repository.FactCatalogRepository
+import com.lucasdias.factcatalog.domain.usecase.DeleteAllFactsFromDatabase
 import com.lucasdias.factcatalog.domain.usecase.GetAllFactsFromDatabase
 import com.lucasdias.factcatalog.domain.usecase.SearchFactsBySubjectFromApi
 import com.lucasdias.factcatalog.presentation.FactCatalogAdapter
@@ -34,7 +35,8 @@ val factCatalogModule = module {
     viewModel {
         FactCatalogViewModel(
             get<SearchFactsBySubjectFromApi>(),
-            get<GetAllFactsFromDatabase>()
+            get<GetAllFactsFromDatabase>(),
+            get<DeleteAllFactsFromDatabase>()
         )
     }
 
@@ -56,6 +58,12 @@ val factCatalogModule = module {
 
     factory {
         GetAllFactsFromDatabase(
+            get<FactCatalogRepository>()
+        )
+    }
+
+    factory {
+        DeleteAllFactsFromDatabase(
             get<FactCatalogRepository>()
         )
     }

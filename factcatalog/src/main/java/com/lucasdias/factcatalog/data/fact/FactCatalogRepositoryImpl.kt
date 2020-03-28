@@ -26,6 +26,7 @@ internal class FactCatalogRepositoryImpl(
     }
 
     override fun getAllFacts(): LiveData<List<Fact>> = factCatalogDao.getAllFacts()
+    override fun deleteAllFacts() = factCatalogDao.deleteAllFacts()
 
     override suspend fun searchFactsBySubjectFromApi(subject: String): RequestStatus {
         val result: SuspendableResult<Response<FactListResponse>, Exception> =

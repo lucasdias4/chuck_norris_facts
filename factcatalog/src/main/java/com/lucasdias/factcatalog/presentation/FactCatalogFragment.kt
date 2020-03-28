@@ -45,7 +45,10 @@ class FactCatalogFragment : Fragment() {
     }
 
     fun updateSearch(searchText: String) {
-        viewModel.searchFactsBySubject(subject = searchText)
+        viewModel.apply {
+            deleteAllFacts()
+            searchFactsBySubject(subject = searchText)
+        }
     }
 
     private fun initRecyclerView() {

@@ -7,4 +7,5 @@ import com.lucasdias.factcatalog.domain.sealedclass.RequestStatus
 internal interface FactCatalogRepository {
     suspend fun searchFactsBySubjectFromApi(subject: String): RequestStatus
     fun getAllFacts(): LiveData<List<Fact>>
+    fun deleteAllFacts()
 }
