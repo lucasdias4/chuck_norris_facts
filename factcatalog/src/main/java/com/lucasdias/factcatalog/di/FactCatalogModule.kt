@@ -8,10 +8,15 @@ import com.lucasdias.factcatalog.data.fact.FactCatalogRepositoryImpl
 import com.lucasdias.factcatalog.data.fact.local.FactCatalogDao
 import com.lucasdias.factcatalog.data.fact.local.FactCatalogDatabase
 import com.lucasdias.factcatalog.data.fact.remote.FactCatalogService
+import com.lucasdias.factcatalog.data.searchtext.SearchTextRepositoryImpl
+import com.lucasdias.factcatalog.data.searchtext.local.SearchTextCache
 import com.lucasdias.factcatalog.domain.repository.FactCatalogRepository
+import com.lucasdias.factcatalog.domain.repository.SearchTextRepository
 import com.lucasdias.factcatalog.domain.usecase.DeleteAllFactsFromDatabase
+import com.lucasdias.factcatalog.domain.usecase.GetActualSearchText
 import com.lucasdias.factcatalog.domain.usecase.GetAllFactsFromDatabase
 import com.lucasdias.factcatalog.domain.usecase.SearchFactsBySubjectFromApi
+import com.lucasdias.factcatalog.domain.usecase.SetActualSearchText
 import com.lucasdias.factcatalog.presentation.FactCatalogAdapter
 import com.lucasdias.factcatalog.presentation.FactCatalogViewModel
 import java.util.concurrent.TimeUnit
@@ -36,7 +41,9 @@ val factCatalogModule = module {
         FactCatalogViewModel(
             get<SearchFactsBySubjectFromApi>(),
             get<GetAllFactsFromDatabase>(),
-            get<DeleteAllFactsFromDatabase>()
+            get<DeleteAllFactsFromDatabase>(),
+            get<GetActualSearchText>(),
+            get<SetActualSearchText>()
         )
     }
 
@@ -69,10 +76,29 @@ val factCatalogModule = module {
     }
 
     factory {
+        GetActualSearchText(
+            get<SearchTextRepository>()
+        )
+    }
+
+    factory {
+        SetActualSearchText(
+            get<SearchTextRepository>()
+        )
+    }
+
+    factory {
         FactCatalogRepositoryImpl(
             get<FactCatalogService>(),
             get<FactCatalogDao>(named(FACT_CATALOG_DAO))
         ) as FactCatalogRepository
+    }
+
+    factory {
+        SearchTextRepositoryImpl(
+            SearchTextCache(),
+            androidContext()
+        ) as SearchTextRepository
     }
 
     // Persistence
@@ -85,6 +111,10 @@ val factCatalogModule = module {
 
     single(named(FACT_CATALOG_DAO)) {
         get<FactCatalogDatabase>(named(FACT_CATALOG_DATABASE)).factDao()
+    }
+
+    factory {
+        SearchTextCache()
     }
 
     // Service

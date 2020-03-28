@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.lucasdias.connectivity.Connectivity
 import com.lucasdias.extensions.bind
@@ -25,6 +26,7 @@ class FactCatalogFragment : Fragment() {
     private val viewModel by viewModel<FactCatalogViewModel>()
     private val adapter by inject<FactCatalogAdapter>()
     private val connectivity by inject<Connectivity>(named(FACT_CATALOG_CONNECTIVITY))
+    private val swipeRefresh by bind<SwipeRefreshLayout>(R.id.swipe_refresh_fact_catalag_fragment)
     private val recyclerView by bind<RecyclerView>(R.id.recycler_view_fact_catalog_fragment)
     private val recyclerViewPlaceHolder by bind<ShimmerFrameLayout>(R.id.recycler_view_place_holder_fact_catalog_fragment)
     private lateinit var layoutManager: LinearLayoutManager
@@ -44,6 +46,7 @@ class FactCatalogFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
+        initSwipeRefresh()
         initViewModelObservers()
         initConnectivityObserver()
     }
@@ -51,6 +54,7 @@ class FactCatalogFragment : Fragment() {
     fun updateSearch(searchText: String) {
         viewModel.apply {
             deleteAllFacts()
+            setActualSearchTextOnCache(searchText = searchText)
             searchFactsBySubject(subject = searchText)
         }
     }
@@ -60,6 +64,14 @@ class FactCatalogFragment : Fragment() {
         recyclerView?.setHasFixedSize(true)
         recyclerView?.layoutManager = layoutManager
         recyclerView?.adapter = adapter
+    }
+
+    private fun initSwipeRefresh() {
+        swipeRefresh?.setOnRefreshListener {
+            val searchText = viewModel.getActualSearchTextFromCache()
+            updateSearch(searchText = searchText)
+            swipeRefresh?.isRefreshing = false
+        }
     }
 
     private fun initViewModelObservers() {

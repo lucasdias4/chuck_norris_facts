@@ -8,8 +8,10 @@ import com.lucasdias.factcatalog.domain.sealedclass.Error
 import com.lucasdias.factcatalog.domain.sealedclass.RequestStatus
 import com.lucasdias.factcatalog.domain.sealedclass.SuccessWithoutResult
 import com.lucasdias.factcatalog.domain.usecase.DeleteAllFactsFromDatabase
+import com.lucasdias.factcatalog.domain.usecase.GetActualSearchText
 import com.lucasdias.factcatalog.domain.usecase.GetAllFactsFromDatabase
 import com.lucasdias.factcatalog.domain.usecase.SearchFactsBySubjectFromApi
+import com.lucasdias.factcatalog.domain.usecase.SetActualSearchText
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,7 +19,9 @@ import kotlinx.coroutines.launch
 internal class FactCatalogViewModel(
     private val searchFactsBySubjectFromApi: SearchFactsBySubjectFromApi,
     private val getAllFactsFromDatabase: GetAllFactsFromDatabase,
-    private val deleteAllFactsFromDatabase: DeleteAllFactsFromDatabase
+    private val deleteAllFactsFromDatabase: DeleteAllFactsFromDatabase,
+    private var getActualSearchText: GetActualSearchText,
+    private var setActualSearchText: SetActualSearchText
 ) : ViewModel() {
 
     private var coroutineContext = Dispatchers.IO
@@ -54,8 +58,17 @@ internal class FactCatalogViewModel(
             SuccessWithoutResult -> {
                 showAnEmptySearchScreenLiveData.postValue(Unit)
             }
-            else -> {}
+            else -> {
+            }
         }
+    }
+
+    fun setActualSearchTextOnCache(searchText: String) {
+        setActualSearchText(searchText)
+    }
+
+    fun getActualSearchTextFromCache(): String {
+        return getActualSearchText()
     }
 
     fun updateConnectivityStatus(hasNetworkConnectivity: Boolean) {
