@@ -2,7 +2,7 @@ package com.lucasdias.factcatalog.domain.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.lucasdias.factcatalog.domain.typeconverter.TypeConverter
+import com.lucasdias.base.typeconverter.TypeConverter
 
 @Entity(tableName = "fact")
 internal data class Fact(

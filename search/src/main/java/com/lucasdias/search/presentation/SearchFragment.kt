@@ -41,10 +41,10 @@ class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragmen
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initObservers()
-        initSearchButtonListener()
         initRecyclerView()
+        initSearchButtonListener()
         initButtonAnimation()
+        initHistoricList()
     }
 
     private fun initRecyclerView() {
@@ -66,11 +66,8 @@ class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragmen
         }
     }
 
-    private fun initObservers() {
-        viewModel.apply {
-            getHistoric().observe(viewLifecycleOwner, Observer { searchHistoric ->
-                adapter.updateSearchTextList(searchHistoric)
-            })
-        }
+    private fun initHistoricList() {
+        val searchHistoric = viewModel.getHistoric()
+        adapter.updateSearchTextList(searchHistoric)
     }
 }

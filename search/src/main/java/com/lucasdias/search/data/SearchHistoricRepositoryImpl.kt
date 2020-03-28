@@ -1,12 +1,15 @@
 package com.lucasdias.search.data
 
+import com.lucasdias.search.data.local.SearchHistoricCache
 import com.lucasdias.search.domain.repository.SearchHistoricRepository
 
-internal class SearchHistoricRepositoryImpl : SearchHistoricRepository {
+internal class SearchHistoricRepositoryImpl (
+    private val searchHistoricCache: SearchHistoricCache
+) : SearchHistoricRepository {
 
-    override fun getHistoric() = SearchHistoricCache.getHistoric()
+    override fun getHistoric() = searchHistoricCache.getHistoric()
 
     override fun setSearch(search: String) {
-        SearchHistoricCache.setSearch(search)
+        searchHistoricCache.setSearch(search)
     }
 }

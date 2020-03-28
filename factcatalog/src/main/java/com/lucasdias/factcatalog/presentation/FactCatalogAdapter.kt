@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lucasdias.extensions.bind
 import com.lucasdias.factcatalog.R
 import com.lucasdias.factcatalog.domain.model.Fact
+import com.lucasdias.log.LogApp
 
 internal class FactCatalogAdapter : RecyclerView.Adapter<FactCatalogAdapter.ViewHolder>() {
 

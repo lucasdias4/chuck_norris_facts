@@ -1,6 +1,5 @@
-package com.lucasdias.factcatalog.domain.typeconverter
+package com.lucasdias.base.typeconverter
 
-import androidx.room.TypeConverter
 import kotlin.collections.ArrayList
 
 class TypeConverter {
@@ -9,7 +8,6 @@ class TypeConverter {
 
         private const val COMMA = ","
 
-        @TypeConverter
         fun arrayListToString(list: List<String>?): String? {
             if (list.isNullOrEmpty()) return null
             val string = StringBuilder()
@@ -24,7 +22,6 @@ class TypeConverter {
             return string.toString()
         }
 
-        @TypeConverter
         fun stringToArrayList(string: String?): ArrayList<String>? {
             when {
                 string.isNullOrEmpty() -> {

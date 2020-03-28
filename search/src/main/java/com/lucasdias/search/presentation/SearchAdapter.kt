@@ -11,17 +11,13 @@ import com.lucasdias.search.R
 internal class SearchAdapter(private val searchActionMethod: ((String) -> Unit)?) :
         RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
-    var searchList = mutableListOf<String>()
+    private var searchList = mutableListOf<String>()
 
-    fun updateSearchTextList(searchList: List<String>) {
+    fun updateSearchTextList(searchList: ArrayList<String>) {
         if (this.searchList.isNotEmpty()) {
             this.searchList.clear()
         }
         this.searchList.addAll(searchList)
-        notifyDataChange()
-    }
-
-    fun notifyDataChange() {
         notifyDataSetChanged()
     }
 
