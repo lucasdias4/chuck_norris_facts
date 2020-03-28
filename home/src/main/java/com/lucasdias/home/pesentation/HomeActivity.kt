@@ -14,7 +14,6 @@ import com.lucasdias.bottomnavigation.BottomNavigation
 import com.lucasdias.bottomnavigation.model.BottomNavigationOption
 import com.lucasdias.connectivity.Connectivity
 import com.lucasdias.extensions.bind
-import com.lucasdias.extensions.toast
 import com.lucasdias.factcatalog.presentation.FactCatalogFragment
 import com.lucasdias.home.R
 import com.lucasdias.home.di.HOME_CONNECTIVITY

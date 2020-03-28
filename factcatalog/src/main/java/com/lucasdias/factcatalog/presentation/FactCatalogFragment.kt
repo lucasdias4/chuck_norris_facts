@@ -13,7 +13,6 @@ import com.facebook.shimmer.ShimmerFrameLayout
 import com.lucasdias.connectivity.Connectivity
 import com.lucasdias.extensions.bind
 import com.lucasdias.extensions.gone
-import com.lucasdias.extensions.toast
 import com.lucasdias.extensions.visible
 import com.lucasdias.factcatalog.R
 import com.lucasdias.factcatalog.di.FACT_CATALOG_CONNECTIVITY
