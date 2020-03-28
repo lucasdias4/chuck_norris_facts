@@ -8,9 +8,9 @@ import com.lucasdias.factcatalog.data.fact.remote.FactCatalogService
 import com.lucasdias.factcatalog.data.fact.remote.response.FactListResponse
 import com.lucasdias.factcatalog.domain.model.Fact
 import com.lucasdias.factcatalog.domain.repository.FactCatalogRepository
+import com.lucasdias.factcatalog.domain.sealedclass.Error
 import com.lucasdias.factcatalog.domain.sealedclass.RequestStatus
 import com.lucasdias.factcatalog.domain.sealedclass.Success
-import com.lucasdias.factcatalog.domain.sealedclass.Error
 import com.lucasdias.factcatalog.domain.sealedclass.SuccessWithoutResult
 import com.lucasdias.log.LogApp
 import retrofit2.Response
@@ -61,7 +61,7 @@ internal class FactCatalogRepositoryImpl(
             FactMapper.map(facts)
         }
 
-        logRequestInfo( facts = domainFacts, subject = subject)
+        logRequestInfo(facts = domainFacts, subject = subject)
         factCatalogDao.insertFacts(facts = domainFacts)
     }
 

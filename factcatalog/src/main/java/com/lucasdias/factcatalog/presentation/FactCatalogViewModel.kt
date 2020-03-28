@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lucasdias.factcatalog.domain.model.Fact
+import com.lucasdias.factcatalog.domain.sealedclass.Error
 import com.lucasdias.factcatalog.domain.sealedclass.RequestStatus
 import com.lucasdias.factcatalog.domain.sealedclass.SuccessWithoutResult
-import com.lucasdias.factcatalog.domain.sealedclass.Error
 import com.lucasdias.factcatalog.domain.usecase.GetAllFactsFromDatabase
 import com.lucasdias.factcatalog.domain.usecase.SearchFactsBySubjectFromApi
 import kotlinx.coroutines.CoroutineScope
