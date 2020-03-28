@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lucasdias.connectivity.Connectivity
 import com.lucasdias.extensions.bind
+import com.lucasdias.extensions.toast
 import com.lucasdias.factcatalog.R
 import com.lucasdias.factcatalog.di.FACT_CATALOG_CONNECTIVITY
 import org.koin.android.ext.android.inject
@@ -58,6 +59,12 @@ class FactCatalogFragment : Fragment() {
         viewModel.apply {
             updateFactsLiveData().observe(this@FactCatalogFragment, Observer { facts ->
                 adapter.updateFactCatalog(facts)
+            })
+            showAnErrorScreenLiveData().observe(this@FactCatalogFragment, Observer {
+                context?.toast("showAnErrorScreenLiveData")
+            })
+            showAnEmptySearchScreenLiveData().observe(this@FactCatalogFragment, Observer {
+                context?.toast("showAnEmptySearchScreenLiveData")
             })
         }
     }

@@ -1,8 +1,12 @@
 package com.lucasdias.factcatalog.presentation
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lucasdias.factcatalog.domain.model.Fact
+import com.lucasdias.factcatalog.domain.sealedclass.RequestStatus
+import com.lucasdias.factcatalog.domain.sealedclass.SuccessWithoutResult
+import com.lucasdias.factcatalog.domain.sealedclass.Error
 import com.lucasdias.factcatalog.domain.usecase.GetAllFactsFromDatabase
 import com.lucasdias.factcatalog.domain.usecase.SearchFactsBySubjectFromApi
 import kotlinx.coroutines.CoroutineScope
@@ -16,14 +20,31 @@ internal class FactCatalogViewModel(
 
     private var coroutineContext = Dispatchers.IO
     private var hasNetworkConnectivity = true
+    private var showAnErrorScreenLiveData = MutableLiveData<Unit>()
+    private var showAnEmptySearchScreenLiveData = MutableLiveData<Unit>()
 
     fun updateFactsLiveData(): LiveData<List<Fact>> = getAllFactsFromDatabase()
+    fun showAnErrorScreenLiveData(): LiveData<Unit> = showAnErrorScreenLiveData
+    fun showAnEmptySearchScreenLiveData(): LiveData<Unit> = showAnEmptySearchScreenLiveData
 
     fun searchFactsBySubject(subject: String) {
         if (hasNetworkConnectivity) {
             CoroutineScope(coroutineContext).launch {
-                searchFactsBySubjectFromApi.invoke(subject = subject)
+                val requestStatus = searchFactsBySubjectFromApi.invoke(subject = subject)
+                requestStatusHandler(requestStatus)
             }
+        }
+    }
+
+    private fun requestStatusHandler(requestStatus: RequestStatus) {
+        when (requestStatus) {
+            Error -> {
+                showAnErrorScreenLiveData.postValue(Unit)
+            }
+            SuccessWithoutResult -> {
+                showAnEmptySearchScreenLiveData.postValue(Unit)
+            }
+            else -> {}
         }
     }
 
