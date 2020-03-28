@@ -3,7 +3,7 @@ package com.lucasdias.search.data
 import com.lucasdias.search.data.local.SearchHistoricCache
 import com.lucasdias.search.domain.repository.SearchHistoricRepository
 
-internal class SearchHistoricRepositoryImpl (
+internal class SearchHistoricRepositoryImpl(
     private val searchHistoricCache: SearchHistoricCache
 ) : SearchHistoricRepository {
 
