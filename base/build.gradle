@@ -42,7 +42,7 @@ dependencies {
     //Layout
     api "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
     api "com.google.android.material:material:$material_version"
-    implementation "androidx.recyclerview:recyclerview:$recycler_view_version"
+    api "androidx.recyclerview:recyclerview:$recycler_view_version"
 
     //Coroutines
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
@@ -52,6 +52,9 @@ dependencies {
     api "org.koin:koin-android:$koin_version"
     api "org.koin:koin-android-viewmodel:$koin_version"
     api "org.koin:koin-core:$koin_version"
+
+    //Persistence
+    api "androidx.preference:preference-ktx:$preferences_ktx_version"
 
     //Test
     testImplementation "junit:junit:$junit_version"

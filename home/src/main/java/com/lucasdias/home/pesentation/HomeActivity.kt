@@ -42,10 +42,11 @@ class HomeActivity : AppCompatActivity() {
 
         initToolbar()
         initBottomNavigation()
+        initFirstTimeObservers()
         initConnectivitySnackbar()
         initSnackbarObserver()
         initConnectivityObserver()
-        startFactCatalogFragment()
+        viewModel.verifyIfItIsTheUsersFirstTimeOnCache()
     }
 
     private fun startFactCatalogFragment() {
@@ -68,6 +69,19 @@ class HomeActivity : AppCompatActivity() {
             .beginTransaction()
             .replace(fragmentContainer.id, fragment)
             .commit()
+    }
+
+    private fun initFirstTimeObservers() {
+        viewModel.apply {
+            isTheUserFirstTime().observe(this@HomeActivity, Observer {
+                val userFirstTimeFragment = UserFirstTimeFragment.newInstance()
+                changeFragment(userFirstTimeFragment)
+                setThatIsNotTheUsersFirstTime()
+            })
+            isNotTheUserFirstTime().observe(this@HomeActivity, Observer {
+                startFactCatalogFragment()
+            })
+        }
     }
 
     private fun initFactCatalogFragmentObservers(factCatalogFragment: FactCatalogFragment) {
