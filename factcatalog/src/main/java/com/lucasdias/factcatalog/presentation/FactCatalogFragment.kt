@@ -23,6 +23,10 @@ import org.koin.core.qualifier.named
 
 class FactCatalogFragment : Fragment() {
 
+    companion object {
+        fun newInstance() = FactCatalogFragment()
+    }
+
     private val viewModel by viewModel<FactCatalogViewModel>()
     private val adapter by inject<FactCatalogAdapter>()
     private val connectivity by inject<Connectivity>(named(FACT_CATALOG_CONNECTIVITY))
@@ -30,10 +34,6 @@ class FactCatalogFragment : Fragment() {
     private val recyclerView by bind<RecyclerView>(R.id.recycler_view_fact_catalog_fragment)
     private val recyclerViewPlaceHolder by bind<ShimmerFrameLayout>(R.id.recycler_view_place_holder_fact_catalog_fragment)
     private lateinit var layoutManager: LinearLayoutManager
-
-    companion object {
-        fun newInstance() = FactCatalogFragment()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,6 +50,9 @@ class FactCatalogFragment : Fragment() {
         initViewModelObservers()
         initConnectivityObserver()
     }
+
+    fun showAnErrorScreenLiveData() = viewModel.showAnErrorScreenLiveData()
+    fun showAnEmptySearchLiveData() = viewModel.showAnEmptySearchScreenLiveData()
 
     fun updateSearch(searchText: String) {
         viewModel.apply {
@@ -86,12 +89,6 @@ class FactCatalogFragment : Fragment() {
             turnOffLoadingLiveData().observe(this@FactCatalogFragment, Observer {
                 recyclerView?.visible()
                 recyclerViewPlaceHolder?.gone()
-            })
-            showAnErrorScreenLiveData().observe(this@FactCatalogFragment, Observer {
-                context?.toast("showAnErrorScreenLiveData")
-            })
-            showAnEmptySearchScreenLiveData().observe(this@FactCatalogFragment, Observer {
-                context?.toast("showAnEmptySearchScreenLiveData")
             })
         }
     }

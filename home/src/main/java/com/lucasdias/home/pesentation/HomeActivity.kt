@@ -14,6 +14,7 @@ import com.lucasdias.bottomnavigation.BottomNavigation
 import com.lucasdias.bottomnavigation.model.BottomNavigationOption
 import com.lucasdias.connectivity.Connectivity
 import com.lucasdias.extensions.bind
+import com.lucasdias.extensions.toast
 import com.lucasdias.factcatalog.presentation.FactCatalogFragment
 import com.lucasdias.home.R
 import com.lucasdias.home.di.HOME_CONNECTIVITY
@@ -45,13 +46,13 @@ class HomeActivity : AppCompatActivity() {
         initConnectivitySnackbar()
         initSnackbarObserver()
         initConnectivityObserver()
-
         startFactCatalogFragment()
     }
 
     private fun startFactCatalogFragment() {
         factCatalogFragment = FactCatalogFragment.newInstance()
         changeFragment(factCatalogFragment)
+        initFactCatalogFragmentObservers(factCatalogFragment)
     }
 
     private fun startSearchFragment() {
@@ -68,6 +69,19 @@ class HomeActivity : AppCompatActivity() {
             .beginTransaction()
             .replace(fragmentContainer.id, fragment)
             .commit()
+    }
+
+    private fun initFactCatalogFragmentObservers(factCatalogFragment: FactCatalogFragment) {
+        factCatalogFragment.apply {
+            showAnErrorScreenLiveData().observe(this@HomeActivity, Observer {
+                val errorFragment = ErrorFragment.newInstance()
+                changeFragment(errorFragment)
+            })
+            showAnEmptySearchLiveData().observe(this@HomeActivity, Observer {
+                val emptySearchFragment = EmptySearchFragment.newInstance()
+                changeFragment(emptySearchFragment)
+            })
+        }
     }
 
     private fun initConnectivityObserver() {

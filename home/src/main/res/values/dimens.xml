@@ -1,4 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--Home Activity Layout-->
     <dimen name="fragment_container_wrapper_height_home_activity">0dp</dimen>
+
+    <!--Empty Search Layout-->
+    <dimen name="message_margin_start_empty_search_fragment">50dp</dimen>
+    <dimen name="message_margin_end_empty_search_fragment">50dp</dimen>
+    <dimen name="message_margin_top_empty_search_fragment">40dp</dimen>
+    <dimen name="message_text_size_empty_search_fragment">20sp</dimen>
+
+    <dimen name="picture_layout_height_empty_search_fragment">170dp</dimen>
+    <dimen name="picture_margin_top_empty_search_fragment">30dp</dimen>
+
+    <!--Error Layout-->
+    <dimen name="message_margin_start_error_fragment">50dp</dimen>
+    <dimen name="message_margin_end_error_fragment">50dp</dimen>
+    <dimen name="message_margin_top_error_fragment">40dp</dimen>
+    <dimen name="message_text_size_error_fragment">20sp</dimen>
+
+    <dimen name="picture_layout_height_error_fragment">170dp</dimen>
+    <dimen name="picture_margin_start_error_fragment">50dp</dimen>
+    <dimen name="picture_margin_end_error_fragment">50dp</dimen>
+    <dimen name="picture_margin_top_error_fragment">30dp</dimen>
+
+    <!--User First Time Layout-->
+    <dimen name="message_margin_start_first_user_time_fragment">70dp</dimen>
+    <dimen name="message_margin_end_first_user_time_fragment">70dp</dimen>
+    <dimen name="message_margin_top_first_user_time_fragment">40dp</dimen>
+    <dimen name="message_text_size_first_user_time_fragment">20sp</dimen>
+
+    <dimen name="picture_layout_height_first_user_time_fragment">170dp</dimen>
+    <dimen name="picture_margin_start_first_user_time_fragment">50dp</dimen>
+    <dimen name="picture_margin_end_first_user_time_fragment">50dp</dimen>
+    <dimen name="picture_margin_top_first_user_time_fragment">30dp</dimen>
 </resources>

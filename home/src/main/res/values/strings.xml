@@ -1,9 +1,17 @@
 <resources>
+    <!--Toolbar-->
     <string name="toolbar_title_home">Chuck Norris Facts</string>
 
+    <!--Bottom Navigation-->
     <string name="bottom_navigation_facts">facts</string>
     <string name="bottom_navigation_search">search</string>
 
-    <string name="connectivity_on_snackbar">Sua internet voltou :)</string>
-    <string name="connectivity_off_snackbar">Você está sem internet</string>
+    <!--Connectivity Snackbar-->
+    <string name="connectivity_on_snackbar">Your internet is back :)</string>
+    <string name="connectivity_off_snackbar">You are without internet</string>
+
+    <!--State Fragments-->
+    <string name="message_user_first_time_fragment">Learn more about this legend</string>
+    <string name="message_error_fragment">We had a small problem. Try again later :)</string>
+    <string name="message_empty_search_fragment">We couldn\'t find any facts for your search. Try again :)</string>
 </resources>
