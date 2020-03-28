@@ -24,18 +24,25 @@ internal class FactCatalogViewModel(
     private var hasNetworkConnectivity = true
     private var showAnErrorScreenLiveData = MutableLiveData<Unit>()
     private var showAnEmptySearchScreenLiveData = MutableLiveData<Unit>()
+    private var turnOnLoadingLiveData = MutableLiveData<Unit>()
+    private var turnOffLoadingLiveData = MutableLiveData<Unit>()
 
     fun deleteAllFacts() = deleteAllFactsFromDatabase.invoke()
     fun updateFactsLiveData(): LiveData<List<Fact>> = getAllFactsFromDatabase()
     fun showAnErrorScreenLiveData(): LiveData<Unit> = showAnErrorScreenLiveData
     fun showAnEmptySearchScreenLiveData(): LiveData<Unit> = showAnEmptySearchScreenLiveData
+    fun turnOnLoadingLiveData(): LiveData<Unit> = turnOnLoadingLiveData
+    fun turnOffLoadingLiveData(): LiveData<Unit> = turnOffLoadingLiveData
 
     fun searchFactsBySubject(subject: String) {
-        if (hasNetworkConnectivity) {
-            CoroutineScope(coroutineContext).launch {
-                val requestStatus = searchFactsBySubjectFromApi.invoke(subject = subject)
-                requestStatusHandler(requestStatus)
-            }
+        if (subject.isEmpty()) return
+        if (hasNetworkConnectivity.not()) return
+
+        CoroutineScope(coroutineContext).launch {
+            turnOnLoadingLiveData.postValue(Unit)
+            val requestStatus = searchFactsBySubjectFromApi.invoke(subject = subject)
+            requestStatusHandler(requestStatus = requestStatus)
+            turnOffLoadingLiveData.postValue(Unit)
         }
     }
 

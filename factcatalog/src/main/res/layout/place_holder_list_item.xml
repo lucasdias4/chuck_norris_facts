@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_place_holder_list_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/layout_place_holder_list_item_margin_top">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:layout_width="@dimen/place_holder_list_item_first_line_width"
+            android:layout_height="@dimen/place_holder_list_item_first_line_height"
+            android:layout_marginTop="@dimen/place_holder_list_item_first_line_margin_top"
+            android:background="@color/lightGray" />
+
+        <View
+            android:layout_width="@dimen/place_holder_list_item_second_line_width"
+            android:layout_height="@dimen/place_holder_list_item_second_line_height"
+            android:layout_marginTop="@dimen/place_holder_list_item_second_line_margin_top"
+            android:background="@color/lightGray" />
+
+        <View
+            android:layout_width="@dimen/place_holder_list_item_third_line_width"
+            android:layout_height="@dimen/place_holder_list_item_third_line_height"
+            android:layout_marginTop="@dimen/place_holder_list_item_third_line_margin_top"
+            android:background="@color/lightGray" />
+
+        <View
+            android:layout_width="@dimen/place_holder_list_item_last_line_width"
+            android:layout_height="@dimen/place_holder_list_item_last_line_height"
+            android:layout_marginTop="@dimen/place_holder_list_item_last_line_margin_top"
+            android:layout_marginBottom="@dimen/place_holder_list_item_last_line_margin_bottom"
+            android:background="@color/lightGray" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

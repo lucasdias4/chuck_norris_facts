@@ -8,9 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.lucasdias.connectivity.Connectivity
 import com.lucasdias.extensions.bind
+import com.lucasdias.extensions.gone
 import com.lucasdias.extensions.toast
+import com.lucasdias.extensions.visible
 import com.lucasdias.factcatalog.R
 import com.lucasdias.factcatalog.di.FACT_CATALOG_CONNECTIVITY
 import org.koin.android.ext.android.inject
@@ -23,6 +26,7 @@ class FactCatalogFragment : Fragment() {
     private val adapter by inject<FactCatalogAdapter>()
     private val connectivity by inject<Connectivity>(named(FACT_CATALOG_CONNECTIVITY))
     private val recyclerView by bind<RecyclerView>(R.id.recycler_view_fact_catalog_fragment)
+    private val recyclerViewPlaceHolder by bind<ShimmerFrameLayout>(R.id.recycler_view_place_holder_fact_catalog_fragment)
     private lateinit var layoutManager: LinearLayoutManager
 
     companion object {
@@ -62,6 +66,14 @@ class FactCatalogFragment : Fragment() {
         viewModel.apply {
             updateFactsLiveData().observe(this@FactCatalogFragment, Observer { facts ->
                 adapter.updateFactCatalog(facts)
+            })
+            turnOnLoadingLiveData().observe(this@FactCatalogFragment, Observer {
+                recyclerView?.gone()
+                recyclerViewPlaceHolder?.visible()
+            })
+            turnOffLoadingLiveData().observe(this@FactCatalogFragment, Observer {
+                recyclerView?.visible()
+                recyclerViewPlaceHolder?.gone()
             })
             showAnErrorScreenLiveData().observe(this@FactCatalogFragment, Observer {
                 context?.toast("showAnErrorScreenLiveData")

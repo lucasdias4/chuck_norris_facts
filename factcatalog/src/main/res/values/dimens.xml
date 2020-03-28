@@ -1,3 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="layout_place_holder_list_item_margin_top">30dp</dimen>
+
+    <dimen name="place_holder_list_item_first_line_margin_top">20dp</dimen>
+    <dimen name="place_holder_list_item_first_line_height">15dp</dimen>
+    <dimen name="place_holder_list_item_first_line_width">300dp</dimen>
+
+    <dimen name="place_holder_list_item_second_line_margin_top">10dp</dimen>
+    <dimen name="place_holder_list_item_second_line_height">15dp</dimen>
+    <dimen name="place_holder_list_item_second_line_width">300dp</dimen>
+
+    <dimen name="place_holder_list_item_third_line_margin_top">10dp</dimen>
+    <dimen name="place_holder_list_item_third_line_height">15dp</dimen>
+    <dimen name="place_holder_list_item_third_line_width">300dp</dimen>
+
+    <dimen name="place_holder_list_item_last_line_margin_top">10dp</dimen>
+    <dimen name="place_holder_list_item_last_line_margin_bottom">20dp</dimen>
+    <dimen name="place_holder_list_item_last_line_height">15dp</dimen>
+    <dimen name="place_holder_list_item_last_line_width">100dp</dimen>
+
 </resources>

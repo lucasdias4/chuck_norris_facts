@@ -5,7 +5,7 @@
     <Transition
         app:constraintSetEnd="@id/end_fragment_search"
         app:constraintSetStart="@id/start_fragment_search"
-        app:duration="400"></Transition>
+        app:duration="400"/>
 
     <ConstraintSet android:id="@+id/start_fragment_search">
         <Constraint
@@ -18,7 +18,7 @@
             android:layout_marginBottom="@dimen/search_button_margin_bottom_search_fragment"
             android:background="@drawable/buttom_custom_shape"
             android:text="@string/button_to_search_search_fragment"
-            android:textColor="@color/lightGray"
+            android:textColor="@color/darkWhite"
             android:textSize="@dimen/search_button_text_size_search_fragment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +36,7 @@
             android:layout_marginBottom="@dimen/search_button_margin_bottom_search_fragment"
             android:background="@drawable/buttom_custom_shape"
             android:text="@string/button_to_search_search_fragment"
-            android:textColor="@color/lightGray"
+            android:textColor="@color/darkWhite"
             android:textSize="@dimen/search_button_text_size_search_fragment"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

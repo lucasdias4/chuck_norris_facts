@@ -52,6 +52,9 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$converter_gson_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
 
+    //Shimmer
+    implementation "com.facebook.shimmer:shimmer:$shimmer_version"
+
     //Persistence
     implementation "androidx.preference:preference-ktx:$preferences_ktx_version"
     implementation "android.arch.persistence.room:runtime:$room_version"

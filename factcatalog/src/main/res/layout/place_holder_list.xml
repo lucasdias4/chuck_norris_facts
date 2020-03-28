@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.facebook.shimmer.ShimmerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/view_place_holder_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:shimmer_duration="800">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/place_holder_list_item" />
+        <include layout="@layout/place_holder_list_item" />
+        <include layout="@layout/place_holder_list_item" />
+        <include layout="@layout/place_holder_list_item" />
+        <include layout="@layout/place_holder_list_item" />
+
+    </LinearLayout>
+
+</com.facebook.shimmer.ShimmerFrameLayout>
