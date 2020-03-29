@@ -19,6 +19,7 @@ internal class FactCatalogAdapter(private val shareUrl: ((String) -> Unit)?) :
         const val UNCATEGORIZED = "uncategorized"
         const val TEXT_SIZE_LIMIT = 80
         const val BIG_TEXT_SIZE = 23F
+        const val SMALL_TEXT_SIZE = 18F
     }
 
     private var factCatalog = mutableListOf<Fact>()
@@ -93,9 +94,9 @@ internal class FactCatalogAdapter(private val shareUrl: ((String) -> Unit)?) :
             val textSize = fact.value.length
             val needToIncreaseTheFontSize = textSize < TEXT_SIZE_LIMIT
             if (needToIncreaseTheFontSize) content.setTextSize(
-                TypedValue.COMPLEX_UNIT_SP,
-                BIG_TEXT_SIZE
+                TypedValue.COMPLEX_UNIT_SP, BIG_TEXT_SIZE
             )
+            else content.setTextSize(TypedValue.COMPLEX_UNIT_SP, SMALL_TEXT_SIZE)
             content.text = fact.value
         }
     }
