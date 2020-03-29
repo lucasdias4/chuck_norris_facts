@@ -1,5 +1,6 @@
 package com.lucasdias.factcatalog.presentation
 
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,11 @@ import com.lucasdias.factcatalog.domain.model.Fact
 
 internal class FactCatalogAdapter : RecyclerView.Adapter<FactCatalogAdapter.ViewHolder>() {
 
+    private companion object {
+        const val textSizeLimit = 80
+        const val bigTextSize = 23F
+    }
+
     private var factCatalog = mutableListOf<Fact>()
 
     fun updateFactCatalog(facts: List<Fact>) {
@@ -18,8 +24,8 @@ internal class FactCatalogAdapter : RecyclerView.Adapter<FactCatalogAdapter.View
             this.factCatalog.clear()
         }
 
-            this.factCatalog.addAll(facts)
-            notifyDataSetChanged()
+        this.factCatalog.addAll(facts)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -44,6 +50,12 @@ internal class FactCatalogAdapter : RecyclerView.Adapter<FactCatalogAdapter.View
         private val content by bind<TextView>(itemView, R.id.fact_description_fact_list_item)
 
         fun itemBind(fact: Fact) {
+            val textSize = fact.value.length
+            val needToIncreaseTheFontSize = textSize < textSizeLimit
+            if (needToIncreaseTheFontSize) content.setTextSize(
+                TypedValue.COMPLEX_UNIT_SP,
+                bigTextSize
+            )
             content.text = fact.value
         }
     }
