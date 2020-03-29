@@ -19,26 +19,26 @@
             android:layout_width="@dimen/place_holder_list_item_first_line_width"
             android:layout_height="@dimen/place_holder_list_item_first_line_height"
             android:layout_marginTop="@dimen/place_holder_list_item_first_line_margin_top"
-            android:background="@color/lightGray" />
+            android:background="@color/mediumGray" />
 
         <View
             android:layout_width="@dimen/place_holder_list_item_second_line_width"
             android:layout_height="@dimen/place_holder_list_item_second_line_height"
             android:layout_marginTop="@dimen/place_holder_list_item_second_line_margin_top"
-            android:background="@color/lightGray" />
+            android:background="@color/mediumGray" />
 
         <View
             android:layout_width="@dimen/place_holder_list_item_third_line_width"
             android:layout_height="@dimen/place_holder_list_item_third_line_height"
             android:layout_marginTop="@dimen/place_holder_list_item_third_line_margin_top"
-            android:background="@color/lightGray" />
+            android:background="@color/mediumGray" />
 
         <View
             android:layout_width="@dimen/place_holder_list_item_last_line_width"
             android:layout_height="@dimen/place_holder_list_item_last_line_height"
             android:layout_marginTop="@dimen/place_holder_list_item_last_line_margin_top"
             android:layout_marginBottom="@dimen/place_holder_list_item_last_line_margin_bottom"
-            android:background="@color/lightGray" />
+            android:background="@color/mediumGray" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

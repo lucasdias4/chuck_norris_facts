@@ -19,24 +19,44 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="18dp"
-            android:textSize="18sp"
             android:fontFamily="@font/roboto_regular"
             android:textColor="@color/darkBlack"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Abcd Abcd Abcd Abcd Abcd Abcd Abcd" />
+
+        <TextView
+            android:id="@+id/category_text_fact_list_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/category_text_margin_top_fact_list_item"
+            android:layout_marginBottom="@dimen/category_text_margin_bottom_fact_list_item"
+            android:background="@drawable/category_tag_custom_shape"
+            android:paddingStart="@dimen/category_text_padding_start_fact_list_item"
+            android:paddingTop="@dimen/category_text_padding_top_fact_list_item"
+            android:paddingEnd="@dimen/category_text_padding_end_fact_list_item"
+            android:paddingBottom="@dimen/category_text_padding_bottom_fact_list_item"
+            android:textAllCaps="false"
+            android:textColor="@color/lightWhite"
+            android:textSize="@dimen/category_text_text_size_fact_list_item"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/fact_description_fact_list_item"
+            app:layout_constraintTop_toBottomOf="@id/fact_description_fact_list_item" />
 
         <ImageView
             android:id="@+id/share_icon_fact_list_item"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:padding="8dp"
-            app:layout_constraintTop_toBottomOf="@id/fact_description_fact_list_item"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="@dimen/share_icon_width_fact_list_item"
+            android:layout_height="@dimen/share_icon_height_fact_list_item"
+            android:layout_marginEnd="@dimen/share_icon_margin_end_fact_list_item"
+            android:layout_marginBottom="@dimen/share_icon_margin_bottom_fact_list_item"
+            android:padding="@dimen/share_icon_padding_fact_list_item"
+            android:src="@drawable/ic_share"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/ic_share"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fact_description_fact_list_item" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

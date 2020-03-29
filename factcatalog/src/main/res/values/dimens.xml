@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Fact catalog place polder-->
     <dimen name="layout_place_holder_list_item_margin_top">30dp</dimen>
 
     <dimen name="place_holder_list_item_first_line_margin_top">20dp</dimen>
@@ -19,4 +20,18 @@
     <dimen name="place_holder_list_item_last_line_height">15dp</dimen>
     <dimen name="place_holder_list_item_last_line_width">100dp</dimen>
 
+    <!-- Fact list item-->
+    <dimen name="share_icon_width_fact_list_item">50dp</dimen>
+    <dimen name="share_icon_height_fact_list_item">50dp</dimen>
+    <dimen name="share_icon_margin_end_fact_list_item">10dp</dimen>
+    <dimen name="share_icon_margin_bottom_fact_list_item">10dp</dimen>
+    <dimen name="share_icon_padding_fact_list_item">10dp</dimen>
+
+    <dimen name="category_text_margin_top_fact_list_item">10dp</dimen>
+    <dimen name="category_text_margin_bottom_fact_list_item">10dp</dimen>
+    <dimen name="category_text_padding_start_fact_list_item">20dp</dimen>
+    <dimen name="category_text_padding_top_fact_list_item">3dp</dimen>
+    <dimen name="category_text_padding_end_fact_list_item">20dp</dimen>
+    <dimen name="category_text_padding_bottom_fact_list_item">7dp</dimen>
+    <dimen name="category_text_text_size_fact_list_item">16sp</dimen>
 </resources>

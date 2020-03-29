@@ -10,13 +10,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lucasdias.extensions.bind
 import com.lucasdias.factcatalog.R
 import com.lucasdias.factcatalog.domain.model.Fact
+import java.util.Locale
 
 internal class FactCatalogAdapter(private val shareUrl: ((String) -> Unit)?) :
     RecyclerView.Adapter<FactCatalogAdapter.ViewHolder>() {
 
     private companion object {
-        const val textSizeLimit = 80
-        const val bigTextSize = 23F
+        const val UNCATEGORIZED = "uncategorized"
+        const val TEXT_SIZE_LIMIT = 80
+        const val BIG_TEXT_SIZE = 23F
     }
 
     private var factCatalog = mutableListOf<Fact>()
@@ -51,14 +53,25 @@ internal class FactCatalogAdapter(private val shareUrl: ((String) -> Unit)?) :
 
         private val content by bind<TextView>(itemView, R.id.fact_description_fact_list_item)
         private val shareIcon by bind<ImageView>(itemView, R.id.share_icon_fact_list_item)
+        private val category by bind<TextView>(itemView, R.id.category_text_fact_list_item)
 
         fun itemBind(
             fact: Fact,
             shareUrl: ((String) -> Unit)?
         ) {
-            textSizeHandler(fact, content)
+            contentSetup(fact, content)
+            categorySetup(fact, category)
             shareIconSetup(fact.url, shareIcon, shareUrl)
-            content.text = fact.value
+        }
+
+        private fun categorySetup(
+            fact: Fact,
+            categoryTextView: TextView
+        ) {
+            val categories = fact.getCategories()
+            var category = categories?.first() ?: UNCATEGORIZED
+            category = category.toLowerCase(Locale.ROOT)
+            categoryTextView.text = category
         }
 
         private fun shareIconSetup(
@@ -73,16 +86,17 @@ internal class FactCatalogAdapter(private val shareUrl: ((String) -> Unit)?) :
             }
         }
 
-        private fun textSizeHandler(
+        private fun contentSetup(
             fact: Fact,
             content: TextView
         ) {
             val textSize = fact.value.length
-            val needToIncreaseTheFontSize = textSize < textSizeLimit
+            val needToIncreaseTheFontSize = textSize < TEXT_SIZE_LIMIT
             if (needToIncreaseTheFontSize) content.setTextSize(
                 TypedValue.COMPLEX_UNIT_SP,
-                bigTextSize
+                BIG_TEXT_SIZE
             )
+            content.text = fact.value
         }
     }
 }
