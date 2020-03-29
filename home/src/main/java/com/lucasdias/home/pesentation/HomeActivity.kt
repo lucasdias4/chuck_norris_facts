@@ -62,6 +62,7 @@ class HomeActivity : AppCompatActivity() {
         }
         searchFragment = SearchFragment.newInstance(searchActionMethod)
         changeFragment(searchFragment)
+        initSearchFragmentObservers(searchFragment)
     }
 
     private fun changeFragment(fragment: Fragment) {
@@ -93,6 +94,15 @@ class HomeActivity : AppCompatActivity() {
             showAnEmptySearchLiveData().observe(this@HomeActivity, Observer {
                 val emptySearchFragment = EmptySearchFragment.newInstance()
                 changeFragment(emptySearchFragment)
+            })
+        }
+    }
+
+    private fun initSearchFragmentObservers(searchFragment: SearchFragment) {
+        searchFragment.apply {
+            errorToLoadSearchCategories().observe(this@HomeActivity, Observer {
+                val errorFragment = ErrorFragment.newInstance()
+                changeFragment(errorFragment)
             })
         }
     }

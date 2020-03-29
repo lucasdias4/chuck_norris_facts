@@ -69,6 +69,8 @@ class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragmen
         viewModel.searchCategories()
     }
 
+    fun errorToLoadSearchCategories() = viewModel.errorToLoadCategories()
+
     private fun initTextInput() {
         inputTextArea?.setOnKeyListener { _, keyCode, event ->
             val userHitEnterButton =

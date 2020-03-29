@@ -24,9 +24,11 @@ internal class SearchViewModel(
     private var coroutineContext = Dispatchers.IO
 
     private var randomCategoriesLiveData = MutableLiveData<List<String>?>()
+    private var errorToLoadCategories = MutableLiveData<Unit>()
 
     fun getHistoric() = getSearchHistoric()
     fun getRandomCategories() = randomCategoriesLiveData
+    fun errorToLoadCategories() = errorToLoadCategories
 
     fun searchCategories() {
         CoroutineScope(coroutineContext).launch {
@@ -37,6 +39,7 @@ internal class SearchViewModel(
 
             if (categoryCacheIsEmpty) requestStatus = searchCategoriesFromApi()
             if (requestStatus == Success) categories = getRandomCategoriesFromDatabase()
+            else errorToLoadCategories.postValue(Unit)
             if (categories.isNullOrEmpty().not()) randomCategoriesLiveData.postValue(categories)
         }
     }
