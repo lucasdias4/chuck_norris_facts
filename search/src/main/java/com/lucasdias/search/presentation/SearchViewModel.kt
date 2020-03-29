@@ -2,7 +2,6 @@ package com.lucasdias.search.presentation
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.lucasdias.search.domain.sealedclass.Error
 import com.lucasdias.search.domain.sealedclass.RequestStatus
 import com.lucasdias.search.domain.sealedclass.Success
 import com.lucasdias.search.domain.usecase.GetRandomCategoriesFromDatabase
