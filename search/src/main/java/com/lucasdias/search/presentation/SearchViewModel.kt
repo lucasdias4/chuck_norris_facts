@@ -32,7 +32,7 @@ internal class SearchViewModel(
     fun searchCategories() {
         CoroutineScope(coroutineContext).launch {
             var categories: List<String>? = null
-            var requestStatus: RequestStatus = Error
+            var requestStatus: RequestStatus = Success
 
             val categoryCacheIsEmpty = isCategoryCacheEmpty()
 
