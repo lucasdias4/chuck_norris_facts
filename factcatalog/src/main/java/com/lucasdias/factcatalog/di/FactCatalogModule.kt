@@ -54,8 +54,8 @@ val factCatalogModule = module {
         )
     }
 
-    factory {
-        FactCatalogAdapter()
+    factory { (method: ((String) -> Unit)?) ->
+        FactCatalogAdapter(method)
     }
 
     factory {

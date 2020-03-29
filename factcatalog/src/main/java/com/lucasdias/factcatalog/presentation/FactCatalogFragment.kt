@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +19,7 @@ import com.lucasdias.factcatalog.R
 import com.lucasdias.factcatalog.di.FACT_CATALOG_CONNECTIVITY
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
 
 class FactCatalogFragment : Fragment() {
@@ -25,14 +27,14 @@ class FactCatalogFragment : Fragment() {
     companion object {
         fun newInstance() = FactCatalogFragment()
     }
-
     private val viewModel by viewModel<FactCatalogViewModel>()
-    private val adapter by inject<FactCatalogAdapter>()
+    private val adapter by inject<FactCatalogAdapter> { parametersOf(shareUrlMethod) }
     private val connectivity by inject<Connectivity>(named(FACT_CATALOG_CONNECTIVITY))
     private val swipeRefresh by bind<SwipeRefreshLayout>(R.id.swipe_refresh_fact_catalag_fragment)
     private val recyclerView by bind<RecyclerView>(R.id.recycler_view_fact_catalog_fragment)
     private val recyclerViewPlaceHolder by bind<ShimmerFrameLayout>(R.id.recycler_view_place_holder_fact_catalog_fragment)
     private lateinit var layoutManager: LinearLayoutManager
+    private val shareUrlMethod = { url: String -> shareUrl(url) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -96,5 +98,15 @@ class FactCatalogFragment : Fragment() {
         connectivity.observe(this@FactCatalogFragment, Observer { hasNetworkConnectivity ->
             viewModel.updateConnectivityStatus(hasNetworkConnectivity)
         })
+    }
+
+    private fun shareUrl(url: String?) {
+        activity?.let {
+            ShareCompat.IntentBuilder.from(it)
+                .setType(resources.getString(R.string.share_url_share_compact_type))
+                .setChooserTitle(R.string.share_url_message)
+                .setText(url)
+                .startChooser()
+        }
     }
 }
