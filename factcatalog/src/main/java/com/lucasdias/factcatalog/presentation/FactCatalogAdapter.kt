@@ -50,13 +50,20 @@ internal class FactCatalogAdapter : RecyclerView.Adapter<FactCatalogAdapter.View
         private val content by bind<TextView>(itemView, R.id.fact_description_fact_list_item)
 
         fun itemBind(fact: Fact) {
+            textSizeHandler(fact, content)
+            content.text = fact.value
+        }
+
+        private fun textSizeHandler(
+            fact: Fact,
+            content: TextView
+        ) {
             val textSize = fact.value.length
             val needToIncreaseTheFontSize = textSize < textSizeLimit
             if (needToIncreaseTheFontSize) content.setTextSize(
                 TypedValue.COMPLEX_UNIT_SP,
                 bigTextSize
             )
-            content.text = fact.value
         }
     }
 }
