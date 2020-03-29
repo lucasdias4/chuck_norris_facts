@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_regular"
             android:hint="@string/input_edit_text_hint_search_fragment"
-            android:imeOptions="actionDone"
+            android:imeOptions="actionSearch"
             android:inputType="text"
             android:maxLines="1"
             android:textSize="@dimen/input_edit_text_text_size_search_fragment" />

@@ -1,6 +1,7 @@
 package com.lucasdias.search.presentation
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,8 +64,18 @@ class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragmen
         initSearchButtonListener()
         initButtonAnimation()
         initHistoricList()
+        initTextInput()
         initViewModelObservers()
         viewModel.searchCategories()
+    }
+
+    private fun initTextInput() {
+        inputTextArea?.setOnKeyListener { _, keyCode, event ->
+            val userHitEnterButton =
+                (event.action == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)
+            if (userHitEnterButton) doASearch(inputTextArea)
+            return@setOnKeyListener true
+        }
     }
 
     private fun initRecyclerView() {
@@ -80,10 +91,14 @@ class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragmen
 
     private fun initSearchButtonListener() {
         searchButton?.setOnClickListener {
-            val inputText = inputTextArea?.text.toString()
-            viewModel.setSearch(inputText)
-            searchClickMethod(inputText)
+            doASearch(inputTextArea)
         }
+    }
+
+    private fun doASearch(inputTextArea: TextInputEditText?) {
+        val inputText = inputTextArea?.text.toString()
+        viewModel.setSearch(inputText)
+        searchClickMethod(inputText)
     }
 
     private fun initHistoricList() {
