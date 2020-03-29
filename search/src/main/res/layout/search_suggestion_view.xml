@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/layout_padding_bottom_search_suggestion">
+
+    <TextView
+        android:id="@+id/description_search_suggestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        android:paddingBottom="@dimen/description_padding_bottom_search_suggestion"
+        android:text="@string/description_search_suggestion"
+        android:textColor="@color/darkBlack"
+        android:textSize="@dimen/description_text_size_search_suggestion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/wrapper_first_tag_search_suggestion"
+        layout="@layout/search_suggestion_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/wrapper_first_tag_margin_start_search_suggestion"
+        android:background="@drawable/suggestion_button_custom_shape"
+        android:paddingStart="@dimen/wrapper_first_tag_padding_start_search_suggestion"
+        android:paddingEnd="@dimen/wrapper_first_tag_padding_end_search_suggestion"
+        app:layout_constraintEnd_toStartOf="@+id/wrapper_second_tag_search_suggestion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/description_search_suggestion" />
+
+    <include
+        android:id="@+id/wrapper_second_tag_search_suggestion"
+        layout="@layout/search_suggestion_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/suggestion_button_custom_shape"
+        android:paddingStart="@dimen/wrapper_second_tag_padding_start_search_suggestion"
+        android:paddingEnd="@dimen/wrapper_second_tag_padding_end_search_suggestion"
+        android:textColor="@color/lightBlack"
+        android:layout_marginEnd="@dimen/wrapper_second_tag_margin_end_search_suggestion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/wrapper_first_tag_search_suggestion"
+        app:layout_constraintTop_toBottomOf="@id/description_search_suggestion" />
+
+
+    <include
+        android:id="@+id/wrapper_third_tag_search_suggestion"
+        layout="@layout/search_suggestion_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/wrapper_third_tag_margin_start_search_suggestion"
+        android:layout_marginTop="@dimen/wrapper_third_tag_margin_top_search_suggestion"
+        android:background="@drawable/suggestion_button_custom_shape"
+        android:paddingStart="@dimen/wrapper_third_tag_padding_start_search_suggestion"
+        android:paddingEnd="@dimen/wrapper_third_tag_padding_end_search_suggestion"
+        app:layout_constraintEnd_toStartOf="@id/wrapper_fourth_tag_search_suggestion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wrapper_first_tag_search_suggestion" />
+
+    <include
+        android:id="@+id/wrapper_fourth_tag_search_suggestion"
+        layout="@layout/search_suggestion_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/wrapper_fourth_tag_margin_top_search_suggestion"
+        android:layout_marginEnd="@dimen/wrapper_fourth_tag_margin_end_search_suggestion"
+        android:background="@drawable/suggestion_button_custom_shape"
+        android:paddingStart="@dimen/wrapper_fourth_tag_padding_start_search_suggestion"
+        android:paddingEnd="@dimen/wrapper_fourth_tag_padding_end_search_suggestion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/wrapper_third_tag_search_suggestion"
+        app:layout_constraintTop_toBottomOf="@id/wrapper_second_tag_search_suggestion" />
+
+
+    <include
+        android:id="@+id/wrapper_fifth_tag_search_suggestion"
+        layout="@layout/search_suggestion_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/wrapper_fifth_tag_margin_start_search_suggestion"
+        android:layout_marginTop="@dimen/wrapper_fifth_tag_margin_top_search_suggestion"
+        android:background="@drawable/suggestion_button_custom_shape"
+        android:paddingStart="@dimen/wrapper_fifth_tag_padding_start_search_suggestion"
+        android:paddingEnd="@dimen/wrapper_fifth_tag_padding_end_search_suggestion"
+        app:layout_constraintEnd_toStartOf="@+id/wrapper_sixth_tag_search_suggestion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wrapper_third_tag_search_suggestion" />
+
+    <include
+        android:id="@+id/wrapper_sixth_tag_search_suggestion"
+        layout="@layout/search_suggestion_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/wrapper_sixth_tag_margin_top_search_suggestion"
+        android:layout_marginEnd="@dimen/wrapper_sixth_tag_margin_end_search_suggestion"
+        android:background="@drawable/suggestion_button_custom_shape"
+        android:paddingStart="@dimen/wrapper_sixth_tag_padding_start_search_suggestion"
+        android:paddingEnd="@dimen/wrapper_sixth_tag_padding_end_search_suggestion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/wrapper_fifth_tag_search_suggestion"
+        app:layout_constraintTop_toBottomOf="@id/wrapper_fourth_tag_search_suggestion" />
+
+    <include
+        android:id="@+id/wrapper_seventh_tag_search_suggestion"
+        layout="@layout/search_suggestion_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/wrapper_seventh_tag_margin_start_search_suggestion"
+        android:layout_marginTop="@dimen/wrapper_seventh_tag_margin_top_search_suggestion"
+        android:background="@drawable/suggestion_button_custom_shape"
+        android:paddingStart="@dimen/wrapper_seventh_tag_padding_start_search_suggestion"
+        android:paddingEnd="@dimen/wrapper_seventh_tag_padding_end_search_suggestion"
+        app:layout_constraintEnd_toStartOf="@+id/wrapper_eighth_tag_search_suggestion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wrapper_fifth_tag_search_suggestion" />
+
+    <include
+        android:id="@+id/wrapper_eighth_tag_search_suggestion"
+        layout="@layout/search_suggestion_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/wrapper_eighth_tag_margin_top_search_suggestion"
+        android:layout_marginEnd="@dimen/wrapper_eighth_tag_margin_end_search_suggestion"
+        android:background="@drawable/suggestion_button_custom_shape"
+        android:paddingStart="@dimen/wrapper_eighth_tag_padding_start_search_suggestion"
+        android:paddingEnd="@dimen/wrapper_eighth_tag_padding_end_search_suggestion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/wrapper_seventh_tag_search_suggestion"
+        app:layout_constraintTop_toBottomOf="@id/wrapper_sixth_tag_search_suggestion" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

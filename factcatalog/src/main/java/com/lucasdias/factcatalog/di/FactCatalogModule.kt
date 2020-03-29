@@ -32,6 +32,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 internal const val FACT_CATALOG_CONNECTIVITY = "FACT_CATALOG_CONNECTIVITY"
 private const val FACT_CATALOG_RETROFIT = "FACT_CATALOG_RETROFIT"
+private const val FACT_CATALOG_OKHTTP = "FACT_CATALOG_OKHTTP"
 private const val FACT_CATALOG_DAO = "FACT_CATALOG_DAO"
 private const val FACT_CATALOG_DATABASE = "FACT_CATALOG_DATABASE"
 
@@ -103,7 +104,11 @@ val factCatalogModule = module {
 
     // Persistence
     single(named(FACT_CATALOG_DATABASE)) {
-        Room.databaseBuilder(androidContext(), FactCatalogDatabase::class.java, FACT_CATALOG_DATABASE)
+        Room.databaseBuilder(
+            androidContext(),
+            FactCatalogDatabase::class.java,
+            FACT_CATALOG_DATABASE
+        )
             .fallbackToDestructiveMigration()
             .allowMainThreadQueries()
             .build()
@@ -118,13 +123,13 @@ val factCatalogModule = module {
     }
 
     // Service
-    factory {
+    factory(named(FACT_CATALOG_OKHTTP)) {
         createOkHttpClient()
     }
 
     single(named(FACT_CATALOG_RETROFIT)) {
         createRetrofit(
-            get<OkHttpClient>()
+            get<OkHttpClient>(named(FACT_CATALOG_OKHTTP))
         )
     }
 

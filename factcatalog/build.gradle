@@ -37,20 +37,8 @@ dependencies {
     //Modules
     implementation project (':base')
 
-    //Coroutines
-    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$retrofit2_kotlin_coroutines_adapter_version"
-
     //Layout
     implementation "androidx.cardview:cardview:$card_view_version"
-
-    //Result
-    implementation "com.github.kittinunf.result:result:$result_version"
-    implementation "com.github.kittinunf.result:result-coroutines:$result_version"
-
-    //Retrofit
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-gson:$converter_gson_version"
-    implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
 
     //Shimmer
     implementation "com.facebook.shimmer:shimmer:$shimmer_version"

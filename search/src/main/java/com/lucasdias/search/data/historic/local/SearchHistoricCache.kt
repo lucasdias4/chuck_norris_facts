@@ -1,4 +1,4 @@
-package com.lucasdias.search.data.local
+package com.lucasdias.search.data.historic.local
 
 import android.content.Context
 import androidx.preference.PreferenceManager

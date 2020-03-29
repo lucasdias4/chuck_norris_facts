@@ -21,8 +21,8 @@ internal class FactCatalogRepositoryImpl(
 ) : FactCatalogRepository {
 
     private companion object {
-        private const val MIN_RESPONSE_CODE = 200
-        private const val MAX_RESPONSE_CODE = 299
+        const val MIN_RESPONSE_CODE = 200
+        const val MAX_RESPONSE_CODE = 299
     }
 
     override fun getAllFacts(): LiveData<List<Fact>> = factCatalogDao.getAllFacts()

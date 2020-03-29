@@ -29,9 +29,9 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //Modules
-    api project (':connectivity')
-    api project (':extensions')
-    api project (':log')
+    api project(':connectivity')
+    api project(':extensions')
+    api project(':log')
 
     //Uncategory
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -52,6 +52,18 @@ dependencies {
     api "org.koin:koin-android:$koin_version"
     api "org.koin:koin-android-viewmodel:$koin_version"
     api "org.koin:koin-core:$koin_version"
+
+    //Result
+    api "com.github.kittinunf.result:result:$result_version"
+    api "com.github.kittinunf.result:result-coroutines:$result_version"
+
+    //Coroutines
+    api "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$retrofit2_kotlin_coroutines_adapter_version"
+
+    //Retrofit
+    api "com.squareup.retrofit2:retrofit:$retrofit_version"
+    api "com.squareup.retrofit2:converter-gson:$converter_gson_version"
+    api "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
 
     //Persistence
     api "androidx.preference:preference-ktx:$preferences_ktx_version"

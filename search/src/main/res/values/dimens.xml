@@ -22,6 +22,7 @@
     <dimen name="search_button_bottom_right_radius">25dp</dimen>
 
     <dimen name="description_text_search_fragment">18sp</dimen>
+    <dimen name="nested_scroll_view_height_fragment_search">0dp</dimen>
 
     <!--    Search Item-->
     <dimen name="item_text_size_search_fragment">20sp</dimen>
@@ -29,4 +30,53 @@
     <dimen name="item_text_padding_end_search_fragment">20dp</dimen>
     <dimen name="item_text_margin_search_fragment">8dp</dimen>
     <dimen name="item_layout_height_search_fragment">45dp</dimen>
+
+    <!--    Search Suggestion Item-->
+    <dimen name="text_padding_start_search_suggestion_tag">20sp</dimen>
+    <dimen name="text_padding_end_search_suggestion_tag">20sp</dimen>
+    <dimen name="text_text_size_search_suggestion_tag">20sp</dimen>
+
+    <!--    Search Suggestion View-->
+    <dimen name="layout_padding_bottom_search_suggestion">30dp</dimen>
+    <dimen name="description_padding_bottom_search_suggestion">30sp</dimen>
+    <dimen name="description_text_size_search_suggestion">20sp</dimen>
+
+    <dimen name="wrapper_first_tag_padding_start_search_suggestion">20dp</dimen>
+    <dimen name="wrapper_first_tag_padding_end_search_suggestion">20dp</dimen>
+    <dimen name="wrapper_first_tag_margin_start_search_suggestion">10dp</dimen>
+
+    <dimen name="wrapper_second_tag_padding_start_search_suggestion">20dp</dimen>
+    <dimen name="wrapper_second_tag_padding_end_search_suggestion">20dp</dimen>
+    <dimen name="wrapper_second_tag_margin_end_search_suggestion">10dp</dimen>
+
+    <dimen name="wrapper_third_tag_padding_start_search_suggestion">20dp</dimen>
+    <dimen name="wrapper_third_tag_padding_end_search_suggestion">20dp</dimen>
+    <dimen name="wrapper_third_tag_margin_start_search_suggestion">10dp</dimen>
+    <dimen name="wrapper_third_tag_margin_top_search_suggestion">20dp</dimen>
+
+    <dimen name="wrapper_fourth_tag_padding_start_search_suggestion">20dp</dimen>
+    <dimen name="wrapper_fourth_tag_padding_end_search_suggestion">20dp</dimen>
+    <dimen name="wrapper_fourth_tag_margin_end_search_suggestion">10dp</dimen>
+    <dimen name="wrapper_fourth_tag_margin_top_search_suggestion">20dp</dimen>
+
+    <dimen name="wrapper_fifth_tag_padding_start_search_suggestion">20dp</dimen>
+    <dimen name="wrapper_fifth_tag_padding_end_search_suggestion">20dp</dimen>
+    <dimen name="wrapper_fifth_tag_margin_start_search_suggestion">10dp</dimen>
+    <dimen name="wrapper_fifth_tag_margin_top_search_suggestion">20dp</dimen>
+
+    <dimen name="wrapper_sixth_tag_padding_start_search_suggestion">20dp</dimen>
+    <dimen name="wrapper_sixth_tag_padding_end_search_suggestion">20dp</dimen>
+    <dimen name="wrapper_sixth_tag_margin_end_search_suggestion">10dp</dimen>
+    <dimen name="wrapper_sixth_tag_margin_top_search_suggestion">20dp</dimen>
+
+    <dimen name="wrapper_seventh_tag_padding_start_search_suggestion">20dp</dimen>
+    <dimen name="wrapper_seventh_tag_padding_end_search_suggestion">20dp</dimen>
+    <dimen name="wrapper_seventh_tag_margin_start_search_suggestion">10dp</dimen>
+    <dimen name="wrapper_seventh_tag_margin_top_search_suggestion">20dp</dimen>
+
+    <dimen name="wrapper_eighth_tag_padding_start_search_suggestion">20dp</dimen>
+    <dimen name="wrapper_eighth_tag_padding_end_search_suggestion">20dp</dimen>
+    <dimen name="wrapper_eighth_tag_margin_end_search_suggestion">10dp</dimen>
+    <dimen name="wrapper_eighth_tag_margin_top_search_suggestion">20dp</dimen>
+
 </resources>

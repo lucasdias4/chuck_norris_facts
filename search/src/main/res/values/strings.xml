@@ -3,4 +3,5 @@
     <string name="input_edit_text_hint_search_fragment">ex: cowboy</string>
     <string name="description_text_search_fragment">latest searches</string>
     <string name="button_to_search_search_fragment">Search</string>
+    <string name="description_search_suggestion">suggestions</string>
 </resources>
