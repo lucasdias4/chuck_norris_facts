@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.lucasdias.extensions.bind
-import com.lucasdias.extensions.gone
 import com.lucasdias.extensions.visible
 import com.lucasdias.search.R
 import org.koin.android.ext.android.inject
