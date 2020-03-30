@@ -25,10 +25,12 @@ internal class SearchViewModel(
 
     private var randomCategoriesLiveData = MutableLiveData<List<String>?>()
     private var errorToLoadCategories = MutableLiveData<Unit>()
+    private var showSuggestionAndHistoricViews = MutableLiveData<Unit>()
 
     fun getHistoric() = getSearchHistoric()
     fun getRandomCategories() = randomCategoriesLiveData
     fun errorToLoadCategories() = errorToLoadCategories
+    fun showSuggestionAndHistoricViews() = showSuggestionAndHistoricViews
 
     fun searchCategories() {
         CoroutineScope(coroutineContext).launch {
@@ -37,7 +39,12 @@ internal class SearchViewModel(
 
             val categoryCacheIsEmpty = isCategoryCacheEmpty()
 
-            if (categoryCacheIsEmpty) requestStatus = searchCategoriesFromApi()
+            if (categoryCacheIsEmpty) {
+                requestStatus = searchCategoriesFromApi()
+            }
+
+            showSuggestionAndHistoricViews.postValue(Unit)
+
             if (requestStatus == Success) categories = getRandomCategoriesFromDatabase()
             else errorToLoadCategories.postValue(Unit)
             if (categories.isNullOrEmpty().not()) randomCategoriesLiveData.postValue(categories)

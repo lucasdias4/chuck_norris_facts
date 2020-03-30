@@ -8,12 +8,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.lucasdias.extensions.bind
+import com.lucasdias.extensions.gone
+import com.lucasdias.extensions.visible
 import com.lucasdias.search.R
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
@@ -40,6 +43,8 @@ class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragmen
     private val searchButton by bind<Button>(R.id.search_button_search_fragment)
     private val inputTextArea by bind<TextInputEditText>(R.id.input_edit_text_search_fragment)
     private val searchMotionLayout by bind<MotionLayout>(R.id.motion_layout_fragment_search)
+    private val suggestion_view_wrapper by bind<ConstraintLayout>(R.id.wrapper_suggestion_search_fragment)
+    private val historic_view_wrapper by bind<ConstraintLayout>(R.id.wrapper_historic_search_fragment)
     private val firstSuggestionTagView by bind<ViewGroup>(R.id.wrapper_first_tag_search_suggestion)
     private val secondSuggestionTagView by bind<ViewGroup>(R.id.wrapper_second_tag_search_suggestion)
     private val thirdSuggestionTagView by bind<ViewGroup>(R.id.wrapper_third_tag_search_suggestion)
@@ -137,6 +142,10 @@ class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragmen
         viewModel.apply {
             getRandomCategories().observe(this@SearchFragment, Observer { suggestionTags ->
                 initSuggestionTags(suggestionTags)
+            })
+            showSuggestionAndHistoricViews().observe(this@SearchFragment, Observer {
+                suggestion_view_wrapper?.visible()
+                historic_view_wrapper?.visible()
             })
         }
     }

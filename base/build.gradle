@@ -39,34 +39,35 @@ dependencies {
     api "androidx.core:core-ktx:$core_ktx_version"
     api "androidx.legacy:legacy-support-v4:$legacy_support_version"
 
-    //Layout
-    api "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
-    api "com.google.android.material:material:$material_version"
-    api "androidx.recyclerview:recyclerview:$recycler_view_version"
-
     //Coroutines
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    api "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$retrofit2_kotlin_coroutines_adapter_version"
 
     //Koin
     api "org.koin:koin-android:$koin_version"
     api "org.koin:koin-android-viewmodel:$koin_version"
     api "org.koin:koin-core:$koin_version"
 
+    //Layout
+    api "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
+    api "com.google.android.material:material:$material_version"
+    api "androidx.recyclerview:recyclerview:$recycler_view_version"
+
+    //Persistence
+    api "androidx.preference:preference-ktx:$preferences_ktx_version"
+
     //Result
     api "com.github.kittinunf.result:result:$result_version"
     api "com.github.kittinunf.result:result-coroutines:$result_version"
-
-    //Coroutines
-    api "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$retrofit2_kotlin_coroutines_adapter_version"
 
     //Retrofit
     api "com.squareup.retrofit2:retrofit:$retrofit_version"
     api "com.squareup.retrofit2:converter-gson:$converter_gson_version"
     api "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
 
-    //Persistence
-    api "androidx.preference:preference-ktx:$preferences_ktx_version"
+    //Shimmer
+    api "com.facebook.shimmer:shimmer:$shimmer_version"
 
     //Test
     testImplementation "junit:junit:$junit_version"

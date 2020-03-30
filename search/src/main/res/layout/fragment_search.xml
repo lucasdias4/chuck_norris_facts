@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_wrappter_fragment_search"
+            android:id="@+id/layout_wrapper_fragment_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -37,6 +37,7 @@
                 layout="@layout/search_suggestion_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/wrapper_text_input_search_fragment" />
@@ -46,6 +47,7 @@
                 layout="@layout/search_historic_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

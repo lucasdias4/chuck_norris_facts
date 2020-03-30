@@ -40,9 +40,6 @@ dependencies {
     //Layout
     implementation "androidx.cardview:cardview:$card_view_version"
 
-    //Shimmer
-    implementation "com.facebook.shimmer:shimmer:$shimmer_version"
-
     //Persistence
     implementation "android.arch.persistence.room:runtime:$room_version"
     kapt "android.arch.persistence.room:compiler:$room_version"
