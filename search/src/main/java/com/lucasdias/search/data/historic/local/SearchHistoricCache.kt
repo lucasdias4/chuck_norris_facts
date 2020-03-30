@@ -3,7 +3,6 @@ package com.lucasdias.search.data.historic.local
 import android.content.Context
 import androidx.preference.PreferenceManager
 import com.lucasdias.base.typeconverter.TypeConverter
-import java.util.*
 import kotlin.collections.ArrayList
 
 internal class SearchHistoricCache(private var context: Context) {
