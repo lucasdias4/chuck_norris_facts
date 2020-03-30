@@ -80,13 +80,8 @@ class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragmen
 
     private fun initTextInput() {
         inputTextArea?.setOnKeyListener { _, keyCode, event ->
-            val userHitEnterButton =
-                (event.action == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)
-            if (userHitEnterButton) {
-                val searchText = inputTextArea?.text ?: EMPTY_STRING
-                viewModel.userWantsToSearch(searchText.toString())
-            }
-
+            val searchText = inputTextArea?.text ?: EMPTY_STRING
+            viewModel.inputTextKeyboardHandler(event, keyCode, searchText.toString())
             return@setOnKeyListener true
         }
     }
@@ -137,10 +132,8 @@ class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragmen
         val tagTextView = suggestionTagView?.findViewById<TextView>(R.id.text_search_suggestion_tag)
         tagTextView?.text = text
         tagTextView?.setOnClickListener {
-            text?.let {
-                viewModel.setSearch(text)
-                searchClickMethod(text)
-            }
+            viewModel.userWantsToSearch(text)
+
         }
     }
 

@@ -1,5 +1,6 @@
 package com.lucasdias.search.presentation
 
+import android.view.KeyEvent
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lucasdias.search.domain.sealedclass.RequestStatus
@@ -64,11 +65,22 @@ internal class SearchViewModel(
         setSearchHistoric(search)
     }
 
-    fun userWantsToSearch(search: String) {
-        if (search.length < SEARCH_MINIMUM_SIZE) {
-            searchMustBeLongerThanTwoCharacters.postValue(Unit)
-            return
+    fun userWantsToSearch(search: String?) {
+        search?.let {
+            if (it.length < SEARCH_MINIMUM_SIZE) {
+                searchMustBeLongerThanTwoCharacters.postValue(Unit)
+                return
+            }
+            doASearch.postValue(search)
         }
-        doASearch.postValue(search)
+    }
+
+    fun inputTextKeyboardHandler(event: KeyEvent?, keyCode: Int, searchText: String) {
+        val userHitEnterButton =
+            (event?.action == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)
+
+        if (userHitEnterButton) {
+            userWantsToSearch(searchText)
+        }
     }
 }
