@@ -21,16 +21,24 @@ internal class SearchViewModel(
     private val isCategoryCacheEmpty: IsCategoryCacheEmpty
 ) : ViewModel() {
 
+    private companion object {
+        const val SEARCH_MINIMUM_SIZE = 3
+    }
+
     private var coroutineContext = Dispatchers.IO
 
     private var randomCategoriesLiveData = MutableLiveData<List<String>?>()
     private var errorToLoadCategories = MutableLiveData<Unit>()
     private var showSuggestionAndHistoricViews = MutableLiveData<Unit>()
+    private var searchMustBeLongerThanTwoCharacters = MutableLiveData<Unit>()
+    private var doASearch = MutableLiveData<String>()
 
     fun getHistoric() = getSearchHistoric()
     fun getRandomCategories() = randomCategoriesLiveData
     fun errorToLoadCategories() = errorToLoadCategories
     fun showSuggestionAndHistoricViews() = showSuggestionAndHistoricViews
+    fun searchMustBeLongerThanTwoCharacters() = searchMustBeLongerThanTwoCharacters
+    fun doASearch() = doASearch
 
     fun searchCategories() {
         CoroutineScope(coroutineContext).launch {
@@ -52,7 +60,15 @@ internal class SearchViewModel(
     }
 
     fun setSearch(search: String) {
-        if (search.isEmpty()) return
+        if (search.length < SEARCH_MINIMUM_SIZE) return
         setSearchHistoric(search)
+    }
+
+    fun userWantsToSearch(search: String) {
+        if (search.length < SEARCH_MINIMUM_SIZE) {
+            searchMustBeLongerThanTwoCharacters.postValue(Unit)
+            return
+        }
+        doASearch.postValue(search)
     }
 }

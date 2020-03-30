@@ -4,4 +4,5 @@
     <string name="description_text_search_fragment">latest searches</string>
     <string name="button_to_search_search_fragment">Search</string>
     <string name="description_search_suggestion">suggestions</string>
+    <string name="search_with_small_text_alert_search_fragment">search must be longer than two characters</string>
 </resources>

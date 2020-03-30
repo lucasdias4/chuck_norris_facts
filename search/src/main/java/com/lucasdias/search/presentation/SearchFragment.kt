@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.lucasdias.extensions.bind
+import com.lucasdias.extensions.toast
 import com.lucasdias.extensions.visible
 import com.lucasdias.search.R
 import org.koin.android.ext.android.inject
@@ -23,6 +24,7 @@ import org.koin.core.parameter.parametersOf
 class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragment() {
 
     companion object {
+        private const val EMPTY_STRING = ""
         private const val FIRST_SUGGESTION = 0
         private const val SECOND_SUGGESTION = 1
         private const val THIRD_SUGGESTION = 2
@@ -37,7 +39,7 @@ class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragmen
     }
 
     private val viewModel by inject<SearchViewModel>()
-    private val adapter: SearchAdapter by inject { parametersOf(searchClickMethod) }
+    private val adapter: SearchAdapter by inject { parametersOf(userWantsToSearch) }
     private val recyclerView by bind<RecyclerView>(R.id.historic_list_search_fragment)
     private val searchButton by bind<Button>(R.id.search_button_search_fragment)
     private val inputTextArea by bind<TextInputEditText>(R.id.input_edit_text_search_fragment)
@@ -53,6 +55,7 @@ class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragmen
     private val seventhSuggestionTagView by bind<ViewGroup>(R.id.wrapper_seventh_tag_search_suggestion)
     private val eightSuggestionTagView by bind<ViewGroup>(R.id.wrapper_eighth_tag_search_suggestion)
     private lateinit var layoutManager: RecyclerView.LayoutManager
+    private val userWantsToSearch = { search: String -> viewModel.userWantsToSearch(search) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -79,7 +82,11 @@ class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragmen
         inputTextArea?.setOnKeyListener { _, keyCode, event ->
             val userHitEnterButton =
                 (event.action == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)
-            if (userHitEnterButton) doASearch(inputTextArea)
+            if (userHitEnterButton) {
+                val searchText = inputTextArea?.text ?: EMPTY_STRING
+                viewModel.userWantsToSearch(searchText.toString())
+            }
+
             return@setOnKeyListener true
         }
     }
@@ -97,14 +104,14 @@ class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragmen
 
     private fun initSearchButtonListener() {
         searchButton?.setOnClickListener {
-            doASearch(inputTextArea)
+            val searchText = inputTextArea?.text ?: EMPTY_STRING
+            viewModel.userWantsToSearch(searchText.toString())
         }
     }
 
-    private fun doASearch(inputTextArea: TextInputEditText?) {
-        val inputText = inputTextArea?.text.toString()
-        viewModel.setSearch(inputText)
-        searchClickMethod(inputText)
+    private fun doASearch(search: String) {
+        viewModel.setSearch(search)
+        searchClickMethod(search)
     }
 
     private fun initHistoricList() {
@@ -145,6 +152,12 @@ class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragmen
             showSuggestionAndHistoricViews().observe(this@SearchFragment, Observer {
                 suggestion_view_wrapper?.visible()
                 historic_view_wrapper?.visible()
+            })
+            doASearch().observe(this@SearchFragment, Observer { search ->
+                this@SearchFragment.doASearch(search)
+            })
+            searchMustBeLongerThanTwoCharacters().observe(this@SearchFragment, Observer { search ->
+                activity?.toast(resources.getString(R.string.search_with_small_text_alert_search_fragment))
             })
         }
     }
