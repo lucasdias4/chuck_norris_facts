@@ -1,7 +1,6 @@
 package com.lucasdias.search.presentation
 
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -133,7 +132,6 @@ class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragmen
         tagTextView?.text = text
         tagTextView?.setOnClickListener {
             viewModel.userWantsToSearch(text)
-
         }
     }
 
