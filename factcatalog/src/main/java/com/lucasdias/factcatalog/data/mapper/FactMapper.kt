@@ -1,7 +1,7 @@
-package com.lucasdias.factcatalog.data.fact.mapper
+package com.lucasdias.factcatalog.data.mapper
 
 import com.lucasdias.base.typeconverter.TypeConverter
-import com.lucasdias.factcatalog.data.fact.remote.response.FactListResponse
+import com.lucasdias.factcatalog.data.remote.response.FactListResponse
 import com.lucasdias.factcatalog.domain.model.Fact
 
 internal class FactMapper {

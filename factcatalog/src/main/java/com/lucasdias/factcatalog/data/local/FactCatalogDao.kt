@@ -1,4 +1,4 @@
-package com.lucasdias.factcatalog.data.fact.local
+package com.lucasdias.factcatalog.data.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

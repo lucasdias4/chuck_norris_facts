@@ -1,11 +1,11 @@
-package com.lucasdias.factcatalog.data.fact
+package com.lucasdias.factcatalog.data
 
 import androidx.lifecycle.LiveData
 import com.github.kittinunf.result.coroutines.SuspendableResult
-import com.lucasdias.factcatalog.data.fact.local.FactCatalogDao
-import com.lucasdias.factcatalog.data.fact.mapper.FactMapper
-import com.lucasdias.factcatalog.data.fact.remote.FactCatalogService
-import com.lucasdias.factcatalog.data.fact.remote.response.FactListResponse
+import com.lucasdias.factcatalog.data.local.FactCatalogDao
+import com.lucasdias.factcatalog.data.mapper.FactMapper
+import com.lucasdias.factcatalog.data.remote.FactCatalogService
+import com.lucasdias.factcatalog.data.remote.response.FactListResponse
 import com.lucasdias.factcatalog.domain.model.Fact
 import com.lucasdias.factcatalog.domain.repository.FactCatalogRepository
 import com.lucasdias.factcatalog.domain.sealedclass.Error

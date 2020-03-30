@@ -1,6 +1,6 @@
-package com.lucasdias.factcatalog.data.fact.remote
+package com.lucasdias.factcatalog.data.remote
 
-import com.lucasdias.factcatalog.data.fact.remote.response.FactListResponse
+import com.lucasdias.factcatalog.data.remote.response.FactListResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.GET
