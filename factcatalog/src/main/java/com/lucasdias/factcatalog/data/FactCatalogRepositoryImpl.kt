@@ -93,7 +93,7 @@ internal class FactCatalogRepositoryImpl(
         facts?.forEach { fact ->
             LogApp.i(
                 "FactCatalog", " \nFact id: ${fact.id}" +
-                        "\nCategories: ${fact.categorieListAsString}" +
+                        "\nCategories: ${fact.categoryListAsString}" +
                         "\nUrl: ${fact.url}" +
                         "\nValue: ${fact.value}"
             )

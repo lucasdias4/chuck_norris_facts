@@ -22,7 +22,7 @@ internal class FactMapper {
                     id = fact.id,
                     value = fact.value,
                     url = httpsUrl,
-                    categorieListAsString = categorieListAsString
+                    categoryListAsString = categorieListAsString
                 )
                 domainFacts.add(domainFact)
             }
