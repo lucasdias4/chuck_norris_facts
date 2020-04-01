@@ -5,16 +5,16 @@ import com.lucasdias.search.domain.sealedclass.Error
 import com.lucasdias.search.domain.sealedclass.Success
 import com.lucasdias.search.domain.usecase.GetRandomCategoriesFromDatabase
 import com.lucasdias.search.domain.usecase.GetSearchHistoric
+import com.lucasdias.search.domain.usecase.IsCategoryCacheEmpty
 import com.lucasdias.search.domain.usecase.SearchCategoriesFromApi
 import com.lucasdias.search.domain.usecase.SetSearchHistoric
-import com.lucasdias.search.domain.usecase.IsCategoryCacheEmpty
 import com.lucasdias.search.presentation.SearchViewModel
+import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.just
 import io.mockk.mockk
 import io.mockk.spyk
-import io.mockk.just
-import io.mockk.Runs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -158,7 +158,7 @@ class SearchViewModel {
     }
 
     @Test
-    fun `If the getRandomCategoriesFromDatabase method returns a non-empty list THEN call randomCategoriesLiveData with that list`() {
+    fun `IF the getRandomCategoriesFromDatabase method returns a non-empty list THEN call randomCategoriesLiveData with that list`() {
         val categories = ArrayList<String>()
         categories.add(FILLED_STRING)
         searchCategoriesMethodSetup()
@@ -185,7 +185,7 @@ class SearchViewModel {
     }
 
     @Test
-    fun `If the getRandomCategoriesFromDatabase method returns am empty list THEN do not call randomCategoriesLiveData with that list`() {
+    fun `IF the getRandomCategoriesFromDatabase method returns am empty list THEN do not call randomCategoriesLiveData with that list`() {
         val categories = ArrayList<String>()
         searchCategoriesMethodSetup()
 
