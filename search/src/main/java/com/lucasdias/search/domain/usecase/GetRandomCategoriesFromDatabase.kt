@@ -4,7 +4,7 @@ import com.lucasdias.search.domain.repository.CategoryRepository
 
 class GetRandomCategoriesFromDatabase(private val categoryRepository: CategoryRepository) {
 
-    private companion object {
+    internal companion object {
         const val FIRST_ITEM = 0
         const val LAST_ITEM = 8
     }
