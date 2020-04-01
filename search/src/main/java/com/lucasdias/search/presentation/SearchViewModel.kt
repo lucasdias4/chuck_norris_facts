@@ -15,24 +15,24 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 internal class SearchViewModel(
-    private val getSearchHistoric: GetSearchHistoric,
-    private val setSearchHistoric: SetSearchHistoric,
-    private val searchCategoriesFromApi: SearchCategoriesFromApi,
-    private val getRandomCategoriesFromDatabase: GetRandomCategoriesFromDatabase,
-    private val isCategoryCacheEmpty: IsCategoryCacheEmpty
+    internal val getSearchHistoric: GetSearchHistoric,
+    internal val setSearchHistoric: SetSearchHistoric,
+    internal val searchCategoriesFromApi: SearchCategoriesFromApi,
+    internal val getRandomCategoriesFromDatabase: GetRandomCategoriesFromDatabase,
+    internal val isCategoryCacheEmpty: IsCategoryCacheEmpty
 ) : ViewModel() {
 
     private companion object {
         const val SEARCH_MINIMUM_SIZE = 3
     }
 
-    private var coroutineContext = Dispatchers.IO
+    internal var coroutineContext = Dispatchers.IO
 
-    private var randomCategoriesLiveData = MutableLiveData<List<String>?>()
-    private var errorToLoadCategories = MutableLiveData<Unit>()
-    private var showSuggestionAndHistoricViews = MutableLiveData<Unit>()
-    private var searchMustBeLongerThanTwoCharacters = MutableLiveData<Unit>()
-    private var doASearch = MutableLiveData<String>()
+    internal var randomCategoriesLiveData = MutableLiveData<List<String>?>()
+    internal var errorToLoadCategories = MutableLiveData<Unit>()
+    internal var showSuggestionAndHistoricViews = MutableLiveData<Unit>()
+    internal var searchMustBeLongerThanTwoCharacters = MutableLiveData<Unit>()
+    internal var doASearch = MutableLiveData<String>()
 
     fun getHistoric() = getSearchHistoric()
     fun getRandomCategories() = randomCategoriesLiveData
@@ -47,10 +47,7 @@ internal class SearchViewModel(
             var requestStatus: RequestStatus = Success
 
             val categoryCacheIsEmpty = isCategoryCacheEmpty()
-
-            if (categoryCacheIsEmpty) {
-                requestStatus = searchCategoriesFromApi()
-            }
+            if (categoryCacheIsEmpty) requestStatus = searchCategoriesFromApi()
 
             showSuggestionAndHistoricViews.postValue(Unit)
 

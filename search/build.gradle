@@ -38,6 +38,7 @@ dependencies {
     implementation project(':base')
 
     //Test
+    testImplementation "io.mockk:mockk:$mockk_version"
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$junit_android_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
