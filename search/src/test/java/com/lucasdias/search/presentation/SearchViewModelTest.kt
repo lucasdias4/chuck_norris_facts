@@ -1,4 +1,4 @@
-package chucknorrisfacts
+package com.lucasdias.search.presentation
 
 import androidx.lifecycle.MutableLiveData
 import com.lucasdias.search.domain.sealedclass.Error
@@ -8,7 +8,6 @@ import com.lucasdias.search.domain.usecase.GetSearchHistoric
 import com.lucasdias.search.domain.usecase.IsCategoryCacheEmpty
 import com.lucasdias.search.domain.usecase.SearchCategoriesFromApi
 import com.lucasdias.search.domain.usecase.SetSearchHistoric
-import com.lucasdias.search.presentation.SearchViewModel
 import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -20,7 +19,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 
-class SearchViewModel {
+class SearchViewModelTest {
 
     private val coroutineContext = Dispatchers.Unconfined
     private val getSearchHistoric: GetSearchHistoric = mockk()
