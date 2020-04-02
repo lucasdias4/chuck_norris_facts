@@ -8,15 +8,15 @@ internal class SearchHistoricRepositoryImpl(
     private val searchHistoricCache: SearchHistoricCache
 ) : SearchHistoricRepository {
 
-    private companion object {
-        const val DO_NOT_CONTAIN = -1
+    internal companion object {
+        const val DOES_NOT_CONTAIN = -1
         const val FIRST_POSITION = 0
     }
 
     override fun setSearch(search: String) {
         val historic = getHistoric()
         val indexOfContainedString = historic.indexOf(search.trim())
-        if (indexOfContainedString != DO_NOT_CONTAIN) historic.removeAt(indexOfContainedString)
+        if (indexOfContainedString != DOES_NOT_CONTAIN) historic.removeAt(indexOfContainedString)
         historic.add(FIRST_POSITION, search)
 
         val historicAsString = TypeConverter.arrayListToString(historic)
