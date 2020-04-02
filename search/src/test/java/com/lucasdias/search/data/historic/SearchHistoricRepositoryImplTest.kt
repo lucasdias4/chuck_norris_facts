@@ -4,13 +4,13 @@ import com.lucasdias.base.typeconverter.TypeConverter
 import com.lucasdias.search.data.historic.SearchHistoricRepositoryImpl.Companion.DOES_NOT_CONTAIN
 import com.lucasdias.search.data.historic.SearchHistoricRepositoryImpl.Companion.FIRST_POSITION
 import com.lucasdias.search.data.historic.local.SearchHistoricCache
+import io.mockk.Runs
 import io.mockk.every
+import io.mockk.just
 import io.mockk.mockk
 import io.mockk.mockkObject
 import io.mockk.spyk
 import io.mockk.verify
-import io.mockk.just
-import io.mockk.Runs
 import org.junit.Before
 import org.junit.Test
 
