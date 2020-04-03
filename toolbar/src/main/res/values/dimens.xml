@@ -13,7 +13,7 @@
     <dimen name="title_margin_start_toolbar_content_layout">8dp</dimen>
     <dimen name="title_padding_bottom_toolbar_content_layout">5dp</dimen>
 
-    <dimen name="separetor_height_toolbar_content_layout">2dp</dimen>
+    <dimen name="separator_height_toolbar_content_layout">2dp</dimen>
 
     <dimen name="title_without_icon_padding_start_toolbar_content_layout">16dp</dimen>
 </resources>

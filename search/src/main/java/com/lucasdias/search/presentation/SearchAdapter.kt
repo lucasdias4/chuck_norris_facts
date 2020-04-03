@@ -9,25 +9,25 @@ import com.lucasdias.extensions.bind
 import com.lucasdias.search.R
 
 internal class SearchAdapter(private val searchActionMethod: ((String) -> Unit)?) :
-        RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
+    RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
     private var searchList = mutableListOf<String>()
 
-    fun updateSearchTextList(searchList: ArrayList<String>) {
+    fun updateSearchHistoric(searchHistoric: ArrayList<String>) {
         if (this.searchList.isNotEmpty()) {
             this.searchList.clear()
         }
-        this.searchList.addAll(searchList)
+        this.searchList.addAll(searchHistoric)
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val viewLayout = LayoutInflater.from(
-                parent.context
+            parent.context
         ).inflate(
-                R.layout.search_item, parent, false
+            R.layout.search_item, parent, false
         )
-        return ViewHolder(viewLayout)
+        return ViewHolder(itemView = viewLayout)
     }
 
     override fun getItemCount(): Int {
@@ -36,14 +36,14 @@ internal class SearchAdapter(private val searchActionMethod: ((String) -> Unit)?
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (searchList.isNotEmpty()) {
-            holder.itemBind(searchList[position], searchActionMethod)
+            holder.bind(text = searchList[position], searchActionMethod = searchActionMethod)
         }
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val searchText by bind<TextView>(itemView, R.id.search_item_text)
 
-        fun itemBind(text: String, searchActionMethod: ((String) -> Unit)?) {
+        fun bind(text: String, searchActionMethod: ((String) -> Unit)?) {
             searchText.text = text
             itemView.setOnClickListener {
                 searchActionMethod?.let { method ->

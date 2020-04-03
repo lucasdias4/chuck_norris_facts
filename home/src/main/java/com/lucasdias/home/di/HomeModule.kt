@@ -5,7 +5,7 @@ import com.lucasdias.home.data.userfirsttime.UserFirstTimeRepositoryImpl
 import com.lucasdias.home.data.userfirsttime.local.UserFirstTimeCache
 import com.lucasdias.home.domain.repository.UserFirstTimeRepository
 import com.lucasdias.home.domain.usecase.GetIfIsTheUsersFirstTime
-import com.lucasdias.home.domain.usecase.SetThatIsNotTheUserFirstTime
+import com.lucasdias.home.domain.usecase.SetThatIsNotTheUsersFirstTimeInTheCache
 import com.lucasdias.home.pesentation.HomeViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
@@ -21,7 +21,7 @@ val homeModule = module {
     viewModel {
         HomeViewModel(
             get<GetIfIsTheUsersFirstTime>(),
-            get<SetThatIsNotTheUserFirstTime>()
+            get<SetThatIsNotTheUsersFirstTimeInTheCache>()
         )
     }
 
@@ -38,7 +38,7 @@ val homeModule = module {
     }
 
     factory {
-        SetThatIsNotTheUserFirstTime(
+        SetThatIsNotTheUsersFirstTimeInTheCache(
             get<UserFirstTimeRepository>()
         )
     }

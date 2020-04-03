@@ -51,18 +51,18 @@ class HomeActivity : AppCompatActivity() {
 
     private fun startFactCatalogFragment() {
         factCatalogFragment = FactCatalogFragment.newInstance()
-        changeFragment(factCatalogFragment)
-        initFactCatalogFragmentObservers(factCatalogFragment)
+        changeFragment(fragment = factCatalogFragment)
+        initFactCatalogFragmentObservers(factCatalogFragment = factCatalogFragment)
     }
 
     private fun startSearchFragment() {
-        val searchActionMethod = { searchText: String ->
-            selectBottomNavigationOptionProgrammatically(BottomNavigationEnum.RESULT.id)
-            factCatalogFragment.updateSearch(searchText)
+        val searchClickMethod = { searchText: String ->
+            selectBottomNavigationOptionProgrammatically(bottomNavigationOptionId = BottomNavigationEnum.RESULT.id)
+            factCatalogFragment.updateSearch(searchText = searchText)
         }
-        searchFragment = SearchFragment.newInstance(searchActionMethod)
-        changeFragment(searchFragment)
-        initSearchFragmentObservers(searchFragment)
+        searchFragment = SearchFragment.newInstance(searchClickMethod = searchClickMethod)
+        changeFragment(fragment = searchFragment)
+        initSearchFragmentObservers(searchFragment = searchFragment)
     }
 
     private fun changeFragment(fragment: Fragment) {
@@ -76,7 +76,7 @@ class HomeActivity : AppCompatActivity() {
         viewModel.apply {
             isTheUserFirstTime().observe(this@HomeActivity, Observer {
                 val userFirstTimeFragment = UserFirstTimeFragment.newInstance()
-                changeFragment(userFirstTimeFragment)
+                changeFragment(fragment = userFirstTimeFragment)
                 setThatIsNotTheUsersFirstTime()
             })
             isNotTheUserFirstTime().observe(this@HomeActivity, Observer {
@@ -89,11 +89,11 @@ class HomeActivity : AppCompatActivity() {
         factCatalogFragment.apply {
             showAnErrorScreenLiveData().observe(this@HomeActivity, Observer {
                 val errorFragment = ErrorFragment.newInstance()
-                changeFragment(errorFragment)
+                changeFragment(fragment = errorFragment)
             })
             showAnEmptySearchLiveData().observe(this@HomeActivity, Observer {
                 val emptySearchFragment = EmptySearchFragment.newInstance()
-                changeFragment(emptySearchFragment)
+                changeFragment(fragment = emptySearchFragment)
             })
         }
     }
@@ -102,14 +102,14 @@ class HomeActivity : AppCompatActivity() {
         searchFragment.apply {
             errorToLoadSearchCategories().observe(this@HomeActivity, Observer {
                 val errorFragment = ErrorFragment.newInstance()
-                changeFragment(errorFragment)
+                changeFragment(fragment = errorFragment)
             })
         }
     }
 
     private fun initConnectivityObserver() {
         connectivity.observe(this@HomeActivity, Observer { hasNetworkConnectivity ->
-            viewModel.mustShowConnectivitySnackbar(hasNetworkConnectivity)
+            viewModel.mustShowConnectivitySnackbar(hasNetworkConnectivity = hasNetworkConnectivity)
         })
     }
 
@@ -140,7 +140,7 @@ class HomeActivity : AppCompatActivity() {
         snackbar.duration = Snackbar.LENGTH_LONG
         snackbar.view.setBackgroundColor(
             ContextCompat.getColor(
-                this,
+                this@HomeActivity,
                 R.color.green
             )
         )
@@ -152,7 +152,7 @@ class HomeActivity : AppCompatActivity() {
         snackbar.duration = Snackbar.LENGTH_INDEFINITE
         snackbar.view.setBackgroundColor(
             ContextCompat.getColor(
-                this,
+                this@HomeActivity,
                 R.color.red
             )
         )
@@ -165,16 +165,23 @@ class HomeActivity : AppCompatActivity() {
         val toolbarTitle = resources.getString(R.string.toolbar_title_home)
         val toolbarTitleStyle = R.style.DefaultToolbarTitle
         val toolbarColor = R.color.lightWhite
-        Toolbar.initializeToolbar(this@HomeActivity, toolbarContainer, supportActionBar)
-        Toolbar.setToolbarColor(this@HomeActivity, toolbarColor)
-        Toolbar.setToolbarIcon(this@HomeActivity, toolbarIcon)
-        Toolbar.setToolbarTitle(this@HomeActivity, toolbarTitle)
-        Toolbar.setToolbarTitleStyle(this@HomeActivity, toolbarTitleStyle)
+        Toolbar.initializeToolbar(
+            activity = this@HomeActivity,
+            toolbarContainer = toolbarContainer,
+            supportActionBar = supportActionBar
+        )
+        Toolbar.setToolbarTitleStyle(
+            activity = this@HomeActivity,
+            toolbarTitleStyle = toolbarTitleStyle
+        )
+        Toolbar.setToolbarColor(activity = this@HomeActivity, toolbarColor = toolbarColor)
+        Toolbar.setToolbarIcon(activity = this@HomeActivity, icon = toolbarIcon)
+        Toolbar.setToolbarTitle(activity = this@HomeActivity, title = toolbarTitle)
     }
 
     private fun initBottomNavigation() {
-        val menuFirstPostion = 1
-        val menuSecondPostion = 2
+        val menuFirstPosition = 1
+        val menuSecondPosition = 2
 
         val bottomNavigationBackgroundColor = ContextCompat.getColor(
             this@HomeActivity,
@@ -199,28 +206,28 @@ class HomeActivity : AppCompatActivity() {
 
         bottomNavigationOptionList.add(
             BottomNavigationOption(
-                BottomNavigationEnum.RESULT.id,
-                resultOptionTitle,
-                resultOptionIcon,
-                menuFirstPostion,
-                resultOptionClickAction
+                id = BottomNavigationEnum.RESULT.id,
+                title = resultOptionTitle,
+                icon = resultOptionIcon,
+                order = menuFirstPosition,
+                startFragment = resultOptionClickAction
             )
         )
         bottomNavigationOptionList.add(
             BottomNavigationOption(
-                BottomNavigationEnum.SEARCH.id,
-                searchOptionTitle,
-                searchOptionIcon,
-                menuSecondPostion,
-                searchOptionClickAction
+                id = BottomNavigationEnum.SEARCH.id,
+                title = searchOptionTitle,
+                icon = searchOptionIcon,
+                order = menuSecondPosition,
+                startFragment = searchOptionClickAction
             )
         )
 
         BottomNavigation.init(
-            this@HomeActivity,
-            bottomNavigationBackgroundColor,
-            bottomNavigationContainer,
-            bottomNavigationOptionList
+            hostActivity = this@HomeActivity,
+            backgroundColor = bottomNavigationBackgroundColor,
+            hostBottomNavigationContainer = bottomNavigationContainer,
+            bottomNavigationOptionList = bottomNavigationOptionList
         )
     }
 
@@ -230,7 +237,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private enum class BottomNavigationEnum(val id: Int) {
-        RESULT(1),
-        SEARCH(2)
+        RESULT(id = 1),
+        SEARCH(id = 2)
     }
 }

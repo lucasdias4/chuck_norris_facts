@@ -26,6 +26,7 @@ class FactCatalogFragment : Fragment() {
     companion object {
         fun newInstance() = FactCatalogFragment()
     }
+
     private val viewModel by viewModel<FactCatalogViewModel>()
     private val adapter by inject<FactCatalogAdapter> { parametersOf(shareUrlMethod) }
     private val connectivity by inject<Connectivity>(named(FACT_CATALOG_CONNECTIVITY))
@@ -68,14 +69,14 @@ class FactCatalogFragment : Fragment() {
 
     private fun initViewModelObservers() {
         viewModel.apply {
-            updateFactsLiveData().observe(this@FactCatalogFragment, Observer { facts ->
-                adapter.updateFactCatalog(facts)
+            updateFactsLiveData().observe(viewLifecycleOwner, Observer { facts ->
+                adapter.updateFactCatalog(facts = facts)
             })
-            turnOnLoadingLiveData().observe(this@FactCatalogFragment, Observer {
+            turnOnLoadingLiveData().observe(viewLifecycleOwner, Observer {
                 recyclerView?.gone()
                 recyclerViewPlaceHolder?.visible()
             })
-            turnOffLoadingLiveData().observe(this@FactCatalogFragment, Observer {
+            turnOffLoadingLiveData().observe(viewLifecycleOwner, Observer {
                 recyclerView?.visible()
                 recyclerViewPlaceHolder?.gone()
             })
@@ -83,8 +84,8 @@ class FactCatalogFragment : Fragment() {
     }
 
     private fun initConnectivityObserver() {
-        connectivity.observe(this@FactCatalogFragment, Observer { hasNetworkConnectivity ->
-            viewModel.updateConnectivityStatus(hasNetworkConnectivity)
+        connectivity.observe(viewLifecycleOwner, Observer { hasNetworkConnectivity ->
+            viewModel.updateConnectivityStatus(hasNetworkConnectivity = hasNetworkConnectivity)
         })
     }
 

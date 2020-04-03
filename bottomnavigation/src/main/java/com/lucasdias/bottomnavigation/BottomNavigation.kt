@@ -19,11 +19,19 @@ class BottomNavigation {
             hostBottomNavigationContainer: FrameLayout,
             bottomNavigationOptionList: ArrayList<BottomNavigationOption>
         ) {
-            val view = getInflatedLayout(hostActivity)
-            val bottomNavigationView = getBottomNavigationView(view)
-            updateBottomNavigateView(bottomNavigationView)
-            bottomNavigationSetup(bottomNavigationView, backgroundColor, bottomNavigationOptionList)
-            clickListenersSetup(bottomNavigationView, bottomNavigationOptionList)
+            val view = getInflatedLayout(activity = hostActivity)
+            val bottomNavigationView = getBottomNavigationView(view = view)
+            updateBottomNavigateView(bottomNavigationView = bottomNavigationView)
+            bottomNavigationSetup(
+                bottomNavigationView = bottomNavigationView,
+                backgroundColor = backgroundColor,
+                bottomNavigationOptionList = bottomNavigationOptionList
+            )
+            clickListenersSetup(
+                bottomNavigationView = bottomNavigationView,
+                bottomNavigationOptionList = bottomNavigationOptionList
+            )
+
             hostBottomNavigationContainer.addView(view)
         }
 
@@ -56,11 +64,11 @@ class BottomNavigation {
             bottomNavigationView.setBackgroundColor(backgroundColor)
             bottomNavigationOptionList.forEach { bottomNavigationOption ->
                 menu.add(
-                        Menu.NONE,
-                        bottomNavigationOption.id,
-                        bottomNavigationOption.order,
-                        bottomNavigationOption.title
-                ).icon = bottomNavigationOption.drawable
+                    Menu.NONE,
+                    bottomNavigationOption.id,
+                    bottomNavigationOption.order,
+                    bottomNavigationOption.title
+                ).icon = bottomNavigationOption.icon
             }
         }
 

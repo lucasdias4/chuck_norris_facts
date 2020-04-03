@@ -44,7 +44,7 @@
     <View
         android:id="@+id/separator_toolbar_content_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/separetor_height_toolbar_content_layout"
+        android:layout_height="@dimen/separator_height_toolbar_content_layout"
         android:background="@drawable/bottom_shadow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

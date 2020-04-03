@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lucasdias.home.domain.usecase.GetIfIsTheUsersFirstTime
-import com.lucasdias.home.domain.usecase.SetThatIsNotTheUserFirstTime
+import com.lucasdias.home.domain.usecase.SetThatIsNotTheUsersFirstTimeInTheCache
 
 internal class HomeViewModel(
     val getIfIsTheUsersFirstTime: GetIfIsTheUsersFirstTime,
-    val setThatIsNotTheUserFirstTime: SetThatIsNotTheUserFirstTime
+    val setThatIsNotTheUsersFirstTimeInTheCache: SetThatIsNotTheUsersFirstTimeInTheCache
 ) : ViewModel() {
 
     private var wasConnected = true
@@ -40,6 +40,6 @@ internal class HomeViewModel(
     }
 
     fun setThatIsNotTheUsersFirstTime() {
-        setThatIsNotTheUserFirstTime()
+        setThatIsNotTheUsersFirstTimeInTheCache()
     }
 }

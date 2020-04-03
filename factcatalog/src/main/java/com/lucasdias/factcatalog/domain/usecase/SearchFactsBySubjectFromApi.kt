@@ -6,6 +6,6 @@ import com.lucasdias.factcatalog.domain.sealedclass.RequestStatus
 internal class SearchFactsBySubjectFromApi(
     private val factCatalogRepository: FactCatalogRepository
 ) {
-    suspend operator fun invoke(subject: String): RequestStatus = factCatalogRepository
-        .searchFactsBySubjectFromApi(subject = subject)
+    suspend operator fun invoke(subject: String): RequestStatus =
+        factCatalogRepository.searchFactsBySubjectFromApi(subject = subject)
 }

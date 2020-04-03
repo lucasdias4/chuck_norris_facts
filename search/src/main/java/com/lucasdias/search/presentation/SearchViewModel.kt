@@ -28,14 +28,14 @@ internal class SearchViewModel(
 
     internal var coroutineContext = Dispatchers.IO
 
-    internal var randomCategoriesLiveData = MutableLiveData<List<String>?>()
+    internal var randomCategories = MutableLiveData<List<String>?>()
     internal var errorToLoadCategories = MutableLiveData<Unit>()
     internal var showSuggestionAndHistoricViews = MutableLiveData<Unit>()
     internal var searchMustBeLongerThanTwoCharacters = MutableLiveData<Unit>()
     internal var doASearch = MutableLiveData<String>()
 
     fun getHistoric() = getSearchHistoric()
-    fun getRandomCategories() = randomCategoriesLiveData
+    fun getRandomCategories() = randomCategories
     fun errorToLoadCategories() = errorToLoadCategories
     fun showSuggestionAndHistoricViews() = showSuggestionAndHistoricViews
     fun searchMustBeLongerThanTwoCharacters() = searchMustBeLongerThanTwoCharacters
@@ -53,13 +53,13 @@ internal class SearchViewModel(
 
             if (requestStatus == Success) categories = getRandomCategoriesFromDatabase()
             else errorToLoadCategories.postValue(Unit)
-            if (categories.isNullOrEmpty().not()) randomCategoriesLiveData.postValue(categories)
+            if (categories.isNullOrEmpty().not()) randomCategories.postValue(categories)
         }
     }
 
     fun setSearch(search: String) {
         if (search.length < SEARCH_MINIMUM_SIZE) return
-        setSearchHistoric(search)
+        setSearchHistoric(search = search)
     }
 
     fun userWantsToSearch(search: String?) {
@@ -77,7 +77,7 @@ internal class SearchViewModel(
             (event?.action == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)
 
         if (userHitEnterButton) {
-            userWantsToSearch(searchText)
+            userWantsToSearch(search = searchText)
         }
     }
 }

@@ -11,8 +11,8 @@ import com.lucasdias.search.domain.sealedclass.Success
 import retrofit2.Response
 
 internal class CategoryRepositoryImpl(
-    var categoryService: CategoryService,
-    var categoryCache: CategoryCache
+    private var categoryService: CategoryService,
+    private var categoryCache: CategoryCache
 ) : CategoryRepository {
 
     private companion object {
@@ -32,7 +32,9 @@ internal class CategoryRepositoryImpl(
         val resultCode = result.component1()?.code()
         val resultException = result.component2()
         val resultBody = result.component1()?.body()
-        val status = resultStatusHandler(resultCode, resultException)
+        val status = resultStatusHandler(
+            resultCode = resultCode, resultException = resultException
+        )
 
         if (status == Success) {
             onSuccess(
@@ -40,7 +42,7 @@ internal class CategoryRepositoryImpl(
             )
         } else if (status == Error) {
             val exception = result.component2()
-            logRequestException(exception, resultCode)
+            logRequestException(exception = exception, resultCode = resultCode)
         }
 
         return status

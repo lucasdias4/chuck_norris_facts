@@ -39,7 +39,11 @@ internal class FactCatalogRepositoryImpl(
         val resultCode = result.component1()?.code()
         val resultException = result.component2()
         val resultBody = result.component1()?.body()
-        val status = resultStatusHandler(resultCode, resultException, resultBody)
+        val status = resultStatusHandler(
+            resultCode = resultCode,
+            resultException = resultException,
+            resultBody = resultBody
+        )
 
         if (status == Success) {
             onSuccess(
@@ -48,7 +52,7 @@ internal class FactCatalogRepositoryImpl(
             )
         } else if (status == Error) {
             val exception = result.component2()
-            logRequestException(exception, resultCode)
+            logRequestException(exception = exception, resultCode = resultCode)
         }
 
         return status
@@ -59,7 +63,7 @@ internal class FactCatalogRepositoryImpl(
         subject: String
     ) {
         val domainFacts = factListResponse?.let { facts ->
-            FactMapper.map(facts)
+            FactMapper.map(factListResponse = facts)
         }
 
         logRequestInfo(facts = domainFacts, subject = subject)

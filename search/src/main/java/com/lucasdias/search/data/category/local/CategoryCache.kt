@@ -12,7 +12,7 @@ internal class CategoryCache(private var context: Context) {
     }
 
     fun setCategories(categories: List<String>?) {
-        val categoriesAsString = TypeConverter.arrayListToString(categories)
+        val categoriesAsString = TypeConverter.arrayListToString(list = categories)
         val preferences = PreferenceManager.getDefaultSharedPreferences(context)
         val editor = preferences.edit()
         editor.putString(CATEGORY_KEY, categoriesAsString)
@@ -22,7 +22,7 @@ internal class CategoryCache(private var context: Context) {
     fun getCategories(): ArrayList<String> {
         val preferences = PreferenceManager.getDefaultSharedPreferences(context)
         val categoriesAsString = preferences.getString(CATEGORY_KEY, EMPTY_STRING)
-        val categories = TypeConverter.stringToArrayList(categoriesAsString) ?: ArrayList()
+        val categories = TypeConverter.stringToArrayList(string = categoriesAsString) ?: ArrayList()
         return categories
     }
 

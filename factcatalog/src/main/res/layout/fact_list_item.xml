@@ -5,9 +5,9 @@
     android:id="@+id/card_view_fact_list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    android:layout_margin="@dimen/card_view_layout_margin_fact_list_item"
+    app:cardCornerRadius="@dimen/card_view_corner_radius_fact_list_item"
+    app:cardElevation="@dimen/card_view_elevation_fact_list_item">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_fact_list_item"
@@ -18,10 +18,10 @@
             android:id="@+id/fact_description_fact_list_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="18dp"
+            android:layout_margin="@dimen/fact_description_margin_fact_list_item"
             android:fontFamily="@font/roboto_regular"
             android:textColor="@color/darkBlack"
-            android:textSize="18sp"
+            android:textSize="@dimen/fact_description_text_margin_fact_list_item"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

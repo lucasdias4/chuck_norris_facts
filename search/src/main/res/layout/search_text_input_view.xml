@@ -28,5 +28,4 @@
             android:maxLines="1"
             android:textSize="@dimen/input_edit_text_text_size_search_fragment" />
     </com.google.android.material.textfield.TextInputLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

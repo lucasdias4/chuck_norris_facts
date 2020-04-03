@@ -46,7 +46,7 @@ internal class FactCatalogAdapter(private val shareUrl: ((String) -> Unit)?) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (factCatalog.isNotEmpty()) {
-            holder.itemBind(factCatalog[position], shareUrl)
+            holder.bind(fact = factCatalog[position], shareUrl = shareUrl)
         }
     }
 
@@ -56,13 +56,13 @@ internal class FactCatalogAdapter(private val shareUrl: ((String) -> Unit)?) :
         private val shareIcon by bind<ImageView>(itemView, R.id.share_icon_fact_list_item)
         private val category by bind<TextView>(itemView, R.id.category_text_fact_list_item)
 
-        fun itemBind(
+        fun bind(
             fact: Fact,
             shareUrl: ((String) -> Unit)?
         ) {
-            contentSetup(fact, content)
-            categorySetup(fact, category)
-            shareIconSetup(fact.url, shareIcon, shareUrl)
+            contentSetup(fact = fact, content = content)
+            categorySetup(fact = fact, categoryTextView = category)
+            shareIconSetup(url = fact.url, shareIcon = shareIcon, shareUrl = shareUrl)
         }
 
         internal fun categorySetup(

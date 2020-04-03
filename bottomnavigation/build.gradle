@@ -35,6 +35,7 @@ dependencies {
 
     //Layout
     implementation "com.google.android.material:material:$material_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
 
     //Test
     testImplementation "junit:junit:$junit_version"

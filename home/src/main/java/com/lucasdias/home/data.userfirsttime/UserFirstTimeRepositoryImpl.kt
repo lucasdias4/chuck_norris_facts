@@ -8,11 +8,8 @@ class UserFirstTimeRepositoryImpl(
     private var userFirstTimeCache: UserFirstTimeCache,
     private var context: Context
 ) : UserFirstTimeRepository {
-    override fun getIfIsUserFirstTime(): Boolean {
-        return userFirstTimeCache.getIfIsUserFirstTime(context)
-    }
-
-    override fun setThatIsNotTheUsersFirstTime() {
-        userFirstTimeCache.setIsNotFirstTime(context)
-    }
+    override fun getIfIsUserFirstTime() = userFirstTimeCache.getIfIsUserFirstTime(context = context)
+    override fun setThatIsNotTheUsersFirstTime() = userFirstTimeCache.setIsNotFirstTime(
+        context = context
+    )
 }

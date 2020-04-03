@@ -43,8 +43,8 @@ class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragmen
     private val searchButton by bind<Button>(R.id.search_button_search_fragment)
     private val inputTextArea by bind<TextInputEditText>(R.id.input_edit_text_search_fragment)
     private val searchMotionLayout by bind<MotionLayout>(R.id.motion_layout_fragment_search)
-    private val suggestion_view_wrapper by bind<ConstraintLayout>(R.id.wrapper_suggestion_search_fragment)
-    private val historic_view_wrapper by bind<ConstraintLayout>(R.id.wrapper_historic_search_fragment)
+    private val suggestionViewWrapper by bind<ConstraintLayout>(R.id.wrapper_suggestion_search_fragment)
+    private val historicViewWrapper by bind<ConstraintLayout>(R.id.wrapper_historic_search_fragment)
     private val firstSuggestionTagView by bind<ViewGroup>(R.id.wrapper_first_tag_search_suggestion)
     private val secondSuggestionTagView by bind<ViewGroup>(R.id.wrapper_second_tag_search_suggestion)
     private val thirdSuggestionTagView by bind<ViewGroup>(R.id.wrapper_third_tag_search_suggestion)
@@ -53,8 +53,8 @@ class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragmen
     private val sixthSuggestionTagView by bind<ViewGroup>(R.id.wrapper_sixth_tag_search_suggestion)
     private val seventhSuggestionTagView by bind<ViewGroup>(R.id.wrapper_seventh_tag_search_suggestion)
     private val eightSuggestionTagView by bind<ViewGroup>(R.id.wrapper_eighth_tag_search_suggestion)
-    private lateinit var layoutManager: RecyclerView.LayoutManager
     private val userWantsToSearch = { search: String -> viewModel.userWantsToSearch(search) }
+    private lateinit var layoutManager: RecyclerView.LayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -80,7 +80,11 @@ class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragmen
     private fun initTextInput() {
         inputTextArea?.setOnKeyListener { _, keyCode, event ->
             val searchText = inputTextArea?.text ?: EMPTY_STRING
-            viewModel.inputTextKeyboardHandler(event, keyCode, searchText.toString())
+            viewModel.inputTextKeyboardHandler(
+                event = event,
+                keyCode = keyCode,
+                searchText = searchText.toString()
+            )
             return@setOnKeyListener true
         }
     }
@@ -99,56 +103,79 @@ class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragmen
     private fun initSearchButtonListener() {
         searchButton?.setOnClickListener {
             val searchText = inputTextArea?.text ?: EMPTY_STRING
-            viewModel.userWantsToSearch(searchText.toString())
+            viewModel.userWantsToSearch(search = searchText.toString())
         }
     }
 
     private fun doASearch(search: String) {
-        viewModel.setSearch(search)
+        viewModel.setSearch(search = search)
         searchClickMethod(search)
     }
 
     private fun initHistoricList() {
         val searchHistoric = viewModel.getHistoric()
-        adapter.updateSearchTextList(searchHistoric)
+        adapter.updateSearchHistoric(searchHistoric = searchHistoric)
     }
 
     private fun initSuggestionTags(suggestionTags: List<String>?) {
-        initSuggestionTag(firstSuggestionTagView, suggestionTags?.get(FIRST_SUGGESTION))
-        initSuggestionTag(secondSuggestionTagView, suggestionTags?.get(SECOND_SUGGESTION))
-        initSuggestionTag(thirdSuggestionTagView, suggestionTags?.get(THIRD_SUGGESTION))
-        initSuggestionTag(fourthSuggestionTagView, suggestionTags?.get(FOURTH_SUGGESTION))
-        initSuggestionTag(fifthSuggestionTagView, suggestionTags?.get(FIFTH_SUGGESTION))
-        initSuggestionTag(sixthSuggestionTagView, suggestionTags?.get(SIXTH_SUGGESTION))
-        initSuggestionTag(seventhSuggestionTagView, suggestionTags?.get(SEVENTH_SUGGESTION))
-        initSuggestionTag(eightSuggestionTagView, suggestionTags?.get(EIGHTH_SUGGESTION))
+        initSuggestionTag(
+            tagView = firstSuggestionTagView, text = suggestionTags?.get(FIRST_SUGGESTION)
+        )
+
+        initSuggestionTag(
+            tagView = secondSuggestionTagView, text = suggestionTags?.get(SECOND_SUGGESTION)
+        )
+
+        initSuggestionTag(
+            tagView = thirdSuggestionTagView, text = suggestionTags?.get(THIRD_SUGGESTION)
+        )
+
+        initSuggestionTag(
+            tagView = fourthSuggestionTagView, text = suggestionTags?.get(FOURTH_SUGGESTION)
+        )
+
+        initSuggestionTag(
+            tagView = fifthSuggestionTagView, text = suggestionTags?.get(FIFTH_SUGGESTION)
+        )
+
+        initSuggestionTag(
+            tagView = sixthSuggestionTagView, text = suggestionTags?.get(SIXTH_SUGGESTION)
+        )
+
+        initSuggestionTag(
+            tagView = seventhSuggestionTagView, text = suggestionTags?.get(SEVENTH_SUGGESTION)
+        )
+
+        initSuggestionTag(
+            tagView = eightSuggestionTagView, text = suggestionTags?.get(EIGHTH_SUGGESTION)
+        )
     }
 
     private fun initSuggestionTag(
-        suggestionTagView: ViewGroup?,
+        tagView: ViewGroup?,
         text: String?
     ) {
-        val tagTextView = suggestionTagView?.findViewById<TextView>(R.id.text_search_suggestion_tag)
+        val tagTextView = tagView?.findViewById<TextView>(R.id.text_search_suggestion_tag)
         tagTextView?.text = text
         tagTextView?.setOnClickListener {
-            viewModel.userWantsToSearch(text)
+            viewModel.userWantsToSearch(search = text)
         }
     }
 
     private fun initViewModelObservers() {
         viewModel.apply {
-            getRandomCategories().observe(this@SearchFragment, Observer { suggestionTags ->
-                initSuggestionTags(suggestionTags)
+            getRandomCategories().observe(viewLifecycleOwner, Observer { suggestionTags ->
+                initSuggestionTags(suggestionTags = suggestionTags)
             })
-            showSuggestionAndHistoricViews().observe(this@SearchFragment, Observer {
-                suggestion_view_wrapper?.visible()
-                historic_view_wrapper?.visible()
+            showSuggestionAndHistoricViews().observe(viewLifecycleOwner, Observer {
+                suggestionViewWrapper?.visible()
+                historicViewWrapper?.visible()
             })
-            doASearch().observe(this@SearchFragment, Observer { search ->
-                this@SearchFragment.doASearch(search)
+            doASearch().observe(viewLifecycleOwner, Observer { search ->
+                this@SearchFragment.doASearch(search = search)
             })
-            searchMustBeLongerThanTwoCharacters().observe(this@SearchFragment, Observer { search ->
-                activity?.toast(resources.getString(R.string.search_with_small_text_alert_search_fragment))
+            searchMustBeLongerThanTwoCharacters().observe(viewLifecycleOwner, Observer {
+                activity?.toast(message = resources.getString(R.string.search_with_small_text_alert_search_fragment))
             })
         }
     }

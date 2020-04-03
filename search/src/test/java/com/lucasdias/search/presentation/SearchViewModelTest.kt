@@ -211,7 +211,7 @@ class SearchViewModelTest {
 
     private fun searchCategoriesMethodSetup() {
         viewModel.errorToLoadCategories = errorToLoadCategories
-        viewModel.randomCategoriesLiveData = randomCategoriesLiveData
+        viewModel.randomCategories = randomCategoriesLiveData
         viewModel.showSuggestionAndHistoricViews = showSuggestionAndHistoricViews
 
         coEvery {

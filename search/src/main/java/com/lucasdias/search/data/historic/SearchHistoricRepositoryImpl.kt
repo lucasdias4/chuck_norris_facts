@@ -19,13 +19,13 @@ internal class SearchHistoricRepositoryImpl(
         if (indexOfContainedString != DOES_NOT_CONTAIN) historic.removeAt(indexOfContainedString)
         historic.add(FIRST_POSITION, search)
 
-        val historicAsString = TypeConverter.arrayListToString(historic)
-        searchHistoricCache.setHistoricAsString(historicAsString)
+        val historicAsString = TypeConverter.arrayListToString(list = historic)
+        searchHistoricCache.setHistoricAsString(historicAsString = historicAsString)
     }
 
     override fun getHistoric(): ArrayList<String> {
         val historicAsString = searchHistoricCache.getHistoricAsString()
-        val historic = TypeConverter.stringToArrayList(historicAsString) ?: ArrayList()
+        val historic = TypeConverter.stringToArrayList(string = historicAsString) ?: ArrayList()
         return historic
     }
 }

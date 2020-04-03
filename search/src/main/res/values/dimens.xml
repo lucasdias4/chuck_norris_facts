@@ -21,6 +21,11 @@
     <dimen name="search_button_bottom_left_radius">25dp</dimen>
     <dimen name="search_button_bottom_right_radius">25dp</dimen>
 
+    <dimen name="suggestion_button_top_left_radius">15dp</dimen>
+    <dimen name="suggestion_button_top_right_radius">15dp</dimen>
+    <dimen name="suggestion_button_bottom_left_radius">15dp</dimen>
+    <dimen name="suggestion_button_bottom_right_radius">15dp</dimen>
+
     <dimen name="description_text_search_fragment">18sp</dimen>
     <dimen name="nested_scroll_view_height_fragment_search">0dp</dimen>
 
@@ -34,6 +39,7 @@
     <!--    Search Suggestion Item-->
     <dimen name="text_padding_start_search_suggestion_tag">20sp</dimen>
     <dimen name="text_padding_end_search_suggestion_tag">20sp</dimen>
+    <dimen name="text_padding_bottom_search_suggestion_tag">3dp</dimen>
     <dimen name="text_text_size_search_suggestion_tag">20sp</dimen>
 
     <!--    Search Suggestion View-->

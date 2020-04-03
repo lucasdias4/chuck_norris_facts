@@ -93,7 +93,6 @@ class FactCatalogAdapter {
 
     @Test
     fun `IF a fact has no category THEN the app will show a tag uncategorized as its category`() {
-
         val fact = spyk(
             Fact(
                 id = FILLED_STRING,
@@ -112,7 +111,6 @@ class FactCatalogAdapter {
 
     @Test
     fun `IF a fact has a category THEN the app will show its category as a tag`() {
-
         val categories = ArrayList<String>()
         categories.add(ANY_CATEGORY_LOWER_CASE)
 

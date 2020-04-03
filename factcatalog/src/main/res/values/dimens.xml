@@ -34,4 +34,11 @@
     <dimen name="category_text_padding_end_fact_list_item">20dp</dimen>
     <dimen name="category_text_padding_bottom_fact_list_item">7dp</dimen>
     <dimen name="category_text_text_size_fact_list_item">16sp</dimen>
+
+    <dimen name="card_view_layout_margin_fact_list_item">10dp</dimen>
+    <dimen name="card_view_corner_radius_fact_list_item">8dp</dimen>
+    <dimen name="card_view_elevation_fact_list_item">4dp</dimen>
+
+    <dimen name="fact_description_margin_fact_list_item">18dp</dimen>
+    <dimen name="fact_description_text_margin_fact_list_item">18sp</dimen>
 </resources>

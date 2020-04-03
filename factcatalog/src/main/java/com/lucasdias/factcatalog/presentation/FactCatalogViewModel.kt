@@ -54,8 +54,7 @@ internal class FactCatalogViewModel(
             SuccessWithoutResult -> {
                 showAnEmptySearchScreenLiveData.postValue(Unit)
             }
-            else -> {
-            }
+            else -> {}
         }
     }
 

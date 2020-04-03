@@ -15,22 +15,22 @@ internal class FactMapper {
 
             val domainFacts = ArrayList<Fact>()
             factListResponse.facts.forEach { fact ->
-                val httpsUrl = makeSureTheUrlHasHttps(fact.url)
-                val categorieListAsString = TypeConverter.arrayListToString(fact.categories)
+                val httpsUrl = makeSureTheUrlHasHttps(url = fact.url)
+                val categoryListAsString = TypeConverter.arrayListToString(list = fact.categories)
 
                 val domainFact = Fact(
                     id = fact.id,
                     value = fact.value,
                     url = httpsUrl,
-                    categoryListAsString = categorieListAsString
+                    categoryListAsString = categoryListAsString
                 )
                 domainFacts.add(domainFact)
             }
             return domainFacts
         }
 
-        private fun makeSureTheUrlHasHttps(urlWithHttp: String?): String {
-            val urlWithHttps = urlWithHttp?.replace(HTTP, HTTPS) ?: EMPTY_STRING
+        private fun makeSureTheUrlHasHttps(url: String?): String {
+            val urlWithHttps = url?.replace(HTTP, HTTPS) ?: EMPTY_STRING
             return urlWithHttps
         }
     }
