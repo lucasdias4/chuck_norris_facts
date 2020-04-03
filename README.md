@@ -50,6 +50,9 @@ Featureas e Fixes - testes unitários e Ktlint.
 **Retrofit** - _requisições HTTP_
  <p>Retrofit é a biblioteca mais difundida para lidar com requisições HTTP, além de possuir uma fácil implementação.</p>
  
+ **Shimmer** - _animação_
+ <p>A biblioteca do Facebook permite que você introduza animações com efeito de shimmer de maneira simples. Ela é muito utilizada para sinalizar o carregamento de algum conteúdo.</p>
+ 
 ## Testes
 **Testes unitários** - _MockK_
  <p>No módulo Search foram feitos testes nas classes SearchViewModel, GetRandomCategoriesFromDatabase e SearchHistoricRepositoryImpl. No módulo FactCatalog, a classe FactCatalogAdapter foi testada.</p>
