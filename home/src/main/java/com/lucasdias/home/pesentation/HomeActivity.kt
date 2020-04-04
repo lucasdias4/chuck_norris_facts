@@ -23,7 +23,7 @@ import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.qualifier.named
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), SearchFragment.Listener {
 
     private val viewModel by viewModel<HomeViewModel>()
     private val connectivity by inject<Connectivity>(named(HOME_CONNECTIVITY))
@@ -49,6 +49,11 @@ class HomeActivity : AppCompatActivity() {
         viewModel.verifyIfItIsTheUsersFirstTimeOnCache()
     }
 
+    override fun searchButtonListener(searchText: String) {
+        selectBottomNavigationOptionProgrammatically(bottomNavigationOptionId = BottomNavigationEnum.RESULT.id)
+        factCatalogFragment.updateSearch(searchText = searchText)
+    }
+
     private fun startFactCatalogFragment() {
         factCatalogFragment = FactCatalogFragment.newInstance()
         changeFragment(fragment = factCatalogFragment)
@@ -56,11 +61,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun startSearchFragment() {
-        val searchClickMethod = { searchText: String ->
-            selectBottomNavigationOptionProgrammatically(bottomNavigationOptionId = BottomNavigationEnum.RESULT.id)
-            factCatalogFragment.updateSearch(searchText = searchText)
-        }
-        searchFragment = SearchFragment.newInstance(searchClickMethod = searchClickMethod)
+        searchFragment = SearchFragment.newInstance()
         changeFragment(fragment = searchFragment)
         initSearchFragmentObservers(searchFragment = searchFragment)
     }

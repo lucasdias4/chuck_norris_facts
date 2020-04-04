@@ -1,5 +1,6 @@
 package com.lucasdias.search.presentation
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +21,7 @@ import com.lucasdias.search.R
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragment() {
+class SearchFragment : Fragment() {
 
     companion object {
         private const val EMPTY_STRING = ""
@@ -33,8 +34,7 @@ class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragmen
         private const val SEVENTH_SUGGESTION = 6
         private const val EIGHTH_SUGGESTION = 7
 
-        fun newInstance(searchClickMethod: (String) -> Unit?) =
-            SearchFragment(searchClickMethod)
+        fun newInstance() = SearchFragment()
     }
 
     private val viewModel by inject<SearchViewModel>()
@@ -55,6 +55,12 @@ class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragmen
     private val eightSuggestionTagView by bind<ViewGroup>(R.id.wrapper_eighth_tag_search_suggestion)
     private val userWantsToSearch = { search: String -> viewModel.userWantsToSearch(search) }
     private lateinit var layoutManager: RecyclerView.LayoutManager
+    private lateinit var fragmentListener: Listener
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        fragmentListener = context as Listener
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -109,7 +115,7 @@ class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragmen
 
     private fun doASearch(search: String) {
         viewModel.setSearch(search = search)
-        searchClickMethod(search)
+        fragmentListener.searchButtonListener(searchText = search)
     }
 
     private fun initHistoricList() {
@@ -178,5 +184,9 @@ class SearchFragment(private val searchClickMethod: (String) -> Unit?) : Fragmen
                 activity?.toast(message = resources.getString(R.string.search_with_small_text_alert_search_fragment))
             })
         }
+    }
+
+    interface Listener {
+        fun searchButtonListener(searchText: String)
     }
 }
