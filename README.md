@@ -2,6 +2,14 @@
 
 O aplicativo permite realizar buscas de "fatos" sobre o Chuck Norris. Isto se dá através do consumo da API [chucknorris.io]( https://chucknorris.io/).
 
+## Telas
+![Tela de erro](/pictures/user_first_time_screen.jpg)
+![Tela de erro](/pictures/search_screen.jpg)
+![Tela de erro](/pictures/fact_catalog_loading_screen.jpg)
+![Tela de erro](/pictures/fact_catalog_screen.jpg)
+![Tela de erro](/pictures/without_result_screen.jpg)
+![Tela de erro](/pictures/error_screen.jpg)
+
 ## Ambiente de instalação
 * 1: Instale o Android Studio;
 * 2: Abra a aplicação;
