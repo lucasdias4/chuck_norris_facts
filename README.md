@@ -51,6 +51,9 @@ Featureas e Fixes - testes unitários e Ktlint.
 
 **MockK** - _testes unitários_ 
  <p>O MockK é uma lib de testes para a linguagem Kotlin. Sua utilização é simples e tem como ponto positivo perante aos concorrêntes, a possibilidade de mockar métodos de Objects e Companion Objects sem precisar criar interfaces. Por outro lado, é uma biblioteca exclusiva para Kotlin, não funcionando com a linguagem Java.</p>
+ 
+ **Espresso** - _testes de ui_ 
+ <p>Biblioteca da Google que é utilizada para testes de tela no ambiente Android. Como alternativas, temos o Robolectric e o Kakao (que faz uso interno do Espresso).</p>
 
 **Retrofit** - _requisições HTTP_
  <p>Retrofit é a biblioteca mais difundida para lidar com requisições HTTP, além de possuir uma fácil implementação.</p>
@@ -59,13 +62,17 @@ Featureas e Fixes - testes unitários e Ktlint.
  <p>A biblioteca do Facebook permite que você introduza animações com efeito de shimmer de maneira simples. Ela é muito utilizada para sinalizar o carregamento de algum conteúdo.</p>
  
 ## Testes
+
+**Testes de UI** - _Espresso_
+ <p>No módulo FactCatalog foram feitos testes na classe FactCatalogFragment.</p>
+ 
 **Testes unitários** - _MockK_
  <p>No módulo Search foram feitos testes nas classes SearchViewModel, GetRandomCategoriesFromDatabase e SearchHistoricRepositoryImpl. No módulo FactCatalog, a classe FactCatalogAdapter foi testada.</p>
  
 ## O que eu gostaria de ter feito
  * _aumentado a cobertura de testes unitários;_
  
- * _implementado testes de ui;_
+ * _aumentado a cobertura de testes de ui;_
     
  * _no módulo Search, ter feito um tratamendo caso a API entregue menos de 8 categorias para serem exibidas como sugestão_
  
