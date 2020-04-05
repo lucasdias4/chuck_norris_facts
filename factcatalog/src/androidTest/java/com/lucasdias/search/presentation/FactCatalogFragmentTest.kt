@@ -22,12 +22,12 @@ import com.lucasdias.factcatalog.domain.usecase.SearchFactsBySubjectFromApi
 import com.lucasdias.factcatalog.presentation.FactCatalogAdapter
 import com.lucasdias.factcatalog.presentation.FactCatalogFragment
 import com.lucasdias.factcatalog.presentation.FactCatalogViewModel
+import io.mockk.Runs
+import io.mockk.coEvery
 import io.mockk.every
+import io.mockk.just
 import io.mockk.mockk
 import io.mockk.spyk
-import io.mockk.coEvery
-import io.mockk.just
-import io.mockk.Runs
 import kotlinx.coroutines.Dispatchers
 import org.hamcrest.Matchers.not
 import org.junit.After
