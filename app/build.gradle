@@ -31,7 +31,6 @@ android {
             signingConfig signingConfigs.debug
         }
     }
-
 }
 
 dependencies {

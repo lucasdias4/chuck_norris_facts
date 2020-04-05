@@ -28,7 +28,15 @@ android {
             buildConfigField "String", "FACT_API_URL", FACT_API_URL
         }
     }
+    
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
 }
 
 dependencies {
@@ -47,6 +55,12 @@ dependencies {
     //Test
     testImplementation "io.mockk:mockk:$mockk_version"
     testImplementation "junit:junit:$junit_version"
+    debugImplementation "androidx.fragment:fragment-testing:$fragment_testing_version"
+    androidTestImplementation "io.mockk:mockk-android:$mockk_version"
+    androidTestImplementation "org.koin:koin-test:$koin_version"
     androidTestImplementation "androidx.test:runner:$runner_version"
+    androidTestImplementation "androidx.test.ext:junit:$junit_android_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$espresso_version"
 }

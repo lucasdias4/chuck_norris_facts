@@ -25,6 +25,8 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+internal const val FACT_CATALOG_VIEW_MODEL = "FACT_CATALOG_VIEW_MODEL"
+internal const val FACT_CATALOG_ADAPTER = "FACT_CATALOG_ADAPTER"
 internal const val FACT_CATALOG_CONNECTIVITY = "FACT_CATALOG_CONNECTIVITY"
 private const val FACT_CATALOG_RETROFIT = "FACT_CATALOG_RETROFIT"
 private const val FACT_CATALOG_OKHTTP = "FACT_CATALOG_OKHTTP"
@@ -33,10 +35,10 @@ private const val FACT_CATALOG_DATABASE = "FACT_CATALOG_DATABASE"
 
 @Suppress("RemoveExplicitTypeArguments", "USELESS_CAST")
 val factCatalogModule = module {
-    viewModel {
+    viewModel(named(FACT_CATALOG_VIEW_MODEL)) {
         FactCatalogViewModel(
-            get<SearchFactsBySubjectFromApi>(),
             get<GetAllFactsFromDatabase>(),
+            get<SearchFactsBySubjectFromApi>(),
             get<DeleteAllFactsFromDatabase>()
         )
     }
@@ -47,7 +49,7 @@ val factCatalogModule = module {
         )
     }
 
-    factory { (method: ((String) -> Unit)?) ->
+    factory(named(FACT_CATALOG_ADAPTER)) { (method: ((String) -> Unit)?) ->
         FactCatalogAdapter(method)
     }
 

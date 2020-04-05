@@ -15,17 +15,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 internal class FactCatalogViewModel(
+    internal val getAllFactsFromDatabase: GetAllFactsFromDatabase,
     private val searchFactsBySubjectFromApi: SearchFactsBySubjectFromApi,
-    private val getAllFactsFromDatabase: GetAllFactsFromDatabase,
     private val deleteAllFactsFromDatabase: DeleteAllFactsFromDatabase
 ) : ViewModel() {
 
-    private var coroutineContext = Dispatchers.IO
+    internal var coroutineContext = Dispatchers.IO
+    internal var showAnErrorScreenLiveData = MutableLiveData<Unit>()
+    internal var showAnEmptySearchScreenLiveData = MutableLiveData<Unit>()
+    internal var turnOnLoadingLiveData = MutableLiveData<Unit>()
+    internal var turnOffLoadingLiveData = MutableLiveData<Unit>()
     private var hasNetworkConnectivity = true
-    private var showAnErrorScreenLiveData = MutableLiveData<Unit>()
-    private var showAnEmptySearchScreenLiveData = MutableLiveData<Unit>()
-    private var turnOnLoadingLiveData = MutableLiveData<Unit>()
-    private var turnOffLoadingLiveData = MutableLiveData<Unit>()
 
     fun deleteAllFacts() = deleteAllFactsFromDatabase.invoke()
     fun updateFactsLiveData(): LiveData<List<Fact>> = getAllFactsFromDatabase()
