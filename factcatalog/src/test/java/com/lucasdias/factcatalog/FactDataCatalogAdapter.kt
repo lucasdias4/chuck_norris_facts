@@ -11,13 +11,20 @@ import io.mockk.just
 import io.mockk.mockk
 import io.mockk.spyk
 import io.mockk.verify
+import org.junit.Before
 import org.junit.Test
 
-class FactCatalogAdapter {
+class FactDataCatalogAdapter {
 
     private val view: View = mockk()
     private val categoryTextView: TextView = mockk()
     private val viewHolder = spyk(FactCatalogAdapter.ViewHolder(view))
+    private val listOfCategory = mutableListOf<String>()
+
+    @Before
+    fun setUp() {
+        listOfCategory.add(ANY_CATEGORY_LOWER_CASE)
+    }
 
     @Test
     fun `IF a fact in the list has a value below the letter limit THEN the letters will be large`() {
@@ -25,7 +32,7 @@ class FactCatalogAdapter {
             id = FILLED_STRING,
             value = STRING_BELOW_THE_LETTER_LIMIT,
             url = FILLED_STRING,
-            categoryListAsString = FILLED_STRING
+            categories = listOfCategory
         )
 
         every {
@@ -49,7 +56,7 @@ class FactCatalogAdapter {
             id = FILLED_STRING,
             value = STRING_WITH_THE_LIMIT_OF_LETTERS,
             url = FILLED_STRING,
-            categoryListAsString = FILLED_STRING
+            categories = listOfCategory
         )
 
         every {
@@ -73,7 +80,7 @@ class FactCatalogAdapter {
             id = FILLED_STRING,
             value = STRING_OVER_THE_LETTER_LIMIT,
             url = FILLED_STRING,
-            categoryListAsString = FILLED_STRING
+            categories = listOfCategory
         )
 
         every {
@@ -98,11 +105,10 @@ class FactCatalogAdapter {
                 id = FILLED_STRING,
                 value = FILLED_STRING,
                 url = FILLED_STRING,
-                categoryListAsString = null
+                categories = null
             )
         )
         every { categoryTextView.text = UNCATEGORIZED } just Runs
-        every { fact.getCategories() } returns null
 
         viewHolder.categorySetup(fact = fact, categoryTextView = categoryTextView)
 
@@ -111,19 +117,16 @@ class FactCatalogAdapter {
 
     @Test
     fun `IF a fact has a category THEN the app will show its category as a tag`() {
-        val categories = ArrayList<String>()
-        categories.add(ANY_CATEGORY_LOWER_CASE)
 
         val fact = spyk(
             Fact(
                 id = FILLED_STRING,
                 value = FILLED_STRING,
                 url = FILLED_STRING,
-                categoryListAsString = ANY_CATEGORY_LOWER_CASE
+                categories = listOfCategory
             )
         )
         every { categoryTextView.text = any() } just Runs
-        every { fact.getCategories() } returns categories
 
         viewHolder.categorySetup(fact = fact, categoryTextView = categoryTextView)
 

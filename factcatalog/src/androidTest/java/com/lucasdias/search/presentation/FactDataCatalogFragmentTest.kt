@@ -43,7 +43,7 @@ import org.koin.dsl.module
 import org.koin.test.KoinTest
 
 @RunWith(AndroidJUnit4::class)
-class FactCatalogFragmentTest : KoinTest {
+class FactDataCatalogFragmentTest : KoinTest {
 
     private val coroutineContext = Dispatchers.Unconfined
     private val lambda = { _: String -> }
@@ -109,7 +109,8 @@ class FactCatalogFragmentTest : KoinTest {
     }
 
     private fun factListSetup() {
-        val fact = Fact(FILLED_STRING, FILLED_STRING, FILLED_STRING, FILLED_STRING)
+        val emptyList = mutableListOf<String>() as List<String>
+        val fact = Fact(FILLED_STRING, FILLED_STRING, FILLED_STRING, emptyList)
         facts.add(fact)
         facts.add(fact)
         facts.add(fact)

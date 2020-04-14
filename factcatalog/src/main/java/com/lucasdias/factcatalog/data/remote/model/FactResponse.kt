@@ -1,4 +1,4 @@
-package com.lucasdias.factcatalog.data.remote.response
+package com.lucasdias.factcatalog.data.remote.model
 
 internal data class FactResponse(
     val id: String,

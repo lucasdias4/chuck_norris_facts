@@ -1,7 +1,7 @@
 package com.lucasdias.factcatalog.data.mapper
 
-import com.lucasdias.base.typeconverter.TypeConverter
-import com.lucasdias.factcatalog.data.remote.response.FactListResponse
+import com.lucasdias.factcatalog.data.local.model.FactData
+import com.lucasdias.factcatalog.data.remote.model.FactListResponse
 import com.lucasdias.factcatalog.domain.model.Fact
 
 internal class FactMapper {
@@ -11,18 +11,38 @@ internal class FactMapper {
         private const val HTTP = "http://"
         private const val HTTPS = "https://"
 
-        fun map(factListResponse: FactListResponse): ArrayList<Fact> {
+        fun mapRemoteToLocal(factListResponse: FactListResponse): List<FactData> {
 
-            val domainFacts = ArrayList<Fact>()
-            factListResponse.facts.forEach { fact ->
-                val httpsUrl = makeSureTheUrlHasHttps(url = fact.url)
-                val categoryListAsString = TypeConverter.arrayListToString(list = fact.categories)
+            val localFacts = mutableListOf<FactData>()
+            factListResponse.facts.map { remoteFact ->
+                val httpsUrl = makeSureTheUrlHasHttps(url = remoteFact.url)
+                val hasCategories = remoteFact.categories.isNotEmpty()
+                val categoryListAsString =
+                    if (hasCategories) remoteFact.categories.joinToString()
+                    else null
 
-                val domainFact = Fact(
-                    id = fact.id,
-                    value = fact.value,
+                val domainFact = FactData(
+                    id = remoteFact.id,
+                    value = remoteFact.value,
                     url = httpsUrl,
                     categoryListAsString = categoryListAsString
+                )
+                localFacts.add(domainFact)
+            }
+            return localFacts
+        }
+
+        fun mapLocalToDomain(factsLocal: List<FactData>): List<Fact> {
+            val domainFacts = mutableListOf<Fact>()
+            factsLocal.map { localFacts ->
+                val httpsUrl = makeSureTheUrlHasHttps(url = localFacts.url)
+                val categories = localFacts.getCategories()
+
+                val domainFact = Fact(
+                    id = localFacts.id,
+                    value = localFacts.value,
+                    url = httpsUrl,
+                    categories = categories
                 )
                 domainFacts.add(domainFact)
             }

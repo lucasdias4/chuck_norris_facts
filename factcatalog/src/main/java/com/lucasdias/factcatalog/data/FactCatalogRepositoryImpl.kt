@@ -1,11 +1,13 @@
 package com.lucasdias.factcatalog.data
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import com.github.kittinunf.result.coroutines.SuspendableResult
 import com.lucasdias.factcatalog.data.local.FactCatalogDao
+import com.lucasdias.factcatalog.data.local.model.FactData
 import com.lucasdias.factcatalog.data.mapper.FactMapper
 import com.lucasdias.factcatalog.data.remote.FactCatalogService
-import com.lucasdias.factcatalog.data.remote.response.FactListResponse
+import com.lucasdias.factcatalog.data.remote.model.FactListResponse
 import com.lucasdias.factcatalog.domain.model.Fact
 import com.lucasdias.factcatalog.domain.repository.FactCatalogRepository
 import com.lucasdias.factcatalog.domain.sealedclass.Error
@@ -25,7 +27,11 @@ internal class FactCatalogRepositoryImpl(
         const val MAX_RESPONSE_CODE = 299
     }
 
-    override fun getAllFacts(): LiveData<List<Fact>> = factCatalogDao.getAllFacts()
+    override fun getAllFacts(): LiveData<List<Fact>> =
+        Transformations.map(factCatalogDao.getAllFacts()) {
+            FactMapper.mapLocalToDomain(it)
+        }
+
     override fun deleteAllFacts() = factCatalogDao.deleteAllFacts()
 
     override suspend fun searchFactsBySubjectFromApi(subject: String): RequestStatus {
@@ -62,12 +68,12 @@ internal class FactCatalogRepositoryImpl(
         factListResponse: FactListResponse?,
         subject: String
     ) {
-        val domainFacts = factListResponse?.let { facts ->
-            FactMapper.map(factListResponse = facts)
+        val dataFacts = factListResponse?.let { facts ->
+            FactMapper.mapRemoteToLocal(factListResponse = facts)
         }
 
-        logRequestInfo(facts = domainFacts, subject = subject)
-        factCatalogDao.insertFacts(facts = domainFacts)
+        logRequestInfo(facts = dataFacts, subject = subject)
+        factCatalogDao.insertFacts(facts = dataFacts)
     }
 
     private fun resultStatusHandler(
@@ -89,7 +95,7 @@ internal class FactCatalogRepositoryImpl(
     }
 
     private fun logRequestInfo(
-        facts: ArrayList<Fact>?,
+        facts: List<FactData>?,
         subject: String
     ) {
         LogApp.i("FactCatalog", "Request response START ---------->")

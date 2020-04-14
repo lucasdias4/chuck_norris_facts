@@ -69,7 +69,7 @@ internal class FactCatalogAdapter(private val shareUrl: ((String) -> Unit)?) :
             fact: Fact,
             categoryTextView: TextView
         ) {
-            val categories = fact.getCategories()
+            val categories = fact.categories
             var category = categories?.first() ?: UNCATEGORIZED
             category = category.toLowerCase(Locale.ROOT)
             categoryTextView.text = category
