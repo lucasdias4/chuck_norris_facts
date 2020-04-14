@@ -1,4 +1,4 @@
-package com.lucasdias.toolbar
+package com.lucasdias.ui_components.toolbar
 
 import android.app.Activity
 import android.graphics.drawable.Drawable
@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.appbar.AppBarLayout
 import com.lucasdias.extensions.gone
 import com.lucasdias.extensions.visible
+import com.lucasdias.ui_components.R
 
 /**
  * Este módulo tem como objetivo ser uma biblioteca. Logo, seus métodos existem independente

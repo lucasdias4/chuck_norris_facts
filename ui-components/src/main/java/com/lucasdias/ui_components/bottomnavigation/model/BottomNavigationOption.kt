@@ -1,4 +1,4 @@
-package com.lucasdias.bottomnavigation.model
+package com.lucasdias.ui_components.bottomnavigation.model
 
 import android.graphics.drawable.Drawable
 

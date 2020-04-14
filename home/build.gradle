@@ -30,10 +30,9 @@ dependencies {
 
     //Modules
     implementation project (':base')
-    implementation project (':bottomnavigation')
     implementation project (':factcatalog')
     implementation project (':search')
-    implementation project (':toolbar')
+    implementation project (':ui-components')
 
     //Test
     testImplementation "junit:junit:$junit_version"

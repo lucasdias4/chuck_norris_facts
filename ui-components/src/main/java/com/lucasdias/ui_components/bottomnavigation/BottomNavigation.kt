@@ -1,11 +1,12 @@
-package com.lucasdias.bottomnavigation
+package com.lucasdias.ui_components.bottomnavigation
 
 import android.app.Activity
 import android.view.Menu
 import android.view.View
 import android.widget.FrameLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.lucasdias.bottomnavigation.model.BottomNavigationOption
+import com.lucasdias.ui_components.R
+import com.lucasdias.ui_components.bottomnavigation.model.BottomNavigationOption
 
 class BottomNavigation {
 
@@ -36,7 +37,7 @@ class BottomNavigation {
         }
 
         fun getBottomNavigationView(): BottomNavigationView? {
-            return if (::bottomNavigationView.isInitialized) bottomNavigationView
+            return if (Companion::bottomNavigationView.isInitialized) bottomNavigationView
             else null
         }
 
@@ -47,7 +48,7 @@ class BottomNavigation {
         }
 
         private fun updateBottomNavigateView(bottomNavigationView: BottomNavigationView) {
-            this.bottomNavigationView = bottomNavigationView
+            Companion.bottomNavigationView = bottomNavigationView
         }
 
         private fun getInflatedLayout(activity: Activity): View {
