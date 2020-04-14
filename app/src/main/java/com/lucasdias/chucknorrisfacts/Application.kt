@@ -1,9 +1,9 @@
 package com.lucasdias.chucknorrisfacts
 
 import android.app.Application
+import com.lucasdias.core_components.log.LogApp
 import com.lucasdias.factcatalog.di.factCatalogModule
 import com.lucasdias.home.di.homeModule
-import com.lucasdias.log.LogApp
 import com.lucasdias.search.di.searchModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.logger.AndroidLogger

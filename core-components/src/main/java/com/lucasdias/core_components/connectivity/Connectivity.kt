@@ -1,4 +1,4 @@
-package com.lucasdias.connectivity
+package com.lucasdias.core_components.connectivity
 
 import android.app.Application
 import android.content.Context

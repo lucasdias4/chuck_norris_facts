@@ -29,9 +29,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //Modules
-    api project(':connectivity')
+    api project(':core-components')
     api project(':extensions')
-    api project(':log')
 
     //Uncategory
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

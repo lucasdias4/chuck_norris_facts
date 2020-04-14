@@ -2,7 +2,7 @@ package com.lucasdias.factcatalog.di
 
 import androidx.room.Room
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.lucasdias.connectivity.Connectivity
+import com.lucasdias.core_components.connectivity.Connectivity
 import com.lucasdias.factcatalog.BuildConfig.FACT_API_URL
 import com.lucasdias.factcatalog.data.FactCatalogRepositoryImpl
 import com.lucasdias.factcatalog.data.local.FactCatalogDao

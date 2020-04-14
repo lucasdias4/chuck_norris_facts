@@ -1,6 +1,6 @@
 package com.lucasdias.home.di
 
-import com.lucasdias.connectivity.Connectivity
+import com.lucasdias.core_components.connectivity.Connectivity
 import com.lucasdias.home.data.userfirsttime.UserFirstTimeRepositoryImpl
 import com.lucasdias.home.data.userfirsttime.local.UserFirstTimeCache
 import com.lucasdias.home.domain.repository.UserFirstTimeRepository

@@ -3,6 +3,7 @@ package com.lucasdias.factcatalog.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.github.kittinunf.result.coroutines.SuspendableResult
+import com.lucasdias.core_components.log.LogApp
 import com.lucasdias.factcatalog.data.local.FactCatalogDao
 import com.lucasdias.factcatalog.data.local.model.FactData
 import com.lucasdias.factcatalog.data.mapper.FactMapper
@@ -14,7 +15,6 @@ import com.lucasdias.factcatalog.domain.sealedclass.Error
 import com.lucasdias.factcatalog.domain.sealedclass.RequestStatus
 import com.lucasdias.factcatalog.domain.sealedclass.Success
 import com.lucasdias.factcatalog.domain.sealedclass.SuccessWithoutResult
-import com.lucasdias.log.LogApp
 import retrofit2.Response
 
 internal class FactCatalogRepositoryImpl(

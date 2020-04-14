@@ -1,4 +1,4 @@
-package com.lucasdias.log
+package com.lucasdias.core_components.log
 
 import android.util.Log
 

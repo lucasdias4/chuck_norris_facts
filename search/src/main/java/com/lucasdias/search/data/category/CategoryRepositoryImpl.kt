@@ -1,7 +1,7 @@
 package com.lucasdias.search.data.category
 
 import com.github.kittinunf.result.coroutines.SuspendableResult
-import com.lucasdias.log.LogApp
+import com.lucasdias.core_components.log.LogApp
 import com.lucasdias.search.data.category.local.CategoryCache
 import com.lucasdias.search.data.category.remote.CategoryService
 import com.lucasdias.search.domain.repository.CategoryRepository

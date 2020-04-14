@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
-import com.lucasdias.connectivity.Connectivity
+import com.lucasdias.core_components.connectivity.Connectivity
 import com.lucasdias.extensions.bind
 import com.lucasdias.factcatalog.presentation.FactCatalogFragment
 import com.lucasdias.home.R

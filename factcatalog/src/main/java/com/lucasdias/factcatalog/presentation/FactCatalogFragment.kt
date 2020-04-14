@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.shimmer.ShimmerFrameLayout
-import com.lucasdias.connectivity.Connectivity
+import com.lucasdias.core_components.connectivity.Connectivity
 import com.lucasdias.extensions.bind
 import com.lucasdias.extensions.gone
 import com.lucasdias.extensions.visible
