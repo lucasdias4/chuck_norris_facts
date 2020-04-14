@@ -22,7 +22,7 @@ internal class FactCatalogAdapter(private val shareUrl: ((String) -> Unit)?) :
         const val SMALL_TEXT_SIZE = 18F
     }
 
-    private var factCatalog = mutableListOf<Fact>()
+    private val factCatalog = mutableListOf<Fact>()
 
     fun updateFactCatalog(facts: List<Fact>) {
         if (this.factCatalog.isNotEmpty()) {

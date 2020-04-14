@@ -11,8 +11,8 @@ import com.lucasdias.search.domain.sealedclass.Success
 import retrofit2.Response
 
 internal class CategoryRepositoryImpl(
-    private var categoryService: CategoryService,
-    private var categoryCache: CategoryCache
+    private val categoryService: CategoryService,
+    private val categoryCache: CategoryCache
 ) : CategoryRepository {
 
     private companion object {

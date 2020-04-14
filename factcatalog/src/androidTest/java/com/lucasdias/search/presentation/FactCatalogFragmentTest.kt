@@ -53,10 +53,10 @@ class FactCatalogFragmentTest : KoinTest {
     private val getAllFactsFromDatabase: GetAllFactsFromDatabase = mockk()
     private val deleteAllFactsFromDatabase: DeleteAllFactsFromDatabase = mockk()
 
-    private var showAnErrorScreenLiveData = spyk(MutableLiveData<Unit>())
-    private var showAnEmptySearchScreenLiveData = spyk(MutableLiveData<Unit>())
-    private var turnOnLoadingLiveData = spyk(MutableLiveData<Unit>())
-    private var turnOffLoadingLiveData = spyk(MutableLiveData<Unit>())
+    private val showAnErrorScreenLiveData = spyk(MutableLiveData<Unit>())
+    private val showAnEmptySearchScreenLiveData = spyk(MutableLiveData<Unit>())
+    private val turnOnLoadingLiveData = spyk(MutableLiveData<Unit>())
+    private val turnOffLoadingLiveData = spyk(MutableLiveData<Unit>())
     private val allFactsFromDatabase = spyk(MutableLiveData<List<Fact>>())
 
     private val connectivity: Connectivity = mockk()

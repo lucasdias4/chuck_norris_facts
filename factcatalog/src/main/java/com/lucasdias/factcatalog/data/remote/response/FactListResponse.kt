@@ -3,6 +3,6 @@ package com.lucasdias.factcatalog.data.remote.response
 import com.google.gson.annotations.SerializedName
 
 internal data class FactListResponse(
-    var total: Int,
-    @SerializedName("result") var facts: List<FactResponse>
+    val total: Int,
+    @SerializedName("result") val facts: List<FactResponse>
 )

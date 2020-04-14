@@ -20,11 +20,15 @@ internal class FactCatalogViewModel(
     private val deleteAllFactsFromDatabase: DeleteAllFactsFromDatabase
 ) : ViewModel() {
 
+    /**
+     * Variáveis como var e internal, por conta de testes unitários
+     **/
     internal var coroutineContext = Dispatchers.IO
     internal var showAnErrorScreenLiveData = MutableLiveData<Unit>()
     internal var showAnEmptySearchScreenLiveData = MutableLiveData<Unit>()
     internal var turnOnLoadingLiveData = MutableLiveData<Unit>()
     internal var turnOffLoadingLiveData = MutableLiveData<Unit>()
+
     private var hasNetworkConnectivity = true
 
     fun deleteAllFacts() = deleteAllFactsFromDatabase.invoke()

@@ -7,9 +7,9 @@ import com.lucasdias.base.typeconverter.TypeConverter
 @Entity(tableName = "fact")
 internal data class Fact(
     @PrimaryKey
-    var id: String,
-    var value: String,
-    var url: String,
+    val id: String,
+    val value: String,
+    val url: String,
     var categoryListAsString: String?
 ) {
     fun setCategories(categories: ArrayList<String>?) {

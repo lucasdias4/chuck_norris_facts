@@ -26,13 +26,15 @@ internal class SearchViewModel(
         const val SEARCH_MINIMUM_SIZE = 3
     }
 
+    /**
+     * Variáveis como var e internal, por conta de testes unitários
+     **/
     internal var coroutineContext = Dispatchers.IO
-
     internal var randomCategories = MutableLiveData<List<String>?>()
     internal var errorToLoadCategories = MutableLiveData<Unit>()
     internal var showSuggestionAndHistoricViews = MutableLiveData<Unit>()
-    internal var searchMustBeLongerThanTwoCharacters = MutableLiveData<Unit>()
-    internal var doASearch = MutableLiveData<String>()
+    private var searchMustBeLongerThanTwoCharacters = MutableLiveData<Unit>()
+    private var doASearch = MutableLiveData<String>()
 
     fun getHistoric() = getSearchHistoric()
     fun getRandomCategories() = randomCategories

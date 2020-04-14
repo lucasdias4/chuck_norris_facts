@@ -15,8 +15,8 @@ import org.junit.Test
 
 class FactCatalogAdapter {
 
-    private var view: View = mockk()
-    private var categoryTextView: TextView = mockk()
+    private val view: View = mockk()
+    private val categoryTextView: TextView = mockk()
     private val viewHolder = spyk(FactCatalogAdapter.ViewHolder(view))
 
     @Test

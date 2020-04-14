@@ -3,7 +3,7 @@ package com.lucasdias.search.data.historic.local
 import android.content.Context
 import androidx.preference.PreferenceManager
 
-internal class SearchHistoricCache(private var context: Context) {
+internal class SearchHistoricCache(private val context: Context) {
 
     private companion object {
         const val SEARCH_HISTORIC_KEY = "SEARCH_HISTORIC_KEY"
