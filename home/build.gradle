@@ -31,7 +31,7 @@ dependencies {
     //Modules
     implementation project (':factcatalog')
     implementation project (':search')
-    implementation project (':shared')
+    implementation project (':shared-components')
     implementation project (':ui-components')
 
     //Test

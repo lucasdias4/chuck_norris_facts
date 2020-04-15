@@ -40,7 +40,7 @@ dependencies {
     implementation project (':factcatalog')
     implementation project (':home')
     implementation project (':search')
-    implementation project (':shared')
+    implementation project (':shared-components')
 
     //Test
     testImplementation "junit:junit:$junit_version"

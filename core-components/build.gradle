@@ -28,16 +28,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    //Modules
-    implementation project(':resource-components')
-
     //Uncategory
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$app_compat_version"
     implementation "androidx.core:core-ktx:$core_ktx_version"
-
-    //Test
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "androidx.test:runner:$runner_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
 }

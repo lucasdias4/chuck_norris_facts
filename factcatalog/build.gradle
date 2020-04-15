@@ -43,7 +43,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //Modules
-    implementation project (':shared')
+    implementation project (':shared-components')
 
     //Layout
     implementation "androidx.cardview:cardview:$card_view_version"
