@@ -29,9 +29,9 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //Modules
-    implementation project (':base')
     implementation project (':factcatalog')
     implementation project (':search')
+    implementation project (':shared')
     implementation project (':ui-components')
 
     //Test
