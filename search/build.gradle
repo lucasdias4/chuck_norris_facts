@@ -35,7 +35,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //Modules
-    implementation project(':base')
+    implementation project(':shared')
 
     //Test
     testImplementation "io.mockk:mockk:$mockk_version"

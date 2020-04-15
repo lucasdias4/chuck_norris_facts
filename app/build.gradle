@@ -37,10 +37,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //Modules
-    implementation project (':base')
     implementation project (':factcatalog')
     implementation project (':home')
     implementation project (':search')
+    implementation project (':shared')
 
     //Test
     testImplementation "junit:junit:$junit_version"

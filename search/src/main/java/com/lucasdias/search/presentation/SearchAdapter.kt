@@ -11,9 +11,9 @@ import com.lucasdias.search.R
 internal class SearchAdapter(private val searchActionMethod: ((String) -> Unit)?) :
     RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
-    private val searchList = mutableListOf<String>()
+    private val searchList = ArrayList<String>()
 
-    fun updateSearchHistoric(searchHistoric: List<String>) {
+    fun updateSearchHistoric(searchHistoric: ArrayList<String>) {
         if (this.searchList.isNotEmpty()) {
             this.searchList.clear()
         }

@@ -23,9 +23,13 @@ internal class SearchHistoricRepositoryImpl(
         searchHistoricCache.setHistoricAsString(historicAsString = historicAsString)
     }
 
-    override fun getHistoric(): MutableList<String> {
+    override fun getHistoric(): ArrayList<String> {
+        val historic = ArrayList<String>()
         val historicAsString = searchHistoricCache.getHistoricAsString()
-        val historic = historicAsString?.split(DELIMITERS) as MutableList<String>
+        val historicAsList = historicAsString?.split(DELIMITERS)
+        historicAsList?.map { search ->
+            historic.add(search.trim())
+        }
         return historic
     }
 }
