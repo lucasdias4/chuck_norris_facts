@@ -31,6 +31,7 @@ dependencies {
     //Modules
     api project(':core-components')
     api project(':extensions')
+    api project(':resource-components')
 
     //Uncategory
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

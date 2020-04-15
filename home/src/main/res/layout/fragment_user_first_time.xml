@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightWhite"
+    android:background="@color/white"
     tools:context=".pesentation.UserFirstTimeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +23,7 @@
             android:gravity="center"
             android:fontFamily="@font/roboto_bold"
             android:text="@string/message_user_first_time_fragment"
-            android:textColor="@color/lightBlack"
+            android:textColor="@color/emperor"
             android:textSize="@dimen/message_text_size_first_user_time_fragment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

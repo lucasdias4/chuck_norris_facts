@@ -14,7 +14,7 @@
         android:fontFamily="@font/roboto_regular"
         android:paddingStart="@dimen/item_text_padding_start_search_fragment"
         android:paddingEnd="@dimen/item_text_padding_end_search_fragment"
-        android:textColor="@color/darkBlack"
+        android:textColor="@color/mine_shaft"
         android:textSize="@dimen/item_text_size_search_fragment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

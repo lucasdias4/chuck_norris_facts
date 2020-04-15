@@ -13,6 +13,6 @@
         android:paddingStart="@dimen/text_padding_start_search_suggestion_tag"
         android:paddingEnd="@dimen/text_padding_end_search_suggestion_tag"
         android:paddingBottom="@dimen/text_padding_bottom_search_suggestion_tag"
-        android:textColor="@color/lightBlack"
+        android:textColor="@color/emperor"
         android:textSize="@dimen/text_text_size_search_suggestion_tag" />
 </LinearLayout>

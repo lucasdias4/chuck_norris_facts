@@ -142,7 +142,7 @@ class HomeActivity : AppCompatActivity(), SearchFragment.Listener {
         snackbar.view.setBackgroundColor(
             ContextCompat.getColor(
                 this@HomeActivity,
-                R.color.green
+                R.color.bilbao
             )
         )
         snackbar.setText(getString(R.string.connectivity_on_snackbar))
@@ -154,7 +154,7 @@ class HomeActivity : AppCompatActivity(), SearchFragment.Listener {
         snackbar.view.setBackgroundColor(
             ContextCompat.getColor(
                 this@HomeActivity,
-                R.color.red
+                R.color.bright_red
             )
         )
         snackbar.setText(getString(R.string.connectivity_off_snackbar))
@@ -165,7 +165,7 @@ class HomeActivity : AppCompatActivity(), SearchFragment.Listener {
         val toolbarIcon = resources.getDrawable(R.drawable.ic_toolbar, null)
         val toolbarTitle = resources.getString(R.string.toolbar_title_home)
         val toolbarTitleStyle = R.style.DefaultToolbarTitle
-        val toolbarColor = R.color.lightWhite
+        val toolbarColor = R.color.white
         Toolbar.initializeToolbar(
             activity = this@HomeActivity,
             toolbarContainer = toolbarContainer,
@@ -186,7 +186,7 @@ class HomeActivity : AppCompatActivity(), SearchFragment.Listener {
 
         val bottomNavigationBackgroundColor = ContextCompat.getColor(
             this@HomeActivity,
-            R.color.darkBlack
+            R.color.mine_shaft
         )
 
         val resultOptionTitle = resources.getString(R.string.bottom_navigation_facts)

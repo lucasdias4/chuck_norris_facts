@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightWhite"
+    android:background="@color/white"
     tools:context=".pesentation.ErrorFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +22,7 @@
             android:layout_marginEnd="@dimen/message_margin_end_error_fragment"
             android:fontFamily="@font/roboto_bold"
             android:text="@string/message_error_fragment"
-            android:textColor="@color/lightBlack"
+            android:textColor="@color/emperor"
             android:textSize="@dimen/message_text_size_error_fragment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -30,6 +30,7 @@ dependencies {
 
     //Modules
     implementation project(':extensions')
+    implementation project(':resource-components')
 
     //Uncategory
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

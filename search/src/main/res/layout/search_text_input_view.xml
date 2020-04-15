@@ -12,7 +12,7 @@
         android:fontFamily="@font/roboto_regular"
         android:paddingStart="@dimen/input_area_margin_top_padding_start_search_fragment"
         android:paddingEnd="@dimen/input_area_margin_top_padding_end_search_fragment"
-        app:hintTextColor="@color/darkGray"
+        app:hintTextColor="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

@@ -21,7 +21,7 @@
             android:layout_marginTop="@dimen/message_margin_top_empty_search_fragment"
             android:fontFamily="@font/roboto_bold"
             android:text="@string/message_empty_search_fragment"
-            android:textColor="@color/lightBlack"
+            android:textColor="@color/emperor"
             android:textSize="@dimen/message_text_size_empty_search_fragment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

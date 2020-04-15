@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="alto">#CFCFCF</color>
+    <color name="bilbao">#177718</color>
+    <color name="black">#000000</color>
+    <color name="bright_red">#AA0202</color>
+    <color name="cerise">#E44B83</color>
+    <color name="congress_blue">#01497C</color>
+    <color name="emperor">#555555</color>
+    <color name="gray">#959595</color>
+    <color name="lucky_point">#171B5F</color>
+    <color name="jacksons_purple">#212C91</color>
+    <color name="mercury">#E6E5E5</color>
+    <color name="mine_shaft">#303030</color>
+    <color name="nobel">#B3B3B3</color>
+    <color name="orange_roughy">#DA491C</color>
+    <color name="orange">#FF5722</color>
+    <color name="razzmatazz">#D81B60</color>
+    <color name="white">#FFFFFF</color>
+    <color name="wild_sand">#F5F4F4</color>
+</resources>
