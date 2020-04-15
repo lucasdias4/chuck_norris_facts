@@ -1,6 +1,5 @@
 package com.lucasdias.search.data.historic
 
-import com.lucasdias.base.typeconverter.TypeConverter
 import com.lucasdias.search.data.historic.local.SearchHistoricCache
 import com.lucasdias.search.domain.repository.SearchHistoricRepository
 
@@ -11,6 +10,7 @@ internal class SearchHistoricRepositoryImpl(
     internal companion object {
         const val DOES_NOT_CONTAIN = -1
         const val FIRST_POSITION = 0
+        const val DELIMITERS = ","
     }
 
     override fun setSearch(search: String) {
@@ -19,13 +19,13 @@ internal class SearchHistoricRepositoryImpl(
         if (indexOfContainedString != DOES_NOT_CONTAIN) historic.removeAt(indexOfContainedString)
         historic.add(FIRST_POSITION, search)
 
-        val historicAsString = TypeConverter.arrayListToString(list = historic)
+        val historicAsString = historic.joinToString()
         searchHistoricCache.setHistoricAsString(historicAsString = historicAsString)
     }
 
-    override fun getHistoric(): ArrayList<String> {
+    override fun getHistoric(): MutableList<String> {
         val historicAsString = searchHistoricCache.getHistoricAsString()
-        val historic = TypeConverter.stringToArrayList(string = historicAsString) ?: ArrayList()
+        val historic = historicAsString?.split(DELIMITERS) as MutableList<String>
         return historic
     }
 }

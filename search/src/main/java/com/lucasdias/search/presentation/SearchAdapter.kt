@@ -13,7 +13,7 @@ internal class SearchAdapter(private val searchActionMethod: ((String) -> Unit)?
 
     private val searchList = mutableListOf<String>()
 
-    fun updateSearchHistoric(searchHistoric: ArrayList<String>) {
+    fun updateSearchHistoric(searchHistoric: List<String>) {
         if (this.searchList.isNotEmpty()) {
             this.searchList.clear()
         }

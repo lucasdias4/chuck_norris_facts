@@ -1,6 +1,5 @@
 package com.lucasdias.search.data.historic
 
-import com.lucasdias.base.typeconverter.TypeConverter
 import com.lucasdias.search.data.historic.SearchHistoricRepositoryImpl.Companion.DOES_NOT_CONTAIN
 import com.lucasdias.search.data.historic.SearchHistoricRepositoryImpl.Companion.FIRST_POSITION
 import com.lucasdias.search.data.historic.local.SearchHistoricCache
@@ -8,7 +7,6 @@ import io.mockk.Runs
 import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk
-import io.mockk.mockkObject
 import io.mockk.spyk
 import io.mockk.verify
 import org.junit.Before
@@ -24,11 +22,8 @@ class SearchHistoricRepositoryImplTest {
 
     @Before
     fun setUp() {
-        mockkObject(TypeConverter)
-
         every { searchHistoricRepositoryImpl.getHistoric() } returns historic
         every { historic.removeAt(any()) } returns FILLED_STRING
-        every { TypeConverter.arrayListToString(any()) } returns FILLED_STRING
         every { searchHistoricCache.setHistoricAsString(any()) } just Runs
         every { historic.add(any(), any()) } just Runs
     }
@@ -68,15 +63,6 @@ class SearchHistoricRepositoryImplTest {
         searchHistoricRepositoryImpl.setSearch(FILLED_STRING)
 
         verify(exactly = 1) { historic.add(FIRST_POSITION, FILLED_STRING) }
-    }
-
-    @Test
-    fun `IF setSearch is called THEN it will always call the TypeConverter's arrayListToString method`() {
-        every { historic.indexOf(any()) } returns DOES_NOT_CONTAIN
-
-        searchHistoricRepositoryImpl.setSearch(FILLED_STRING)
-
-        verify(exactly = 1) { TypeConverter.arrayListToString(historic) }
     }
 
     @Test
