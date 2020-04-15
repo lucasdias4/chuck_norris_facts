@@ -5,6 +5,7 @@ import com.lucasdias.core_components.log.LogApp
 import com.lucasdias.factcatalog.di.factCatalogModule
 import com.lucasdias.home.di.homeModule
 import com.lucasdias.search.di.searchModule
+import com.lucasdias.shared.di.sharedModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.logger.AndroidLogger
 import org.koin.core.context.startKoin
@@ -24,7 +25,8 @@ class Application : Application() {
                 listOf(
                     factCatalogModule,
                     homeModule,
-                    searchModule
+                    searchModule,
+                    sharedModule
                 )
             )
         }

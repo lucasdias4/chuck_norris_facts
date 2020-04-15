@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply from: '../information.gradle'
 
 android {
     compileSdkVersion 29
@@ -20,6 +21,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "FACT_API_URL", FACT_API_URL
+        }
+        debug {
+            buildConfigField "String", "FACT_API_URL", FACT_API_URL
         }
     }
 
