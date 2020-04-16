@@ -4,5 +4,4 @@
         <item name="colorPrimaryDark">@color/mercury</item>
         <item name="colorAccent">@color/alto</item>
     </style>
-
 </resources>
