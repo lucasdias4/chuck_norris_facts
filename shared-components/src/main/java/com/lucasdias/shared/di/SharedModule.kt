@@ -3,6 +3,7 @@ package com.lucasdias.shared.di
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.lucasdias.shared.BuildConfig.FACT_API_URL
 import java.util.concurrent.TimeUnit
+import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.qualifier.named
@@ -16,6 +17,11 @@ const val SHARED_OKHTTP = "SHARED_OKHTTP"
 @Suppress("RemoveExplicitTypeArguments", "USELESS_CAST")
 val sharedModule = module {
 
+    factory {
+        getCoroutinesDispatchersIo()
+    }
+
+    // Service
     factory(named(SHARED_OKHTTP)) {
         createOkHttpClient()
     }
@@ -43,3 +49,5 @@ fun createRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
     .addConverterFactory(GsonConverterFactory.create())
     .addCallAdapterFactory(CoroutineCallAdapterFactory())
     .build()
+
+private fun getCoroutinesDispatchersIo() = Dispatchers.IO

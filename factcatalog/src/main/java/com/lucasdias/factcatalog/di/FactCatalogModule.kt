@@ -13,6 +13,7 @@ import com.lucasdias.factcatalog.domain.usecase.SearchFactsBySubjectFromApi
 import com.lucasdias.factcatalog.presentation.FactCatalogAdapter
 import com.lucasdias.factcatalog.presentation.FactCatalogViewModel
 import com.lucasdias.shared.di.SHARED_RETROFIT
+import kotlinx.coroutines.CoroutineDispatcher
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
@@ -30,6 +31,7 @@ private const val FACT_CATALOG_DATABASE = "FACT_CATALOG_DATABASE"
 val factCatalogModule = module {
     viewModel(named(FACT_CATALOG_VIEW_MODEL)) {
         FactCatalogViewModel(
+            get<CoroutineDispatcher>(),
             get<GetAllFactsFromDatabase>(),
             get<SearchFactsBySubjectFromApi>(),
             get<DeleteAllFactsFromDatabase>()

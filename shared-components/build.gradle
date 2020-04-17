@@ -43,6 +43,7 @@ dependencies {
     api "androidx.appcompat:appcompat:$app_compat_version"
     api "androidx.core:core-ktx:$core_ktx_version"
     api "androidx.legacy:legacy-support-v4:$legacy_support_version"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
     //Coroutines
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"

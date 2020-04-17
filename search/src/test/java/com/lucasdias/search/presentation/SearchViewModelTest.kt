@@ -14,14 +14,21 @@ import io.mockk.coVerify
 import io.mockk.just
 import io.mockk.mockk
 import io.mockk.spyk
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
 class SearchViewModelTest {
 
-    private val coroutineContext = Dispatchers.Unconfined
+    private val mainThreadSurrogate = newSingleThreadContext(MAIN_THREAD_NAME)
+
+    private val coroutineContext = Dispatchers.Main
     private val getSearchHistoric: GetSearchHistoric = mockk()
     private val setSearchHistoric: SetSearchHistoric = mockk()
     private val searchCategoriesFromApi: SearchCategoriesFromApi = mockk()
@@ -29,6 +36,7 @@ class SearchViewModelTest {
     private val isCategoryCacheEmpty: IsCategoryCacheEmpty = mockk()
     private val viewModel = spyk(
         SearchViewModel(
+            coroutineContext = coroutineContext,
             getSearchHistoric = getSearchHistoric,
             setSearchHistoric = setSearchHistoric,
             searchCategoriesFromApi = searchCategoriesFromApi,
@@ -43,7 +51,13 @@ class SearchViewModelTest {
 
     @Before
     fun setUp() {
-        viewModel.coroutineContext = coroutineContext
+        Dispatchers.setMain(mainThreadSurrogate)
+    }
+
+    @After
+    fun tearDown() {
+        Dispatchers.resetMain() // reset main dispatcher to the original Main dispatcher
+        mainThreadSurrogate.close()
     }
 
     @Test
@@ -59,7 +73,9 @@ class SearchViewModelTest {
         } returns Error
 
         runBlocking {
-            viewModel.searchCategories()
+            launch(coroutineContext) {
+                viewModel.searchCategories()
+            }
         }
 
         coVerify(exactly = 1) {
@@ -80,7 +96,9 @@ class SearchViewModelTest {
         } returns Error
 
         runBlocking {
-            viewModel.searchCategories()
+            launch(coroutineContext) {
+                viewModel.searchCategories()
+            }
         }
 
         coVerify(exactly = 1) {
@@ -101,7 +119,9 @@ class SearchViewModelTest {
         } returns Error
 
         runBlocking {
-            viewModel.searchCategories()
+            launch(coroutineContext) {
+                viewModel.searchCategories()
+            }
         }
 
         coVerify(exactly = 0) {
@@ -122,7 +142,9 @@ class SearchViewModelTest {
         } returns Error
 
         runBlocking {
-            viewModel.searchCategories()
+            launch(coroutineContext) {
+                viewModel.searchCategories()
+            }
         }
 
         coVerify(exactly = 1) {
@@ -148,7 +170,9 @@ class SearchViewModelTest {
         } returns categories
 
         runBlocking {
-            viewModel.searchCategories()
+            launch(coroutineContext) {
+                viewModel.searchCategories()
+            }
         }
 
         coVerify(exactly = 1) {
@@ -175,7 +199,9 @@ class SearchViewModelTest {
         } returns categories
 
         runBlocking {
-            viewModel.searchCategories()
+            launch(coroutineContext) {
+                viewModel.searchCategories()
+            }
         }
 
         coVerify(exactly = 1) {
@@ -201,7 +227,9 @@ class SearchViewModelTest {
         } returns categories
 
         runBlocking {
-            viewModel.searchCategories()
+            launch(coroutineContext) {
+                viewModel.searchCategories()
+            }
         }
 
         coVerify(exactly = 0) {
@@ -229,5 +257,6 @@ class SearchViewModelTest {
 
     private companion object {
         const val FILLED_STRING = "ABCD"
+        const val MAIN_THREAD_NAME = "SearchViewModelTest UI Thread"
     }
 }

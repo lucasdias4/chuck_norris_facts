@@ -15,6 +15,7 @@ import com.lucasdias.search.domain.usecase.SetSearchHistoric
 import com.lucasdias.search.presentation.SearchAdapter
 import com.lucasdias.search.presentation.SearchViewModel
 import com.lucasdias.shared.di.SHARED_RETROFIT
+import kotlinx.coroutines.CoroutineDispatcher
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
@@ -26,6 +27,7 @@ val searchModule = module {
 
     viewModel {
         SearchViewModel(
+            get<CoroutineDispatcher>(),
             get<GetSearchHistoric>(),
             get<SetSearchHistoric>(),
             get<SearchCategoriesFromApi>(),

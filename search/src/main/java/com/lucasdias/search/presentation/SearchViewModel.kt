@@ -3,6 +3,7 @@ package com.lucasdias.search.presentation
 import android.view.KeyEvent
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.lucasdias.search.domain.sealedclass.RequestStatus
 import com.lucasdias.search.domain.sealedclass.Success
 import com.lucasdias.search.domain.usecase.GetRandomCategoriesFromDatabase
@@ -10,11 +11,12 @@ import com.lucasdias.search.domain.usecase.GetSearchHistoric
 import com.lucasdias.search.domain.usecase.IsCategoryCacheEmpty
 import com.lucasdias.search.domain.usecase.SearchCategoriesFromApi
 import com.lucasdias.search.domain.usecase.SetSearchHistoric
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 internal class SearchViewModel(
+    internal val coroutineContext: CoroutineDispatcher,
     internal val getSearchHistoric: GetSearchHistoric,
     internal val setSearchHistoric: SetSearchHistoric,
     internal val searchCategoriesFromApi: SearchCategoriesFromApi,
@@ -27,9 +29,8 @@ internal class SearchViewModel(
     }
 
     /**
-     * Variáveis como var e internal, por conta de testes unitários
+     * Variáveis como var e internal, por conta dos testes unitários
      **/
-    internal var coroutineContext = Dispatchers.IO
     internal var randomCategories = MutableLiveData<List<String>?>()
     internal var errorToLoadCategories = MutableLiveData<Unit>()
     internal var showSuggestionAndHistoricViews = MutableLiveData<Unit>()
@@ -44,18 +45,20 @@ internal class SearchViewModel(
     fun doASearch() = doASearch
 
     fun searchCategories() {
-        CoroutineScope(coroutineContext).launch {
-            var categories: List<String>? = null
-            var requestStatus: RequestStatus = Success
+        viewModelScope.launch {
+            withContext(coroutineContext) {
+                var categories: List<String>? = null
+                var requestStatus: RequestStatus = Success
 
-            val categoryCacheIsEmpty = isCategoryCacheEmpty()
-            if (categoryCacheIsEmpty) requestStatus = searchCategoriesFromApi()
+                val categoryCacheIsEmpty = isCategoryCacheEmpty()
+                if (categoryCacheIsEmpty) requestStatus = searchCategoriesFromApi()
 
-            showSuggestionAndHistoricViews.postValue(Unit)
+                showSuggestionAndHistoricViews.postValue(Unit)
 
-            if (requestStatus == Success) categories = getRandomCategoriesFromDatabase()
-            else errorToLoadCategories.postValue(Unit)
-            if (categories.isNullOrEmpty().not()) randomCategories.postValue(categories)
+                if (requestStatus == Success) categories = getRandomCategoriesFromDatabase()
+                else errorToLoadCategories.postValue(Unit)
+                if (categories.isNullOrEmpty().not()) randomCategories.postValue(categories)
+            }
         }
     }
 
