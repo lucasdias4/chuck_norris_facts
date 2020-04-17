@@ -8,27 +8,22 @@ import com.lucasdias.search.domain.usecase.GetSearchHistoric
 import com.lucasdias.search.domain.usecase.IsCategoryCacheEmpty
 import com.lucasdias.search.domain.usecase.SearchCategoriesFromApi
 import com.lucasdias.search.domain.usecase.SetSearchHistoric
+import com.lucasdias.search.util.CoroutineTestRule
 import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.just
 import io.mockk.mockk
 import io.mockk.spyk
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.newSingleThreadContext
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.setMain
-import org.junit.After
-import org.junit.Before
+import kotlinx.coroutines.test.runBlockingTest
+import org.junit.Rule
 import org.junit.Test
 
 class SearchViewModelTest {
 
-    private val mainThreadSurrogate = newSingleThreadContext(MAIN_THREAD_NAME)
+    @get:Rule
+    var coroutinesTestRule = CoroutineTestRule()
 
-    private val coroutineContext = Dispatchers.Main
     private val getSearchHistoric: GetSearchHistoric = mockk()
     private val setSearchHistoric: SetSearchHistoric = mockk()
     private val searchCategoriesFromApi: SearchCategoriesFromApi = mockk()
@@ -36,7 +31,7 @@ class SearchViewModelTest {
     private val isCategoryCacheEmpty: IsCategoryCacheEmpty = mockk()
     private val viewModel = spyk(
         SearchViewModel(
-            coroutineContext = coroutineContext,
+            coroutineContext = coroutinesTestRule.testDispatcher,
             getSearchHistoric = getSearchHistoric,
             setSearchHistoric = setSearchHistoric,
             searchCategoriesFromApi = searchCategoriesFromApi,
@@ -48,17 +43,6 @@ class SearchViewModelTest {
     private var errorToLoadCategories: MutableLiveData<Unit> = mockk()
     private var randomCategoriesLiveData: MutableLiveData<List<String>?> = mockk()
     private var showSuggestionAndHistoricViews: MutableLiveData<Unit> = mockk()
-
-    @Before
-    fun setUp() {
-        Dispatchers.setMain(mainThreadSurrogate)
-    }
-
-    @After
-    fun tearDown() {
-        Dispatchers.resetMain() // reset main dispatcher to the original Main dispatcher
-        mainThreadSurrogate.close()
-    }
 
     @Test
     fun `IF the application needs to display a list of categories THAN always calls the isCategoryCacheEmpty method to find out if the application already has a list in the cache`() {
@@ -72,10 +56,8 @@ class SearchViewModelTest {
             viewModel.searchCategoriesFromApi()
         } returns Error
 
-        runBlocking {
-            launch(coroutineContext) {
-                viewModel.searchCategories()
-            }
+        coroutinesTestRule.testDispatcher.runBlockingTest {
+            viewModel.searchCategories()
         }
 
         coVerify(exactly = 1) {
@@ -95,10 +77,8 @@ class SearchViewModelTest {
             viewModel.searchCategoriesFromApi()
         } returns Error
 
-        runBlocking {
-            launch(coroutineContext) {
-                viewModel.searchCategories()
-            }
+        coroutinesTestRule.testDispatcher.runBlockingTest {
+            viewModel.searchCategories()
         }
 
         coVerify(exactly = 1) {
@@ -118,10 +98,8 @@ class SearchViewModelTest {
             viewModel.searchCategoriesFromApi()
         } returns Error
 
-        runBlocking {
-            launch(coroutineContext) {
-                viewModel.searchCategories()
-            }
+        coroutinesTestRule.testDispatcher.runBlockingTest {
+            viewModel.searchCategories()
         }
 
         coVerify(exactly = 0) {
@@ -141,10 +119,8 @@ class SearchViewModelTest {
             viewModel.searchCategoriesFromApi()
         } returns Error
 
-        runBlocking {
-            launch(coroutineContext) {
-                viewModel.searchCategories()
-            }
+        coroutinesTestRule.testDispatcher.runBlockingTest {
+            viewModel.searchCategories()
         }
 
         coVerify(exactly = 1) {
@@ -169,10 +145,8 @@ class SearchViewModelTest {
             viewModel.getRandomCategoriesFromDatabase()
         } returns categories
 
-        runBlocking {
-            launch(coroutineContext) {
-                viewModel.searchCategories()
-            }
+        coroutinesTestRule.testDispatcher.runBlockingTest {
+            viewModel.searchCategories()
         }
 
         coVerify(exactly = 1) {
@@ -198,10 +172,8 @@ class SearchViewModelTest {
             viewModel.getRandomCategoriesFromDatabase()
         } returns categories
 
-        runBlocking {
-            launch(coroutineContext) {
-                viewModel.searchCategories()
-            }
+        coroutinesTestRule.testDispatcher.runBlockingTest {
+            viewModel.searchCategories()
         }
 
         coVerify(exactly = 1) {
@@ -226,10 +198,8 @@ class SearchViewModelTest {
             viewModel.getRandomCategoriesFromDatabase()
         } returns categories
 
-        runBlocking {
-            launch(coroutineContext) {
-                viewModel.searchCategories()
-            }
+        coroutinesTestRule.testDispatcher.runBlockingTest {
+            viewModel.searchCategories()
         }
 
         coVerify(exactly = 0) {
@@ -257,6 +227,5 @@ class SearchViewModelTest {
 
     private companion object {
         const val FILLED_STRING = "ABCD"
-        const val MAIN_THREAD_NAME = "SearchViewModelTest UI Thread"
     }
 }

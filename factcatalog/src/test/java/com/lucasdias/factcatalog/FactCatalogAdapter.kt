@@ -14,7 +14,7 @@ import io.mockk.verify
 import org.junit.Before
 import org.junit.Test
 
-class FactDataCatalogAdapter {
+class FactCatalogAdapter {
 
     private val view: View = mockk()
     private val categoryTextView: TextView = mockk()

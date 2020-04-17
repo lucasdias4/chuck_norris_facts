@@ -9,7 +9,7 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.internal.runner.junit4.statement.UiThreadStatement.runOnUiThread
-import com.lucasdias.connectivity.Connectivity
+import com.lucasdias.core_components.connectivity.Connectivity
 import com.lucasdias.factcatalog.R
 import com.lucasdias.factcatalog.di.FACT_CATALOG_ADAPTER
 import com.lucasdias.factcatalog.di.FACT_CATALOG_CONNECTIVITY
@@ -43,7 +43,7 @@ import org.koin.dsl.module
 import org.koin.test.KoinTest
 
 @RunWith(AndroidJUnit4::class)
-class FactDataCatalogFragmentTest : KoinTest {
+class FactCatalogFragmentTest : KoinTest {
 
     private val coroutineContext = Dispatchers.Unconfined
     private val lambda = { _: String -> }
@@ -63,6 +63,7 @@ class FactDataCatalogFragmentTest : KoinTest {
     private val adapter = spyk(FactCatalogAdapter(lambda))
     private val viewModel = spyk(
         FactCatalogViewModel(
+            coroutineContext,
             getAllFactsFromDatabase,
             searchFactsBySubjectFromApi,
             deleteAllFactsFromDatabase
@@ -122,7 +123,6 @@ class FactDataCatalogFragmentTest : KoinTest {
     }
 
     private fun viewModelSetup() {
-        viewModel.coroutineContext = coroutineContext
         viewModel.showAnErrorScreenLiveData = showAnErrorScreenLiveData
         viewModel.showAnEmptySearchScreenLiveData = showAnEmptySearchScreenLiveData
         viewModel.turnOnLoadingLiveData = turnOnLoadingLiveData
