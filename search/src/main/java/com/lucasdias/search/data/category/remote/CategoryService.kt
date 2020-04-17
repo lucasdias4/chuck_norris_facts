@@ -1,6 +1,5 @@
 package com.lucasdias.search.data.category.remote
 
-import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.GET
 
