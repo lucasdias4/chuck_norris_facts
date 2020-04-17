@@ -1,5 +1,6 @@
 package com.lucasdias.search.di
 
+import android.content.SharedPreferences
 import com.lucasdias.search.data.category.CategoryRepositoryImpl
 import com.lucasdias.search.data.category.local.CategoryCache
 import com.lucasdias.search.data.category.remote.CategoryService
@@ -15,8 +16,8 @@ import com.lucasdias.search.domain.usecase.SetSearchHistoric
 import com.lucasdias.search.presentation.SearchAdapter
 import com.lucasdias.search.presentation.SearchViewModel
 import com.lucasdias.shared.di.SHARED_RETROFIT
+import com.lucasdias.shared.di.SHARED_SHARED_PREFERENCES
 import kotlinx.coroutines.CoroutineDispatcher
-import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -86,13 +87,13 @@ val searchModule = module {
     // Persistence
     factory {
         SearchHistoricCache(
-            androidContext()
+            get<SharedPreferences>(named(SHARED_SHARED_PREFERENCES))
         )
     }
 
     factory {
         CategoryCache(
-            androidContext()
+            get<SharedPreferences>(named(SHARED_SHARED_PREFERENCES))
         )
     }
 

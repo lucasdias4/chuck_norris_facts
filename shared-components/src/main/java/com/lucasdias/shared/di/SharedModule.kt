@@ -1,16 +1,20 @@
 package com.lucasdias.shared.di
 
+import android.content.Context
+import androidx.preference.PreferenceManager
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.lucasdias.shared.BuildConfig.FACT_API_URL
 import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+const val SHARED_SHARED_PREFERENCES = "SHARED_SHARED_PREFERENCES"
 const val SHARED_RETROFIT = "SHARED_RETROFIT"
 const val SHARED_OKHTTP = "SHARED_OKHTTP"
 
@@ -19,6 +23,11 @@ val sharedModule = module {
 
     factory {
         getCoroutinesDispatchersIo()
+    }
+
+    // Persistence
+    single(named(SHARED_SHARED_PREFERENCES)) {
+        getSharedPreferences(androidContext())
     }
 
     // Service
@@ -51,3 +60,6 @@ fun createRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
     .build()
 
 private fun getCoroutinesDispatchersIo() = Dispatchers.IO
+
+private fun getSharedPreferences(context: Context) =
+    PreferenceManager.getDefaultSharedPreferences(context)

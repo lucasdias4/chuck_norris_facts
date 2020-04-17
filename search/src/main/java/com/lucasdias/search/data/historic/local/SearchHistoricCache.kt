@@ -1,9 +1,8 @@
 package com.lucasdias.search.data.historic.local
 
-import android.content.Context
-import androidx.preference.PreferenceManager
+import android.content.SharedPreferences
 
-internal class SearchHistoricCache(private val context: Context) {
+internal class SearchHistoricCache(private val sharedPreferences: SharedPreferences) {
 
     private companion object {
         const val SEARCH_HISTORIC_KEY = "SEARCH_HISTORIC_KEY"
@@ -11,15 +10,13 @@ internal class SearchHistoricCache(private val context: Context) {
     }
 
     fun setHistoricAsString(historicAsString: String?) {
-        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-        val editor = preferences.edit()
+        val editor = sharedPreferences.edit()
         editor.putString(SEARCH_HISTORIC_KEY, historicAsString)
         editor.apply()
     }
 
     fun getHistoricAsString(): String? {
-        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-        val historicAsString = preferences.getString(SEARCH_HISTORIC_KEY, EMPTY_STRING)
+        val historicAsString = sharedPreferences.getString(SEARCH_HISTORIC_KEY, EMPTY_STRING)
         return historicAsString
     }
 }

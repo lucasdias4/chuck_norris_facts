@@ -63,11 +63,11 @@ class FactCatalogFragmentTest : KoinTest {
     private val adapter = spyk(FactCatalogAdapter(lambda))
     private val viewModel = spyk(
         FactCatalogViewModel(
-            coroutineContext,
             getAllFactsFromDatabase,
             searchFactsBySubjectFromApi,
-            deleteAllFactsFromDatabase
-        )
+            deleteAllFactsFromDatabase,
+            coroutineContext
+            )
     )
 
     @Before

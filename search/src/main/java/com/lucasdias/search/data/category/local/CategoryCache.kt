@@ -1,9 +1,8 @@
 package com.lucasdias.search.data.category.local
 
-import android.content.Context
-import androidx.preference.PreferenceManager
+import android.content.SharedPreferences
 
-internal class CategoryCache(private var context: Context) {
+internal class CategoryCache(private val sharedPreferences: SharedPreferences) {
 
     private companion object {
         const val CATEGORY_KEY = "CATEGORY_KEY"
@@ -13,22 +12,19 @@ internal class CategoryCache(private var context: Context) {
 
     fun setCategories(categories: List<String>?) {
         val categoriesAsString = categories?.joinToString()
-        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-        val editor = preferences.edit()
+        val editor = sharedPreferences.edit()
         editor.putString(CATEGORY_KEY, categoriesAsString)
         editor.apply()
     }
 
     fun getCategories(): List<String> {
-        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-        val categoriesAsString = preferences.getString(CATEGORY_KEY, EMPTY_STRING)
+        val categoriesAsString = sharedPreferences.getString(CATEGORY_KEY, EMPTY_STRING)
         val categories = categoriesAsString?.split(DELIMITERS) ?: emptyList()
         return categories
     }
 
     fun isCategoryCacheEmpty(): Boolean {
-        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-        val categoriesAsString = preferences.getString(CATEGORY_KEY, EMPTY_STRING)
+        val categoriesAsString = sharedPreferences.getString(CATEGORY_KEY, EMPTY_STRING)
         val isNullOrEmpty = categoriesAsString.isNullOrEmpty()
         return isNullOrEmpty
     }

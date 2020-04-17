@@ -1,5 +1,6 @@
 package com.lucasdias.home.di
 
+import android.content.SharedPreferences
 import com.lucasdias.core_components.connectivity.Connectivity
 import com.lucasdias.home.data.userfirsttime.UserFirstTimeRepositoryImpl
 import com.lucasdias.home.data.userfirsttime.local.UserFirstTimeCache
@@ -7,8 +8,8 @@ import com.lucasdias.home.domain.repository.UserFirstTimeRepository
 import com.lucasdias.home.domain.usecase.GetIfIsTheUsersFirstTime
 import com.lucasdias.home.domain.usecase.SetThatIsNotTheUsersFirstTimeInTheCache
 import com.lucasdias.home.pesentation.HomeViewModel
+import com.lucasdias.shared.di.SHARED_SHARED_PREFERENCES
 import org.koin.android.ext.koin.androidApplication
-import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -45,12 +46,13 @@ val homeModule = module {
 
     factory {
         UserFirstTimeRepositoryImpl(
-            get<UserFirstTimeCache>(),
-            androidContext()
+            get<UserFirstTimeCache>()
         ) as UserFirstTimeRepository
     }
 
     factory {
-        UserFirstTimeCache()
+        UserFirstTimeCache(
+            get<SharedPreferences>(named(SHARED_SHARED_PREFERENCES))
+        )
     }
 }

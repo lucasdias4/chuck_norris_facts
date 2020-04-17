@@ -31,10 +31,10 @@ private const val FACT_CATALOG_DATABASE = "FACT_CATALOG_DATABASE"
 val factCatalogModule = module {
     viewModel(named(FACT_CATALOG_VIEW_MODEL)) {
         FactCatalogViewModel(
-            get<CoroutineDispatcher>(),
             get<GetAllFactsFromDatabase>(),
             get<SearchFactsBySubjectFromApi>(),
-            get<DeleteAllFactsFromDatabase>()
+            get<DeleteAllFactsFromDatabase>(),
+            get<CoroutineDispatcher>()
         )
     }
 

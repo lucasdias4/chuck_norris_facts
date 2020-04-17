@@ -15,10 +15,10 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
 internal class FactCatalogViewModel(
-    internal val coroutineContext: CoroutineDispatcher,
     internal val getAllFactsFromDatabase: GetAllFactsFromDatabase,
     private val searchFactsBySubjectFromApi: SearchFactsBySubjectFromApi,
-    private val deleteAllFactsFromDatabase: DeleteAllFactsFromDatabase
+    private val deleteAllFactsFromDatabase: DeleteAllFactsFromDatabase,
+    private val coroutineContext: CoroutineDispatcher
 ) : ViewModel() {
 
     /**
