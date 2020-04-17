@@ -13,7 +13,6 @@ import com.lucasdias.search.domain.usecase.SearchCategoriesFromApi
 import com.lucasdias.search.domain.usecase.SetSearchHistoric
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 internal class SearchViewModel(
     internal val coroutineContext: CoroutineDispatcher,
@@ -45,20 +44,18 @@ internal class SearchViewModel(
     fun doASearch() = doASearch
 
     fun searchCategories() {
-        viewModelScope.launch {
-            withContext(coroutineContext) {
-                var categories: List<String>? = null
-                var requestStatus: RequestStatus = Success
+        viewModelScope.launch(coroutineContext) {
+            var categories: List<String>? = null
+            var requestStatus: RequestStatus = Success
 
-                val categoryCacheIsEmpty = isCategoryCacheEmpty()
-                if (categoryCacheIsEmpty) requestStatus = searchCategoriesFromApi()
+            val categoryCacheIsEmpty = isCategoryCacheEmpty()
+            if (categoryCacheIsEmpty) requestStatus = searchCategoriesFromApi()
 
-                showSuggestionAndHistoricViews.postValue(Unit)
+            showSuggestionAndHistoricViews.postValue(Unit)
 
-                if (requestStatus == Success) categories = getRandomCategoriesFromDatabase()
-                else errorToLoadCategories.postValue(Unit)
-                if (categories.isNullOrEmpty().not()) randomCategories.postValue(categories)
-            }
+            if (requestStatus == Success) categories = getRandomCategoriesFromDatabase()
+            else errorToLoadCategories.postValue(Unit)
+            if (categories.isNullOrEmpty().not()) randomCategories.postValue(categories)
         }
     }
 

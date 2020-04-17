@@ -13,7 +13,7 @@ import com.lucasdias.factcatalog.domain.usecase.GetAllFactsFromDatabase
 import com.lucasdias.factcatalog.domain.usecase.SearchFactsBySubjectFromApi
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+
 internal class FactCatalogViewModel(
     internal val coroutineContext: CoroutineDispatcher,
     internal val getAllFactsFromDatabase: GetAllFactsFromDatabase,
@@ -42,13 +42,11 @@ internal class FactCatalogViewModel(
         if (subject.isEmpty()) return
         if (hasNetworkConnectivity.not()) return
 
-        viewModelScope.launch {
-            withContext(coroutineContext) {
-                turnOnLoadingLiveData.postValue(Unit)
-                val requestStatus = searchFactsBySubjectFromApi.invoke(subject = subject)
-                requestStatusHandler(requestStatus = requestStatus)
-                turnOffLoadingLiveData.postValue(Unit)
-            }
+        viewModelScope.launch(coroutineContext) {
+            turnOnLoadingLiveData.postValue(Unit)
+            val requestStatus = searchFactsBySubjectFromApi.invoke(subject = subject)
+            requestStatusHandler(requestStatus = requestStatus)
+            turnOffLoadingLiveData.postValue(Unit)
         }
     }
 
