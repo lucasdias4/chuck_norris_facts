@@ -26,7 +26,7 @@ internal class CategoryRepositoryImpl(
     override suspend fun searchCategoriesFromApi(): RequestStatus {
         val result: SuspendableResult<Response<List<String>>, Exception> =
             SuspendableResult.of {
-                categoryService.searchFactsBySubjectFromApi().await()
+                categoryService.searchFactsBySubjectFromApi()
             }
 
         val resultCode = result.component1()?.code()

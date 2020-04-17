@@ -7,5 +7,5 @@ import retrofit2.http.GET
 internal interface CategoryService {
 
     @GET("jokes/categories")
-    fun searchFactsBySubjectFromApi(): Deferred<Response<List<String>>>
+    suspend fun searchFactsBySubjectFromApi(): Response<List<String>>
 }

@@ -9,5 +9,5 @@ import retrofit2.http.Query
 internal interface FactCatalogService {
 
     @GET("/jokes/search")
-    fun searchFactsBySubjectFromApi(@Query("query") subject: String?): Deferred<Response<FactListResponse>>
+    suspend fun searchFactsBySubjectFromApi(@Query("query") subject: String?): Response<FactListResponse>
 }

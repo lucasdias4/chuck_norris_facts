@@ -39,7 +39,7 @@ internal class FactCatalogRepositoryImpl(
             SuspendableResult.of {
                 factCatalogService.searchFactsBySubjectFromApi(
                     subject = subject
-                ).await()
+                )
             }
 
         val resultCode = result.component1()?.code()
