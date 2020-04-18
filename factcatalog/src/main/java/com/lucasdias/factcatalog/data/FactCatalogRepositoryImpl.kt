@@ -43,11 +43,9 @@ internal class FactCatalogRepositoryImpl(
             }
 
         val resultCode = result.component1()?.code()
-        val resultException = result.component2()
         val resultBody = result.component1()?.body()
         val status = resultStatusHandler(
             resultCode = resultCode,
-            resultException = resultException,
             resultBody = resultBody
         )
 
@@ -78,16 +76,11 @@ internal class FactCatalogRepositoryImpl(
 
     private fun resultStatusHandler(
         resultCode: Int?,
-        resultException: java.lang.Exception?,
         resultBody: FactListResponse?
     ): RequestStatus {
         if (resultCode in MIN_RESPONSE_CODE..MAX_RESPONSE_CODE) {
-
             val searchWithoutResult = resultBody?.facts.isNullOrEmpty()
-            val isAnException = resultException != null
-
             if (searchWithoutResult) return SuccessWithoutResult
-            if (isAnException) return Error
             return Success
         } else {
             return Error
