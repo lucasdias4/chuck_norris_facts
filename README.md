@@ -74,6 +74,6 @@ Featureas e Fixes - testes unitários e Ktlint.
  
  * _aumentado a cobertura de testes de ui;_
     
- * _no módulo Search, ter feito um tratamendo caso a API entregue menos de 8 categorias para serem exibidas como sugestão_
+ * _no módulo Search, ter feito um tratamendo caso a API entregue menos de 8 categorias para serem exibidas como sugestão;_
  
- * _implementado mais animações;_
+ * _implementado mais animações._
