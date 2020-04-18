@@ -25,15 +25,6 @@ class SearchFragment : Fragment() {
 
     companion object {
         private const val EMPTY_STRING = ""
-        private const val FIRST_SUGGESTION = 0
-        private const val SECOND_SUGGESTION = 1
-        private const val THIRD_SUGGESTION = 2
-        private const val FOURTH_SUGGESTION = 3
-        private const val FIFTH_SUGGESTION = 4
-        private const val SIXTH_SUGGESTION = 5
-        private const val SEVENTH_SUGGESTION = 6
-        private const val EIGHTH_SUGGESTION = 7
-
         fun newInstance() = SearchFragment()
     }
 
@@ -124,37 +115,19 @@ class SearchFragment : Fragment() {
     }
 
     private fun initSuggestionTags(suggestionTags: List<String>?) {
-        initSuggestionTag(
-            tagView = firstSuggestionTagView, text = suggestionTags?.get(FIRST_SUGGESTION)
-        )
+        val tagsViewsList = ArrayList<ViewGroup?>()
+        tagsViewsList.add(firstSuggestionTagView)
+        tagsViewsList.add(secondSuggestionTagView)
+        tagsViewsList.add(thirdSuggestionTagView)
+        tagsViewsList.add(fourthSuggestionTagView)
+        tagsViewsList.add(fifthSuggestionTagView)
+        tagsViewsList.add(sixthSuggestionTagView)
+        tagsViewsList.add(seventhSuggestionTagView)
+        tagsViewsList.add(eightSuggestionTagView)
 
-        initSuggestionTag(
-            tagView = secondSuggestionTagView, text = suggestionTags?.get(SECOND_SUGGESTION)
-        )
-
-        initSuggestionTag(
-            tagView = thirdSuggestionTagView, text = suggestionTags?.get(THIRD_SUGGESTION)
-        )
-
-        initSuggestionTag(
-            tagView = fourthSuggestionTagView, text = suggestionTags?.get(FOURTH_SUGGESTION)
-        )
-
-        initSuggestionTag(
-            tagView = fifthSuggestionTagView, text = suggestionTags?.get(FIFTH_SUGGESTION)
-        )
-
-        initSuggestionTag(
-            tagView = sixthSuggestionTagView, text = suggestionTags?.get(SIXTH_SUGGESTION)
-        )
-
-        initSuggestionTag(
-            tagView = seventhSuggestionTagView, text = suggestionTags?.get(SEVENTH_SUGGESTION)
-        )
-
-        initSuggestionTag(
-            tagView = eightSuggestionTagView, text = suggestionTags?.get(EIGHTH_SUGGESTION)
-        )
+        tagsViewsList.forEachIndexed { index, tagView ->
+            initSuggestionTag(tagView = tagView, text = suggestionTags?.get(index))
+        }
     }
 
     private fun initSuggestionTag(
