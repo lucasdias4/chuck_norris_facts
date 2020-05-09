@@ -16,7 +16,7 @@ import com.lucasdias.shared.di.SHARED_RETROFIT
 import kotlinx.coroutines.CoroutineDispatcher
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
-import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -96,5 +96,6 @@ val factCatalogModule = module {
         )
     }
 }
+
 private fun getFactCatalogService(retrofit: Retrofit): FactCatalogService =
     retrofit.create(FactCatalogService::class.java)

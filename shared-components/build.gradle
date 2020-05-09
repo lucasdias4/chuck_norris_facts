@@ -1,3 +1,5 @@
+import com.lucasdias.buildSrc.Dependencies
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -33,50 +35,32 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    //Modules
-    api project(':core-components')
-    api project(':extensions')
-    api project(':resource-components')
+    api project(Dependencies.Module.core_components)
+    api project(Dependencies.Module.extensions)
+    api project(Dependencies.Module.resource_components)
 
-    //Uncategory
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api "androidx.appcompat:appcompat:$app_compat_version"
-    api "androidx.core:core-ktx:$core_ktx_version"
-    api "androidx.legacy:legacy-support-v4:$legacy_support_version"
-    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    api Dependencies.Core.appcompat
+    api Dependencies.Core.core_ktx
+    api Dependencies.Core.coroutines_android
+    api Dependencies.Core.coroutines_core
+    api Dependencies.Core.legacy_support
+    api Dependencies.Core.lifecycle
+    api Dependencies.Core.kotlin_stdlib_jdk7
 
-    //Coroutines
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
-    api "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$retrofit2_kotlin_coroutines_adapter_version"
+    api Dependencies.Data.converter_gson
+    api Dependencies.Data.logging_interceptor
+    api Dependencies.Data.preferences_ktx
+    api Dependencies.Data.result
+    api Dependencies.Data.result_coroutines
+    api Dependencies.Data.retrofit
+    api Dependencies.Data.retrofit2_coroutines_adapter
 
-    //Koin
-    api "org.koin:koin-android:$koin_version"
-    api "org.koin:koin-android-viewmodel:$koin_version"
-    api "org.koin:koin-core:$koin_version"
+    api Dependencies.DI.koin
+    api Dependencies.DI.koin_core
+    api Dependencies.DI.koin_view_model
 
-    //Layout
-    api "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
-    api "com.google.android.material:material:$material_version"
-    api "androidx.recyclerview:recyclerview:$recycler_view_version"
-
-    //Persistence
-    api "androidx.preference:preference-ktx:$preferences_ktx_version"
-
-    //Result
-    api "com.github.kittinunf.result:result:$result_version"
-    api "com.github.kittinunf.result:result-coroutines:$result_version"
-
-    //Retrofit
-    api "com.squareup.retrofit2:retrofit:$retrofit_version"
-    api "com.squareup.retrofit2:converter-gson:$converter_gson_version"
-    api "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
-
-    //Shimmer
-    api "com.facebook.shimmer:shimmer:$shimmer_version"
-
-    //Test
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "androidx.test.ext:junit:$junit_android_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    api Dependencies.UI.constraint_layout
+    api Dependencies.UI.material
+    api Dependencies.UI.recycler_view
+    api Dependencies.UI.shimmer
 }

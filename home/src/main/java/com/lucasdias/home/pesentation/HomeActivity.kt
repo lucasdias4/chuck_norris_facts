@@ -20,7 +20,7 @@ import com.lucasdias.ui_components.bottomnavigation.BottomNavigation
 import com.lucasdias.ui_components.bottomnavigation.model.BottomNavigationOption
 import com.lucasdias.ui_components.toolbar.Toolbar
 import org.koin.android.ext.android.inject
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.qualifier.named
 
 class HomeActivity : AppCompatActivity(), SearchFragment.Listener {

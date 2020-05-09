@@ -19,7 +19,7 @@ import com.lucasdias.factcatalog.di.FACT_CATALOG_ADAPTER
 import com.lucasdias.factcatalog.di.FACT_CATALOG_CONNECTIVITY
 import com.lucasdias.factcatalog.di.FACT_CATALOG_VIEW_MODEL
 import org.koin.android.ext.android.inject
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
 
@@ -30,7 +30,11 @@ class FactCatalogFragment : Fragment() {
     }
 
     private val viewModel by viewModel<FactCatalogViewModel>(named(FACT_CATALOG_VIEW_MODEL))
-    private val adapter by inject<FactCatalogAdapter>(named(FACT_CATALOG_ADAPTER)) { parametersOf(shareUrlMethod) }
+    private val adapter by inject<FactCatalogAdapter>(named(FACT_CATALOG_ADAPTER)) {
+        parametersOf(
+            shareUrlMethod
+        )
+    }
     private val connectivity by inject<Connectivity>(named(FACT_CATALOG_CONNECTIVITY))
     private val recyclerView by bind<RecyclerView>(R.id.recycler_view_fact_catalog_fragment)
     private val recyclerViewPlaceHolder by bind<ShimmerFrameLayout>(R.id.recycler_view_place_holder_fact_catalog_fragment)

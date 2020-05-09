@@ -10,7 +10,7 @@ import com.lucasdias.home.domain.usecase.SetThatIsNotTheUsersFirstTimeInTheCache
 import com.lucasdias.home.pesentation.HomeViewModel
 import com.lucasdias.shared.di.SHARED_SHARED_PREFERENCES
 import org.koin.android.ext.koin.androidApplication
-import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 

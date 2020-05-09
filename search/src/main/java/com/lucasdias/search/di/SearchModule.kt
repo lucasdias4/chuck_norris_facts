@@ -18,7 +18,7 @@ import com.lucasdias.search.presentation.SearchViewModel
 import com.lucasdias.shared.di.SHARED_RETROFIT
 import com.lucasdias.shared.di.SHARED_SHARED_PREFERENCES
 import kotlinx.coroutines.CoroutineDispatcher
-import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit

@@ -1,3 +1,5 @@
+import com.lucasdias.buildSrc.Dependencies
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -42,25 +44,21 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    //Modules
-    implementation project (':shared-components')
+    implementation project (Dependencies.Module.shared_components)
 
-    //Layout
-    implementation "androidx.cardview:cardview:$card_view_version"
+    implementation Dependencies.Data.room
+    kapt Dependencies.Data.room_compiler
 
-    //Persistence
-    implementation "android.arch.persistence.room:runtime:$room_version"
-    kapt "android.arch.persistence.room:compiler:$room_version"
+    implementation Dependencies.UI.card_view
 
-    //Test
-    testImplementation "io.mockk:mockk:$mockk_version"
-    testImplementation "junit:junit:$junit_version"
-    debugImplementation "androidx.fragment:fragment-testing:$fragment_testing_version"
-    androidTestImplementation "io.mockk:mockk-android:$mockk_version"
-    androidTestImplementation "org.koin:koin-test:$koin_version"
-    androidTestImplementation "androidx.test:runner:$runner_version"
-    androidTestImplementation "androidx.test.ext:junit:$junit_android_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
-    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espresso_version"
-    androidTestImplementation "androidx.test.espresso:espresso-intents:$espresso_version"
+    testImplementation Dependencies.Testing.mockk
+    testImplementation Dependencies.Testing.junit
+    debugImplementation Dependencies.Testing.fragment_testing
+    androidTestImplementation Dependencies.Testing.espresso_contrib
+    androidTestImplementation Dependencies.Testing.espresso_core
+    androidTestImplementation Dependencies.Testing.espresso_intents
+    androidTestImplementation Dependencies.Testing.junit_android
+    androidTestImplementation Dependencies.Testing.koin
+    androidTestImplementation Dependencies.Testing.mockk
+    androidTestImplementation Dependencies.Testing.test_runner
 }

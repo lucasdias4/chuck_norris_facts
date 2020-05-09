@@ -1,3 +1,5 @@
+import com.lucasdias.buildSrc.Dependencies
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -28,22 +30,14 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    //Modules
-    implementation project(':extensions')
-    implementation project(':resource-components')
+    implementation project(Dependencies.Module.extensions)
+    implementation project(Dependencies.Module.resource_components)
 
-    //Uncategory
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.appcompat:appcompat:$app_compat_version"
-    implementation "androidx.core:core-ktx:$core_ktx_version"
+    implementation Dependencies.Core.appcompat
+    implementation Dependencies.Core.core_ktx
+    implementation Dependencies.Core.kotlin_stdlib_jdk7
 
-    //Layout
-    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
-    implementation "com.google.android.material:material:$material_version"
-    implementation "androidx.coordinatorlayout:coordinatorlayout:$coordinator_layout_version"
-
-    //Test
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "androidx.test:runner:$runner_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    implementation Dependencies.UI.constraint_layout
+    implementation Dependencies.UI.material
+    implementation Dependencies.UI.coordinator_layout
 }

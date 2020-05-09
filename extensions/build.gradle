@@ -1,3 +1,5 @@
+import com.lucasdias.buildSrc.Dependencies
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -29,13 +31,11 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    //Uncategory
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.appcompat:appcompat:$app_compat_version"
-    implementation "androidx.core:core-ktx:$core_ktx_version"
+    implementation Dependencies.Core.appcompat
+    implementation Dependencies.Core.core_ktx
+    implementation Dependencies.Core.kotlin_stdlib_jdk7
 
-    //Glide
-    api "com.github.bumptech.glide:glide:$glide_version"
-    kapt "com.github.bumptech.glide:annotations:$glide_version"
-    kapt "com.github.bumptech.glide:compiler:$glide_version"
+    api Dependencies.UI.glide
+    kapt Dependencies.UI.glide_annotations
+    kapt Dependencies.UI.glide_compiler
 }

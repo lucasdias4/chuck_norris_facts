@@ -1,3 +1,5 @@
+import com.lucasdias.buildSrc.Dependencies
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -33,13 +35,9 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    //Modules
-    implementation project(':shared-components')
+    implementation project(Dependencies.Module.shared_components)
 
-    //Test
-    testImplementation "io.mockk:mockk:$mockk_version"
-    testImplementation "junit:junit:$junit_version"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
-    androidTestImplementation "androidx.test.ext:junit:$junit_android_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    testImplementation Dependencies.Testing.junit
+    testImplementation Dependencies.Testing.mockk
+    testImplementation Dependencies.Testing.kotlinx_coroutines_test
 }

@@ -1,3 +1,5 @@
+import com.lucasdias.buildSrc.Dependencies
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -28,14 +30,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    //Modules
-    implementation project (':factcatalog')
-    implementation project (':search')
-    implementation project (':shared-components')
-    implementation project (':ui-components')
-
-    //Test
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "androidx.test.ext:junit:$junit_android_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    implementation project (Dependencies.Module.fact_catalog)
+    implementation project (Dependencies.Module.search)
+    implementation project (Dependencies.Module.shared_components)
+    implementation project (Dependencies.Module.ui_components)
 }
