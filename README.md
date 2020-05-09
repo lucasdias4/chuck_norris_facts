@@ -74,8 +74,6 @@ Featureas e Fixes - testes unitários e Ktlint.
  
  * _aumentado a cobertura de testes de ui;_
     
- * _no módulo Search, ter feito um tratamendo caso a API entregue menos de 8 categorias para serem exibidas como sugestão_
+ * _no módulo Search, ter feito um tratamendo caso a API entregue menos de 8 categorias para serem exibidas como sugestão;_
  
- * _implementado mais animações;_
-   
- * _estudado a possibilidade de criar um modelo no pacote local, dentro da camada de data, para representar o modelo do banco de dados. Apesar de ser uma prática normal no Repository Pattern, o Room dificulta essa abordagem, uma vez que usa o modelo do banco de dados para ser observado pela View (em presentation);_
+ * _implementado mais animações._
