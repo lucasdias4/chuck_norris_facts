@@ -50,8 +50,6 @@ dependencies {
     api Dependencies.Data.converter_gson
     api Dependencies.Data.logging_interceptor
     api Dependencies.Data.preferences_ktx
-    api Dependencies.Data.result
-    api Dependencies.Data.result_coroutines
     api Dependencies.Data.retrofit
     api Dependencies.Data.retrofit2_coroutines_adapter
 

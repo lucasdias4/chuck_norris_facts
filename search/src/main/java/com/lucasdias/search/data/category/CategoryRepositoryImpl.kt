@@ -1,6 +1,6 @@
 package com.lucasdias.search.data.category
 
-import com.github.kittinunf.result.coroutines.SuspendableResult
+import com.lucasdias.core_components.base.data.RemoteResponse
 import com.lucasdias.core_components.log.LogApp
 import com.lucasdias.search.data.category.local.CategoryCache
 import com.lucasdias.search.data.category.remote.CategoryService
@@ -24,14 +24,14 @@ internal class CategoryRepositoryImpl(
     override fun getCategories(): List<String>? = categoryCache.getCategories()
 
     override suspend fun searchCategoriesFromApi(): RequestStatus {
-        val result: SuspendableResult<Response<List<String>>, Exception> =
-            SuspendableResult.of {
+        val result: RemoteResponse<Response<List<String>>, Exception> =
+            RemoteResponse.of {
                 categoryService.searchFactsBySubjectFromApi()
             }
 
-        val resultCode = result.component1()?.code()
-        val resultException = result.component2()
-        val resultBody = result.component1()?.body()
+        val resultCode = result.value()?.code()
+        val resultException = result.error()
+        val resultBody = result.value()?.body()
         val status = resultStatusHandler(
             resultCode = resultCode, resultException = resultException
         )
@@ -41,8 +41,7 @@ internal class CategoryRepositoryImpl(
                 categories = resultBody
             )
         } else if (status == Error) {
-            val exception = result.component2()
-            logRequestException(exception = exception, resultCode = resultCode)
+            logRequestException(exception = resultException, resultCode = resultCode)
         }
 
         return status

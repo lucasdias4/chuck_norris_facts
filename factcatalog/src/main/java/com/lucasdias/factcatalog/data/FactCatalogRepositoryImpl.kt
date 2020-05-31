@@ -2,7 +2,7 @@ package com.lucasdias.factcatalog.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.github.kittinunf.result.coroutines.SuspendableResult
+import com.lucasdias.core_components.base.data.RemoteResponse
 import com.lucasdias.core_components.log.LogApp
 import com.lucasdias.factcatalog.data.local.FactCatalogDao
 import com.lucasdias.factcatalog.data.local.model.FactData
@@ -35,15 +35,15 @@ internal class FactCatalogRepositoryImpl(
     override fun deleteAllFacts() = factCatalogDao.deleteAllFacts()
 
     override suspend fun searchFactsBySubjectFromApi(subject: String): RequestStatus {
-        val result: SuspendableResult<Response<FactListResponse>, Exception> =
-            SuspendableResult.of {
+        val result: RemoteResponse<Response<FactListResponse>, Exception> =
+            RemoteResponse.of {
                 factCatalogService.searchFactsBySubjectFromApi(
                     subject = subject
                 )
             }
 
-        val resultCode = result.component1()?.code()
-        val resultBody = result.component1()?.body()
+        val resultCode = result.value()?.code()
+        val resultBody = result.value()?.body()
         val status = resultStatusHandler(
             resultCode = resultCode,
             resultBody = resultBody
@@ -55,7 +55,7 @@ internal class FactCatalogRepositoryImpl(
                 subject = subject
             )
         } else if (status == Error) {
-            val exception = result.component2()
+            val exception = result.error()
             logRequestException(exception = exception, resultCode = resultCode)
         }
 
