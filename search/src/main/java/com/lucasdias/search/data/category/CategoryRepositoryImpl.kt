@@ -1,13 +1,12 @@
 package com.lucasdias.search.data.category
 
 import com.lucasdias.core_components.base.data.RemoteResponse
+import com.lucasdias.core_components.base.data.requeststatus.RequestStatus
+import com.lucasdias.core_components.base.data.requeststatus.RequestStatusHandler
 import com.lucasdias.core_components.log.LogApp
 import com.lucasdias.search.data.category.local.CategoryCache
 import com.lucasdias.search.data.category.remote.CategoryService
 import com.lucasdias.search.domain.repository.CategoryRepository
-import com.lucasdias.search.domain.sealedclass.Error
-import com.lucasdias.search.domain.sealedclass.RequestStatus
-import com.lucasdias.search.domain.sealedclass.Success
 import retrofit2.Response
 
 internal class CategoryRepositoryImpl(
@@ -15,36 +14,32 @@ internal class CategoryRepositoryImpl(
     private val categoryCache: CategoryCache
 ) : CategoryRepository {
 
-    private companion object {
-        private const val MIN_RESPONSE_CODE = 200
-        private const val MAX_RESPONSE_CODE = 299
-    }
-
     override fun isCategoryCacheEmpty(): Boolean = categoryCache.isCategoryCacheEmpty()
     override fun getCategories(): List<String>? = categoryCache.getCategories()
 
     override suspend fun searchCategoriesFromApi(): RequestStatus {
-        val result: RemoteResponse<Response<List<String>>, Exception> =
+        val response: RemoteResponse<Response<List<String>>, Exception> =
             RemoteResponse.of {
                 categoryService.searchFactsBySubjectFromApi()
             }
 
-        val resultCode = result.value()?.code()
-        val resultException = result.error()
-        val resultBody = result.value()?.body()
-        val status = resultStatusHandler(
-            resultCode = resultCode, resultException = resultException
-        )
+        return responseHandler(response)
+    }
 
-        if (status == Success) {
-            onSuccess(
-                categories = resultBody
-            )
-        } else if (status == Error) {
-            logRequestException(exception = resultException, resultCode = resultCode)
+    private fun responseHandler(response: RemoteResponse<Response<List<String>>, Exception>): RequestStatus {
+        val responseStatus = response.value()?.code()?.let { code ->
+            return@let RequestStatusHandler.execute(code)
+        } ?: run {
+            return@run RequestStatus.GenericError()
         }
 
-        return status
+        if (responseStatus is RequestStatus.Success) {
+            onSuccess(categories = response.value()?.body())
+        } else {
+            logRequestException(exception = response.error(), resultCode = response.value()?.code())
+        }
+
+        return responseStatus
     }
 
     private fun onSuccess(
@@ -52,20 +47,6 @@ internal class CategoryRepositoryImpl(
     ) {
         categoryCache.setCategories(categories = categories)
         logRequestInfo(categories = categories)
-    }
-
-    private fun resultStatusHandler(
-        resultCode: Int?,
-        resultException: java.lang.Exception?
-    ): RequestStatus {
-        if (resultCode in MIN_RESPONSE_CODE..MAX_RESPONSE_CODE) {
-            val isAnException = resultException != null
-
-            if (isAnException) return Error
-            return Success
-        } else {
-            return Error
-        }
     }
 
     private fun logRequestInfo(

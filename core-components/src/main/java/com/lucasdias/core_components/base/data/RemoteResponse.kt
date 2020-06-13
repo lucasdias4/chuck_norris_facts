@@ -15,14 +15,14 @@ sealed class RemoteResponse<V : Any, E : Exception> {
         override fun value(): V? = value
         override fun error(): E? = null
 
-        override fun toString(): String = "{Success: $value}"
+        override fun toString(): String = "Success: $value"
     }
 
     data class Error<V : Any, E : Exception>(val error: E?) : RemoteResponse<V, E>() {
         override fun value(): V? = null
         override fun error(): E? = error
 
-        override fun toString() = "{Error: $error}"
+        override fun toString() = "Error: $error"
     }
 
     companion object {

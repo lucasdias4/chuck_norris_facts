@@ -1,6 +1,6 @@
 package com.lucasdias.search.domain.repository
 
-import com.lucasdias.search.domain.sealedclass.RequestStatus
+import com.lucasdias.core_components.base.data.requeststatus.RequestStatus
 
 interface CategoryRepository {
     suspend fun searchCategoriesFromApi(): RequestStatus

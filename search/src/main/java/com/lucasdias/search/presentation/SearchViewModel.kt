@@ -4,8 +4,8 @@ import android.view.KeyEvent
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lucasdias.search.domain.sealedclass.RequestStatus
-import com.lucasdias.search.domain.sealedclass.Success
+import com.lucasdias.core_components.base.data.requeststatus.RequestStatus
+import com.lucasdias.core_components.base.data.requeststatus.RequestStatus.Success
 import com.lucasdias.search.domain.usecase.GetRandomCategoriesFromDatabase
 import com.lucasdias.search.domain.usecase.GetSearchHistoric
 import com.lucasdias.search.domain.usecase.IsCategoryCacheEmpty
@@ -46,14 +46,14 @@ internal class SearchViewModel(
     fun searchCategories() {
         viewModelScope.launch(coroutineContext) {
             var categories: List<String>? = null
-            var requestStatus: RequestStatus = Success
+            var requestStatus: RequestStatus = Success()
 
             val categoryCacheIsEmpty = isCategoryCacheEmpty()
             if (categoryCacheIsEmpty) requestStatus = searchCategoriesFromApi()
 
             showSuggestionAndHistoricViews.postValue(Unit)
 
-            if (requestStatus == Success) categories = getRandomCategoriesFromDatabase()
+            if (requestStatus is Success) categories = getRandomCategoriesFromDatabase()
             else errorToLoadCategories.postValue(Unit)
             if (categories.isNullOrEmpty().not()) randomCategories.postValue(categories)
         }
