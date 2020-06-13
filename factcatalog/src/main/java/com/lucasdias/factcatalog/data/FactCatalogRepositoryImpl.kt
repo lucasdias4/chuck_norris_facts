@@ -3,6 +3,8 @@ package com.lucasdias.factcatalog.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.lucasdias.core_components.base.data.RemoteResponse
+import com.lucasdias.core_components.base.data.requeststatus.RequestStatus
+import com.lucasdias.core_components.base.data.requeststatus.RequestStatusHandler
 import com.lucasdias.core_components.log.LogApp
 import com.lucasdias.factcatalog.data.local.FactCatalogDao
 import com.lucasdias.factcatalog.data.local.model.FactData
@@ -11,21 +13,12 @@ import com.lucasdias.factcatalog.data.remote.FactCatalogService
 import com.lucasdias.factcatalog.data.remote.model.FactListResponse
 import com.lucasdias.factcatalog.domain.model.Fact
 import com.lucasdias.factcatalog.domain.repository.FactCatalogRepository
-import com.lucasdias.factcatalog.domain.sealedclass.Error
-import com.lucasdias.factcatalog.domain.sealedclass.RequestStatus
-import com.lucasdias.factcatalog.domain.sealedclass.Success
-import com.lucasdias.factcatalog.domain.sealedclass.SuccessWithoutResult
 import retrofit2.Response
 
 internal class FactCatalogRepositoryImpl(
     private val factCatalogService: FactCatalogService,
     private val factCatalogDao: FactCatalogDao
 ) : FactCatalogRepository {
-
-    private companion object {
-        const val MIN_RESPONSE_CODE = 200
-        const val MAX_RESPONSE_CODE = 299
-    }
 
     override fun getAllFacts(): LiveData<List<Fact>> =
         Transformations.map(factCatalogDao.getAllFacts()) {
@@ -35,31 +28,32 @@ internal class FactCatalogRepositoryImpl(
     override fun deleteAllFacts() = factCatalogDao.deleteAllFacts()
 
     override suspend fun searchFactsBySubjectFromApi(subject: String): RequestStatus {
-        val result: RemoteResponse<Response<FactListResponse>, Exception> =
+        val response: RemoteResponse<Response<FactListResponse>, Exception> =
             RemoteResponse.of {
                 factCatalogService.searchFactsBySubjectFromApi(
                     subject = subject
                 )
             }
 
-        val resultCode = result.value()?.code()
-        val resultBody = result.value()?.body()
-        val status = resultStatusHandler(
-            resultCode = resultCode,
-            resultBody = resultBody
+        return responseHandler(response, subject)
+    }
+
+    private fun responseHandler(
+        response: RemoteResponse<Response<FactListResponse>, Exception>,
+        subject: String
+    ): RequestStatus {
+        val responseStatus = RequestStatusHandler.execute(
+            code = response.value()?.code(),
+            data = response.value()?.body()?.facts
         )
 
-        if (status == Success) {
-            onSuccess(
-                factListResponse = resultBody,
-                subject = subject
-            )
-        } else if (status == Error) {
-            val exception = result.error()
-            logRequestException(exception = exception, resultCode = resultCode)
+        if (responseStatus is RequestStatus.Success || responseStatus is RequestStatus.SuccessWithoutData) {
+            onSuccess(factListResponse = response.value()?.body(), subject = subject)
+        } else {
+            logRequestException(exception = response.error(), resultCode = response.value()?.code())
         }
 
-        return status
+        return responseStatus
     }
 
     private fun onSuccess(
@@ -72,19 +66,6 @@ internal class FactCatalogRepositoryImpl(
 
         logRequestInfo(facts = dataFacts, subject = subject)
         factCatalogDao.insertFacts(facts = dataFacts)
-    }
-
-    private fun resultStatusHandler(
-        resultCode: Int?,
-        resultBody: FactListResponse?
-    ): RequestStatus {
-        if (resultCode in MIN_RESPONSE_CODE..MAX_RESPONSE_CODE) {
-            val searchWithoutResult = resultBody?.facts.isNullOrEmpty()
-            if (searchWithoutResult) return SuccessWithoutResult
-            return Success
-        } else {
-            return Error
-        }
     }
 
     private fun logRequestInfo(

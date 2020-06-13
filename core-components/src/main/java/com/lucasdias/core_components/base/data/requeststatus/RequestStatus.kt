@@ -29,6 +29,16 @@ sealed class RequestStatus {
             else -> UNCATEGORIZED
         }
     }
+
+    data class SuccessWithoutData(override val code: Int = UNCATEGORIZED.code) : RequestStatus() {
+        override fun getType() = when (code) {
+            OK.code -> OK
+            CREATED.code -> CREATED
+            NO_CONTENT.code -> NO_CONTENT
+            else -> UNCATEGORIZED
+        }
+    }
+
     data class Redirection(override val code: Int = UNCATEGORIZED.code) : RequestStatus() {
         override fun getType() = if (code == NOT_MODIFIED.code) NOT_MODIFIED
         else UNCATEGORIZED

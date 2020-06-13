@@ -27,13 +27,12 @@ internal class CategoryRepositoryImpl(
     }
 
     private fun responseHandler(response: RemoteResponse<Response<List<String>>, Exception>): RequestStatus {
-        val responseStatus = response.value()?.code()?.let { code ->
-            return@let RequestStatusHandler.execute(code)
-        } ?: run {
-            return@run RequestStatus.GenericError()
-        }
+        val responseStatus = RequestStatusHandler.execute(
+            code = response.value()?.code(),
+            data = response.value()?.body()
+        )
 
-        if (responseStatus is RequestStatus.Success) {
+        if (responseStatus is RequestStatus.Success || responseStatus is RequestStatus.SuccessWithoutData) {
             onSuccess(categories = response.value()?.body())
         } else {
             logRequestException(exception = response.error(), resultCode = response.value()?.code())

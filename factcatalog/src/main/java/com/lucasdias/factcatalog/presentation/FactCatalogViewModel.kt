@@ -4,10 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.lucasdias.core_components.base.data.requeststatus.RequestStatus
 import com.lucasdias.factcatalog.domain.model.Fact
-import com.lucasdias.factcatalog.domain.sealedclass.Error
-import com.lucasdias.factcatalog.domain.sealedclass.RequestStatus
-import com.lucasdias.factcatalog.domain.sealedclass.SuccessWithoutResult
 import com.lucasdias.factcatalog.domain.usecase.DeleteAllFactsFromDatabase
 import com.lucasdias.factcatalog.domain.usecase.GetAllFactsFromDatabase
 import com.lucasdias.factcatalog.domain.usecase.SearchFactsBySubjectFromApi
@@ -52,13 +50,13 @@ internal class FactCatalogViewModel(
 
     private fun requestStatusHandler(requestStatus: RequestStatus) {
         when (requestStatus) {
-            Error -> {
-                showAnErrorScreenLiveData.postValue(Unit)
-            }
-            SuccessWithoutResult -> {
+
+            is RequestStatus.Success -> {}
+            is RequestStatus.SuccessWithoutData -> {
                 showAnEmptySearchScreenLiveData.postValue(Unit)
             }
             else -> {
+                showAnErrorScreenLiveData.postValue(Unit)
             }
         }
     }

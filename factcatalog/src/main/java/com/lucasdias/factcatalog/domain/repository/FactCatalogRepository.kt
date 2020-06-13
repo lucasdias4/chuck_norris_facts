@@ -1,8 +1,8 @@
 package com.lucasdias.factcatalog.domain.repository
 
 import androidx.lifecycle.LiveData
+import com.lucasdias.core_components.base.data.requeststatus.RequestStatus
 import com.lucasdias.factcatalog.domain.model.Fact
-import com.lucasdias.factcatalog.domain.sealedclass.RequestStatus
 
 internal interface FactCatalogRepository {
     suspend fun searchFactsBySubjectFromApi(subject: String): RequestStatus
