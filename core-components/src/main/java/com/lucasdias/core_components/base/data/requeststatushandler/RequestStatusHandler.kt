@@ -12,7 +12,7 @@ class RequestStatusHandler {
 
     companion object {
 
-        fun execute(code: Int?, data: Any?): RequestStatus {
+        fun <T> execute(code: Int?, data: T?): RequestStatus {
 
             return code?.let { nonNullCode ->
                 when (nonNullCode) {
@@ -41,7 +41,7 @@ class RequestStatusHandler {
             }
         }
 
-        private fun successHandler(nonNullCode: Int, body: Any?): RequestStatus {
+        private fun <T> successHandler(nonNullCode: Int, body: T?): RequestStatus {
             return if ((body is ArrayList<*> && body.isEmpty()) || body == null) SuccessWithoutData(nonNullCode)
             else Success(nonNullCode)
         }
