@@ -1,8 +1,8 @@
 package com.lucasdias.search.data.category
 
-import com.lucasdias.core_components.base.data.RemoteResponse
-import com.lucasdias.core_components.base.data.requeststatus.RequestStatus
-import com.lucasdias.core_components.base.data.requeststatus.RequestStatusHandler
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatusHandler
+import com.lucasdias.core_components.base.data.response.RemoteResponse
 import com.lucasdias.core_components.log.LogApp
 import com.lucasdias.search.data.category.local.CategoryCache
 import com.lucasdias.search.data.category.remote.CategoryService

@@ -2,9 +2,9 @@ package com.lucasdias.factcatalog.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.lucasdias.core_components.base.data.RemoteResponse
-import com.lucasdias.core_components.base.data.requeststatus.RequestStatus
-import com.lucasdias.core_components.base.data.requeststatus.RequestStatusHandler
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatusHandler
+import com.lucasdias.core_components.base.data.response.RemoteResponse
 import com.lucasdias.core_components.log.LogApp
 import com.lucasdias.factcatalog.data.local.FactCatalogDao
 import com.lucasdias.factcatalog.data.local.model.FactData

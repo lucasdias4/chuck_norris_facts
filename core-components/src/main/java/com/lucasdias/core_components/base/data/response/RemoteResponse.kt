@@ -1,4 +1,4 @@
-package com.lucasdias.core_components.base.data
+package com.lucasdias.core_components.base.data.response
 
 import java.lang.Exception
 
@@ -8,17 +8,17 @@ sealed class RemoteResponse<V : Any, E : Exception> {
     abstract fun value(): V?
     abstract fun error(): E?
 
-    fun isSuccess() = this is Success
-    fun isError() = this is Error
+    fun isSuccess() = this is Successful
+    fun isError() = this is Failed
 
-    data class Success<V : Any, E : Exception>(private val value: V?) : RemoteResponse<V, E>() {
+    data class Successful<V : Any, E : Exception>(private val value: V?) : RemoteResponse<V, E>() {
         override fun value(): V? = value
         override fun error(): E? = null
 
         override fun toString(): String = "Success: $value"
     }
 
-    data class Error<V : Any, E : Exception>(val error: E?) : RemoteResponse<V, E>() {
+    data class Failed<V : Any, E : Exception>(val error: E?) : RemoteResponse<V, E>() {
         override fun value(): V? = null
         override fun error(): E? = error
 
@@ -28,10 +28,14 @@ sealed class RemoteResponse<V : Any, E : Exception> {
     companion object {
         suspend fun <V : Any, E : Exception> of(suspendFunction: suspend () -> V): RemoteResponse<V, E> = try {
             val value = suspendFunction()
-            Success(value)
+            Successful(
+                value
+            )
         } catch (ex: Exception) {
             val error = ex as E
-            Error(error)
+            Failed(
+                error
+            )
         }
     }
 }

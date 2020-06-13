@@ -1,16 +1,16 @@
-package com.lucasdias.core_components.base.data.requeststatus
+package com.lucasdias.core_components.base.data.requeststatushandler
 
-import com.lucasdias.core_components.base.data.requeststatus.RequestStatus.Type.BAD_REQUEST
-import com.lucasdias.core_components.base.data.requeststatus.RequestStatus.Type.CONFLICT
-import com.lucasdias.core_components.base.data.requeststatus.RequestStatus.Type.CREATED
-import com.lucasdias.core_components.base.data.requeststatus.RequestStatus.Type.FORBIDDEN
-import com.lucasdias.core_components.base.data.requeststatus.RequestStatus.Type.INTERNAL_SERVER_ERROR
-import com.lucasdias.core_components.base.data.requeststatus.RequestStatus.Type.NOT_FOUND
-import com.lucasdias.core_components.base.data.requeststatus.RequestStatus.Type.NOT_MODIFIED
-import com.lucasdias.core_components.base.data.requeststatus.RequestStatus.Type.NO_CONTENT
-import com.lucasdias.core_components.base.data.requeststatus.RequestStatus.Type.OK
-import com.lucasdias.core_components.base.data.requeststatus.RequestStatus.Type.UNAUTHORIZED
-import com.lucasdias.core_components.base.data.requeststatus.RequestStatus.Type.UNCATEGORIZED
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.Type.BAD_REQUEST
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.Type.CONFLICT
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.Type.CREATED
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.Type.FORBIDDEN
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.Type.INTERNAL_SERVER_ERROR
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.Type.NOT_FOUND
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.Type.NOT_MODIFIED
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.Type.NO_CONTENT
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.Type.OK
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.Type.UNAUTHORIZED
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.Type.UNCATEGORIZED
 
 sealed class RequestStatus {
 

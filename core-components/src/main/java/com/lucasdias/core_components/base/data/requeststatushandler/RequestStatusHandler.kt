@@ -1,12 +1,12 @@
-package com.lucasdias.core_components.base.data.requeststatus
+package com.lucasdias.core_components.base.data.requeststatushandler
 
-import com.lucasdias.core_components.base.data.requeststatus.RequestStatus.ClientError
-import com.lucasdias.core_components.base.data.requeststatus.RequestStatus.GenericError
-import com.lucasdias.core_components.base.data.requeststatus.RequestStatus.Informational
-import com.lucasdias.core_components.base.data.requeststatus.RequestStatus.Redirection
-import com.lucasdias.core_components.base.data.requeststatus.RequestStatus.ServerError
-import com.lucasdias.core_components.base.data.requeststatus.RequestStatus.Success
-import com.lucasdias.core_components.base.data.requeststatus.RequestStatus.SuccessWithoutData
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.ClientError
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.GenericError
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.Informational
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.Redirection
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.ServerError
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.Success
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.SuccessWithoutData
 
 class RequestStatusHandler {
 
