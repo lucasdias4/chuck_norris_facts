@@ -1,5 +1,6 @@
 package com.lucasdias.search.domain.usecase
 
+import com.lucasdias.core_components.base.domain.model.None
 import com.lucasdias.search.domain.repository.CategoryRepository
 import com.lucasdias.search.domain.usecase.GetRandomCategoriesFromDatabase.Companion.LAST_ITEM
 import io.mockk.every
@@ -34,7 +35,7 @@ class GetRandomCategoriesFromDatabaseTest {
             categoryRepository.getCategories()
         } returns categories
 
-        getRandomCategoriesFromDatabase.invoke()
+        getRandomCategoriesFromDatabase.invoke(None())
 
         verify(exactly = 1) { categoryRepository.getCategories() }
     }
@@ -45,7 +46,7 @@ class GetRandomCategoriesFromDatabaseTest {
             categoryRepository.getCategories()
         } returns categories
 
-        getRandomCategoriesFromDatabase.invoke()
+        getRandomCategoriesFromDatabase.invoke(None())
 
         verify(exactly = 1) { categories.shuffled() }
     }
@@ -56,7 +57,7 @@ class GetRandomCategoriesFromDatabaseTest {
             categoryRepository.getCategories()
         } returns categories
 
-        val categories = getRandomCategoriesFromDatabase.invoke()
+        val categories = getRandomCategoriesFromDatabase.invoke(None())
 
         val expectedCategoriesSize = LAST_ITEM
         val actualCategoriesSize = categories?.size

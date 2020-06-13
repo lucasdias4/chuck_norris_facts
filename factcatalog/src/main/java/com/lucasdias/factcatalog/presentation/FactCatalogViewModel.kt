@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus
+import com.lucasdias.core_components.base.domain.model.None
 import com.lucasdias.factcatalog.domain.model.Fact
 import com.lucasdias.factcatalog.domain.usecase.DeleteAllFactsFromDatabase
 import com.lucasdias.factcatalog.domain.usecase.GetAllFactsFromDatabase
@@ -29,8 +30,8 @@ internal class FactCatalogViewModel(
 
     private var hasNetworkConnectivity = true
 
-    fun deleteAllFacts() = deleteAllFactsFromDatabase.invoke()
-    fun updateFactsLiveData(): LiveData<List<Fact>> = getAllFactsFromDatabase()
+    fun deleteAllFacts() = deleteAllFactsFromDatabase.invoke(None())
+    fun updateFactsLiveData(): LiveData<List<Fact>> = getAllFactsFromDatabase(None())
     fun showAnErrorScreenLiveData(): LiveData<Unit> = showAnErrorScreenLiveData
     fun showAnEmptySearchScreenLiveData(): LiveData<Unit> = showAnEmptySearchScreenLiveData
     fun turnOnLoadingLiveData(): LiveData<Unit> = turnOnLoadingLiveData
@@ -42,7 +43,7 @@ internal class FactCatalogViewModel(
 
         viewModelScope.launch(coroutineContext) {
             turnOnLoadingLiveData.postValue(Unit)
-            val requestStatus = searchFactsBySubjectFromApi.invoke(subject = subject)
+            val requestStatus = searchFactsBySubjectFromApi.invoke(subject)
             requestStatusHandler(requestStatus = requestStatus)
             turnOffLoadingLiveData.postValue(Unit)
         }

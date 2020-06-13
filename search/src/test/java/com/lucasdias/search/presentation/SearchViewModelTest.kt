@@ -1,8 +1,8 @@
 package com.lucasdias.search.presentation
 
 import androidx.lifecycle.MutableLiveData
-import com.lucasdias.search.domain.sealedclass.Error
-import com.lucasdias.search.domain.sealedclass.Success
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.ClientError
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.Success
 import com.lucasdias.search.domain.usecase.GetRandomCategoriesFromDatabase
 import com.lucasdias.search.domain.usecase.GetSearchHistoric
 import com.lucasdias.search.domain.usecase.IsCategoryCacheEmpty
@@ -49,19 +49,19 @@ class SearchViewModelTest {
         searchCategoriesMethodSetup()
 
         coEvery {
-            viewModel.isCategoryCacheEmpty()
+            viewModel.isCategoryCacheEmpty(any())
         } returns true
 
         coEvery {
-            viewModel.searchCategoriesFromApi()
-        } returns Error
+            viewModel.searchCategoriesFromApi(any())
+        } returns ClientError()
 
         coroutinesTestRule.testDispatcher.runBlockingTest {
             viewModel.searchCategories()
         }
 
         coVerify(exactly = 1) {
-            viewModel.isCategoryCacheEmpty()
+            viewModel.isCategoryCacheEmpty(any())
         }
     }
 
@@ -70,19 +70,19 @@ class SearchViewModelTest {
         searchCategoriesMethodSetup()
 
         coEvery {
-            viewModel.isCategoryCacheEmpty()
+            viewModel.isCategoryCacheEmpty(any())
         } returns true
 
         coEvery {
-            viewModel.searchCategoriesFromApi()
-        } returns Error
+            viewModel.searchCategoriesFromApi(any())
+        } returns ClientError()
 
         coroutinesTestRule.testDispatcher.runBlockingTest {
             viewModel.searchCategories()
         }
 
         coVerify(exactly = 1) {
-            viewModel.searchCategoriesFromApi()
+            viewModel.searchCategoriesFromApi(any())
         }
     }
 
@@ -91,19 +91,19 @@ class SearchViewModelTest {
         searchCategoriesMethodSetup()
 
         coEvery {
-            viewModel.isCategoryCacheEmpty()
+            viewModel.isCategoryCacheEmpty(any())
         } returns false
 
         coEvery {
-            viewModel.searchCategoriesFromApi()
-        } returns Error
+            viewModel.searchCategoriesFromApi(any())
+        } returns ClientError()
 
         coroutinesTestRule.testDispatcher.runBlockingTest {
             viewModel.searchCategories()
         }
 
         coVerify(exactly = 0) {
-            viewModel.searchCategoriesFromApi()
+            viewModel.searchCategoriesFromApi(any())
         }
     }
 
@@ -112,12 +112,12 @@ class SearchViewModelTest {
         searchCategoriesMethodSetup()
 
         coEvery {
-            viewModel.isCategoryCacheEmpty()
+            viewModel.isCategoryCacheEmpty(any())
         } returns true
 
         coEvery {
-            viewModel.searchCategoriesFromApi()
-        } returns Error
+            viewModel.searchCategoriesFromApi(any())
+        } returns ClientError()
 
         coroutinesTestRule.testDispatcher.runBlockingTest {
             viewModel.searchCategories()
@@ -134,15 +134,15 @@ class SearchViewModelTest {
         searchCategoriesMethodSetup()
 
         coEvery {
-            viewModel.isCategoryCacheEmpty()
+            viewModel.isCategoryCacheEmpty(any())
         } returns true
 
         coEvery {
-            viewModel.searchCategoriesFromApi()
-        } returns Success
+            viewModel.searchCategoriesFromApi(any())
+        } returns Success()
 
         coEvery {
-            viewModel.getRandomCategoriesFromDatabase()
+            viewModel.getRandomCategoriesFromDatabase(any())
         } returns categories
 
         coroutinesTestRule.testDispatcher.runBlockingTest {
@@ -150,7 +150,7 @@ class SearchViewModelTest {
         }
 
         coVerify(exactly = 1) {
-            viewModel.getRandomCategoriesFromDatabase()
+            viewModel.getRandomCategoriesFromDatabase(any())
         }
     }
 
@@ -161,15 +161,15 @@ class SearchViewModelTest {
         searchCategoriesMethodSetup()
 
         coEvery {
-            viewModel.isCategoryCacheEmpty()
+                viewModel.isCategoryCacheEmpty(any())
         } returns true
 
         coEvery {
-            viewModel.searchCategoriesFromApi()
-        } returns Success
+            viewModel.searchCategoriesFromApi(any())
+        } returns Success()
 
         coEvery {
-            viewModel.getRandomCategoriesFromDatabase()
+            viewModel.getRandomCategoriesFromDatabase(any())
         } returns categories
 
         coroutinesTestRule.testDispatcher.runBlockingTest {
@@ -187,15 +187,15 @@ class SearchViewModelTest {
         searchCategoriesMethodSetup()
 
         coEvery {
-            viewModel.isCategoryCacheEmpty()
+            viewModel.isCategoryCacheEmpty(any())
         } returns true
 
         coEvery {
-            viewModel.searchCategoriesFromApi()
-        } returns Success
+            viewModel.searchCategoriesFromApi(any())
+        } returns Success()
 
         coEvery {
-            viewModel.getRandomCategoriesFromDatabase()
+            viewModel.getRandomCategoriesFromDatabase(any())
         } returns categories
 
         coroutinesTestRule.testDispatcher.runBlockingTest {

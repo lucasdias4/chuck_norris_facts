@@ -9,13 +9,13 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.internal.runner.junit4.statement.UiThreadStatement.runOnUiThread
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.Success
 import com.lucasdias.core_components.connectivity.Connectivity
 import com.lucasdias.factcatalog.R
 import com.lucasdias.factcatalog.di.FACT_CATALOG_ADAPTER
 import com.lucasdias.factcatalog.di.FACT_CATALOG_CONNECTIVITY
 import com.lucasdias.factcatalog.di.FACT_CATALOG_VIEW_MODEL
 import com.lucasdias.factcatalog.domain.model.Fact
-import com.lucasdias.factcatalog.domain.sealedclass.Success
 import com.lucasdias.factcatalog.domain.usecase.DeleteAllFactsFromDatabase
 import com.lucasdias.factcatalog.domain.usecase.GetAllFactsFromDatabase
 import com.lucasdias.factcatalog.domain.usecase.SearchFactsBySubjectFromApi
@@ -34,7 +34,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.core.module.Module
@@ -61,7 +61,7 @@ class FactCatalogFragmentTest : KoinTest {
 
     private val connectivity: Connectivity = mockk()
     private val adapter = spyk(FactCatalogAdapter(lambda))
-    private val viewModel = spyk(
+    private val mockedViewModel = spyk(
         FactCatalogViewModel(
             getAllFactsFromDatabase,
             searchFactsBySubjectFromApi,
@@ -85,7 +85,7 @@ class FactCatalogFragmentTest : KoinTest {
 
     @Test
         fun IF_the_catalog_list_is_already_loaded_THAN_the_recycler_view_will_be_displayed_and_the_placeholder_will_be_hidden() {
-        coEvery { searchFactsBySubjectFromApi(FILLED_STRING) } returns Success
+        coEvery { searchFactsBySubjectFromApi(FILLED_STRING) } returns Success()
 
         val factory = { FactCatalogFragment.newInstance() }
         launchFragmentInContainer(Bundle(), instantiate = factory)
@@ -98,7 +98,7 @@ class FactCatalogFragmentTest : KoinTest {
 
     @Test
     fun IF_the_catalog_list_it_is_not_already_loaded_THAN_the_recycler_view_will_be_hidden_and_the_placeholder_will_be_displayed() {
-        coEvery { searchFactsBySubjectFromApi(FILLED_STRING) } returns Success
+        coEvery { searchFactsBySubjectFromApi(FILLED_STRING) } returns Success()
 
         val factory = { FactCatalogFragment.newInstance() }
         launchFragmentInContainer(Bundle(), instantiate = factory)
@@ -123,21 +123,21 @@ class FactCatalogFragmentTest : KoinTest {
     }
 
     private fun viewModelSetup() {
-        viewModel.showAnErrorScreenLiveData = showAnErrorScreenLiveData
-        viewModel.showAnEmptySearchScreenLiveData = showAnEmptySearchScreenLiveData
-        viewModel.turnOnLoadingLiveData = turnOnLoadingLiveData
-        viewModel.turnOffLoadingLiveData = turnOffLoadingLiveData
+        mockedViewModel.showAnErrorScreenLiveData = showAnErrorScreenLiveData
+        mockedViewModel.showAnEmptySearchScreenLiveData = showAnEmptySearchScreenLiveData
+        mockedViewModel.turnOnLoadingLiveData = turnOnLoadingLiveData
+        mockedViewModel.turnOffLoadingLiveData = turnOffLoadingLiveData
 
-        every { viewModel.deleteAllFacts() } just Runs
-        every { viewModel.searchFactsBySubject(any()) } just Runs
-        every { viewModel.updateConnectivityStatus(any()) } just Runs
-        every { getAllFactsFromDatabase() } returns allFactsFromDatabase
-        every { deleteAllFactsFromDatabase() } just Runs
+        every { mockedViewModel.deleteAllFacts() } just Runs
+        every { mockedViewModel.searchFactsBySubject(any()) } just Runs
+        every { mockedViewModel.updateConnectivityStatus(any()) } just Runs
+        every { getAllFactsFromDatabase(any()) } returns allFactsFromDatabase
+        every { deleteAllFactsFromDatabase(any()) } just Runs
     }
 
     private fun koinSetup() {
         val moduleList = mutableListOf<Module>()
-        val viewModelModule = module { viewModel(named(FACT_CATALOG_VIEW_MODEL)) { viewModel } }
+        val viewModelModule = module { viewModel(named(FACT_CATALOG_VIEW_MODEL)) { mockedViewModel } }
         val adapterModule = module { factory(named(FACT_CATALOG_ADAPTER)) { adapter } }
         val connectivityModule =
             module { factory(named(FACT_CATALOG_CONNECTIVITY)) { connectivity } }
