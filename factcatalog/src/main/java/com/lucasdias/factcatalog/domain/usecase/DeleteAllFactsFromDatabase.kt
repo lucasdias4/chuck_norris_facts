@@ -1,12 +1,11 @@
 package com.lucasdias.factcatalog.domain.usecase
 
-import com.lucasdias.core_components.base.domain.BaseUseCase
-import com.lucasdias.core_components.base.domain.model.None
+import com.lucasdias.core_components.base.domain.usecase.BaseUseCase
 import com.lucasdias.factcatalog.domain.repository.FactCatalogRepository
 
 internal class DeleteAllFactsFromDatabase(
     private val factCatalogRepository: FactCatalogRepository
-) : BaseUseCase<None, Unit?>() {
+) : BaseUseCase<Unit?, Unit?> {
 
-    override fun invoke(parameter: None) = factCatalogRepository.deleteAllFacts()
+    override fun invoke(parameter: Unit?) = factCatalogRepository.deleteAllFacts()
 }

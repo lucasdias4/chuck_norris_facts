@@ -1,13 +1,12 @@
 package com.lucasdias.search.domain.usecase
 
-import com.lucasdias.core_components.base.domain.BaseUseCase
-import com.lucasdias.core_components.base.domain.model.None
+import com.lucasdias.core_components.base.domain.usecase.BaseUseCase
 import com.lucasdias.search.domain.repository.SearchHistoricRepository
 
 internal class GetSearchHistoric(
     private val searchHistoricRepository: SearchHistoricRepository
-) : BaseUseCase<None, ArrayList<String>>() {
+) : BaseUseCase<Unit?, ArrayList<String>> {
 
-    override operator fun invoke(parameter: None) =
+    override operator fun invoke(parameter: Unit?) =
             searchHistoricRepository.getHistoric() as ArrayList<String>
 }

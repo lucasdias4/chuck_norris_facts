@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus
 import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.Success
-import com.lucasdias.core_components.base.domain.model.None
 import com.lucasdias.search.domain.usecase.GetRandomCategoriesFromDatabase
 import com.lucasdias.search.domain.usecase.GetSearchHistoric
 import com.lucasdias.search.domain.usecase.IsCategoryCacheEmpty
@@ -37,7 +36,7 @@ internal class SearchViewModel(
     private var searchMustBeLongerThanTwoCharacters = MutableLiveData<Unit>()
     private var doASearch = MutableLiveData<String>()
 
-    fun getHistoric() = getSearchHistoric(None())
+    fun getHistoric() = getSearchHistoric()
     fun getRandomCategories() = randomCategories
     fun errorToLoadCategories() = errorToLoadCategories
     fun showSuggestionAndHistoricViews() = showSuggestionAndHistoricViews
@@ -49,12 +48,12 @@ internal class SearchViewModel(
             var categories: List<String>? = null
             var requestStatus: RequestStatus = Success()
 
-            val categoryCacheIsEmpty = isCategoryCacheEmpty(None())
-            if (categoryCacheIsEmpty) requestStatus = searchCategoriesFromApi(None())
+            val categoryCacheIsEmpty = isCategoryCacheEmpty()
+            if (categoryCacheIsEmpty) requestStatus = searchCategoriesFromApi()
 
             showSuggestionAndHistoricViews.postValue(Unit)
 
-            if (requestStatus is Success) categories = getRandomCategoriesFromDatabase(None())
+            if (requestStatus is Success) categories = getRandomCategoriesFromDatabase()
             else errorToLoadCategories.postValue(Unit)
             if (categories.isNullOrEmpty().not()) randomCategories.postValue(categories)
         }

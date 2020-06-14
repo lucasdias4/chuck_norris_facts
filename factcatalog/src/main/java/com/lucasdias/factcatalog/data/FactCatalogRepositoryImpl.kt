@@ -29,11 +29,11 @@ internal class FactCatalogRepositoryImpl(
 
     override fun deleteAllFacts() = factCatalogDao.deleteAllFacts()
 
-    override suspend fun searchFactsBySubjectFromApi(subject: String): RequestStatus {
+    override suspend fun fetch(parameter: String?): RequestStatus {
         val response: RemoteResponse<Response<FactListResponse>, Exception> =
             RemoteResponse.of {
                 factCatalogService.searchFactsBySubjectFromApi(
-                    subject = subject
+                    subject = parameter
                 )
             }
 

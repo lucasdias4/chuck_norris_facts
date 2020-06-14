@@ -18,7 +18,7 @@ internal class CategoryRepositoryImpl(
     override fun isCategoryCacheEmpty(): Boolean = categoryCache.isCategoryCacheEmpty()
     override fun getCategories(): List<String>? = categoryCache.getCategories()
 
-    override suspend fun searchCategoriesFromApi(): RequestStatus {
+    override suspend fun fetch(parameter: String?): RequestStatus {
         val response: RemoteResponse<Response<List<String>>, Exception> =
             RemoteResponse.of {
                 categoryService.searchFactsBySubjectFromApi()

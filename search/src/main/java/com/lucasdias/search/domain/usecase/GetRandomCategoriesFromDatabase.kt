@@ -1,14 +1,13 @@
 package com.lucasdias.search.domain.usecase
 
-import com.lucasdias.core_components.base.domain.BaseUseCase
-import com.lucasdias.core_components.base.domain.model.None
+import com.lucasdias.core_components.base.domain.usecase.BaseUseCase
 import com.lucasdias.search.domain.repository.CategoryRepository
 
 class GetRandomCategoriesFromDatabase(
     private val categoryRepository: CategoryRepository
-) : BaseUseCase<None, List<String>?>() {
+) : BaseUseCase<Unit?, List<String>?> {
 
-    override operator fun invoke(parameter: None): List<String>? {
+    override operator fun invoke(parameter: Unit?): List<String>? {
         val categories = categoryRepository.getCategories()
         val shuffledCategories = categories?.shuffled()
         return shuffledCategories?.subList(FIRST_ITEM, LAST_ITEM)
