@@ -10,5 +10,6 @@ internal class GetAllFactsFromDatabase(
     private val factCatalogRepository: FactCatalogRepository
 ) : BaseUseCase<None, LiveData<List<Fact>>>() {
 
-    override operator fun invoke(parameter: None): LiveData<List<Fact>> = factCatalogRepository.getAllFacts()
+    override operator fun invoke(parameter: None): LiveData<List<Fact>>
+            = factCatalogRepository.getAllFacts()
 }

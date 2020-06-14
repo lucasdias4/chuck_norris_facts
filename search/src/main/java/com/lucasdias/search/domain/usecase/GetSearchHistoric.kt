@@ -8,5 +8,6 @@ internal class GetSearchHistoric(
     private val searchHistoricRepository: SearchHistoricRepository
 ) : BaseUseCase<None, ArrayList<String>>() {
 
-    override operator fun invoke(parameter: None) = searchHistoricRepository.getHistoric() as ArrayList<String>
+    override operator fun invoke(parameter: None)
+            = searchHistoricRepository.getHistoric() as ArrayList<String>
 }

@@ -9,5 +9,6 @@ internal class SearchCategoriesFromApi(
     private val categoryRepository: CategoryRepository
 ) : SuspendableUseCase<None, RequestStatus>() {
 
-    override suspend operator fun invoke(parameter: None) = categoryRepository.searchCategoriesFromApi()
+    override suspend operator fun invoke(parameter: None)
+            = categoryRepository.searchCategoriesFromApi()
 }
