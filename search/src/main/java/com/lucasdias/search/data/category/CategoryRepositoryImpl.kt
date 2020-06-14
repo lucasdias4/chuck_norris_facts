@@ -1,18 +1,19 @@
 package com.lucasdias.search.data.category
 
+import com.lucasdias.core_components.base.data.SuspendableRepositoryImpl
 import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus
-import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatusHandler
 import com.lucasdias.core_components.base.data.response.RemoteResponse
-import com.lucasdias.core_components.log.LogApp
+import com.lucasdias.extensions.itemsTypeAre
 import com.lucasdias.search.data.category.local.CategoryCache
 import com.lucasdias.search.data.category.remote.CategoryService
 import com.lucasdias.search.domain.repository.CategoryRepository
 import retrofit2.Response
 
+@Suppress("UNCHECKED_CAST")
 internal class CategoryRepositoryImpl(
     private val categoryService: CategoryService,
     private val categoryCache: CategoryCache
-) : CategoryRepository {
+) : SuspendableRepositoryImpl(), CategoryRepository {
 
     override fun isCategoryCacheEmpty(): Boolean = categoryCache.isCategoryCacheEmpty()
     override fun getCategories(): List<String>? = categoryCache.getCategories()
@@ -23,47 +24,18 @@ internal class CategoryRepositoryImpl(
                 categoryService.searchFactsBySubjectFromApi()
             }
 
-        return responseHandler(response)
-    }
-
-    private fun responseHandler(response: RemoteResponse<Response<List<String>>, Exception>): RequestStatus {
-        val responseStatus = RequestStatusHandler.execute(
-            code = response.value()?.code(),
-            data = response.value()?.body()
+        return responseHandler(
+            data = response.value()?.body(),
+            requestCode = response.value()?.code(),
+            exception = response.error()
         )
+    }
 
-        if (responseStatus is RequestStatus.Success || responseStatus is RequestStatus.SuccessWithoutData) {
-            onSuccess(categories = response.value()?.body())
-        } else {
-            logRequestException(exception = response.error(), resultCode = response.value()?.code())
+    override fun <Data> onSuccess(data: List<Data>?) {
+        if (data.itemsTypeAre<String>()) {
+            categoryCache.setCategories(categories = data as List<String>?)
         }
-
-        return responseStatus
     }
 
-    private fun onSuccess(
-        categories: List<String>?
-    ) {
-        categoryCache.setCategories(categories = categories)
-        logRequestInfo(categories = categories)
-    }
-
-    private fun logRequestInfo(
-        categories: List<String>?
-    ) {
-        LogApp.i("Search", "Request response START ---------->")
-        categories?.forEach { category ->
-            LogApp.i(
-                "Search",
-                "\nCategories: $category"
-            )
-        }
-        LogApp.i("Search", "Request response END <----------")
-    }
-
-    private fun logRequestException(exception: java.lang.Exception?, resultCode: Int?) {
-        LogApp.i("Search", "Request exception START ---------->")
-        LogApp.i("Search", "Exception or ErrorCode: ${exception ?: resultCode}")
-        LogApp.i("Search", "Request exception END <----------")
-    }
+    override fun onFail(exception: java.lang.Exception?, resultCode: Int?) {}
 }

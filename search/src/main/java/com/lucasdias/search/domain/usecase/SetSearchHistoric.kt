@@ -7,6 +7,6 @@ internal class SetSearchHistoric(
     private val searchHistoricRepository: SearchHistoricRepository
 ) : BaseUseCase<String, Unit?>() {
 
-    override operator fun invoke(parameter: String)
-            = searchHistoricRepository.setSearch(search = parameter)
+    override operator fun invoke(parameter: String) =
+            searchHistoricRepository.setSearch(search = parameter)
 }
