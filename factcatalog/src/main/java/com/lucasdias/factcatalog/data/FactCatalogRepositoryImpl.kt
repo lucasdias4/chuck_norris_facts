@@ -2,7 +2,7 @@ package com.lucasdias.factcatalog.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.lucasdias.core_components.base.data.SuspendableRepositoryImpl
+import com.lucasdias.core_components.base.data.repository.SuspendableRepositoryImpl
 import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus
 import com.lucasdias.core_components.base.data.response.RemoteResponse
 import com.lucasdias.extensions.itemsTypeAre

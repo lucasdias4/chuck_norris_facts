@@ -1,4 +1,4 @@
-package com.lucasdias.core_components.base.data
+package com.lucasdias.core_components.base.data.repository
 
 import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus
 import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatusHandler

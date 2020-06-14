@@ -1,6 +1,6 @@
 package com.lucasdias.search.data.category
 
-import com.lucasdias.core_components.base.data.SuspendableRepositoryImpl
+import com.lucasdias.core_components.base.data.repository.SuspendableRepositoryImpl
 import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus
 import com.lucasdias.core_components.base.data.response.RemoteResponse
 import com.lucasdias.extensions.itemsTypeAre
