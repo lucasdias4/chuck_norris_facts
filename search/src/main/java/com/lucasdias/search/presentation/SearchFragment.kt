@@ -23,11 +23,6 @@ import org.koin.core.parameter.parametersOf
 
 class SearchFragment : Fragment() {
 
-    companion object {
-        private const val EMPTY_STRING = ""
-        fun newInstance() = SearchFragment()
-    }
-
     private val viewModel by inject<SearchViewModel>()
     private val adapter: SearchAdapter by inject { parametersOf(userWantsToSearch) }
     private val recyclerView by bind<RecyclerView>(R.id.historic_list_search_fragment)
@@ -161,5 +156,10 @@ class SearchFragment : Fragment() {
 
     interface Listener {
         fun searchButtonListener(searchText: String)
+    }
+
+    companion object {
+        private const val EMPTY_STRING = ""
+        fun newInstance() = SearchFragment()
     }
 }

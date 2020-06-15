@@ -4,12 +4,6 @@ import android.content.SharedPreferences
 
 internal class CategoryCache(private val sharedPreferences: SharedPreferences) {
 
-    private companion object {
-        const val CATEGORY_KEY = "CATEGORY_KEY"
-        const val EMPTY_STRING = ""
-        const val DELIMITERS = ","
-    }
-
     fun setCategories(categories: List<String>?) {
         val categoriesAsString = categories?.joinToString()
         val editor = sharedPreferences.edit()
@@ -27,5 +21,11 @@ internal class CategoryCache(private val sharedPreferences: SharedPreferences) {
         val categoriesAsString = sharedPreferences.getString(CATEGORY_KEY, EMPTY_STRING)
         val isNullOrEmpty = categoriesAsString.isNullOrEmpty()
         return isNullOrEmpty
+    }
+
+    private companion object {
+        const val CATEGORY_KEY = "CATEGORY_KEY"
+        const val EMPTY_STRING = ""
+        const val DELIMITERS = ","
     }
 }

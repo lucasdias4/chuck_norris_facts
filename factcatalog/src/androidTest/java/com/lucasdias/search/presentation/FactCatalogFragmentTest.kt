@@ -123,10 +123,10 @@ class FactCatalogFragmentTest : KoinTest {
     }
 
     private fun viewModelSetup() {
-        mockedViewModel.showAnErrorScreenLiveData = showAnErrorScreenLiveData
-        mockedViewModel.showAnEmptySearchScreenLiveData = showAnEmptySearchScreenLiveData
-        mockedViewModel.turnOnLoadingLiveData = turnOnLoadingLiveData
-        mockedViewModel.turnOffLoadingLiveData = turnOffLoadingLiveData
+        mockedViewModel._showAnErrorScreen = showAnErrorScreenLiveData
+        mockedViewModel._showAnEmptySearchScreen = showAnEmptySearchScreenLiveData
+        mockedViewModel._turnOnLoading = turnOnLoadingLiveData
+        mockedViewModel._turnOffLoading = turnOffLoadingLiveData
 
         every { mockedViewModel.deleteAllFacts() } just Runs
         every { mockedViewModel.searchFactsBySubject(any()) } just Runs

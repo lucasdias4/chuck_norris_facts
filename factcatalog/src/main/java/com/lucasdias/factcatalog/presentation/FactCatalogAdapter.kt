@@ -15,13 +15,6 @@ import java.util.Locale
 internal class FactCatalogAdapter(private val shareUrl: ((String) -> Unit)?) :
     RecyclerView.Adapter<FactCatalogAdapter.ViewHolder>() {
 
-    internal companion object {
-        const val UNCATEGORIZED = "uncategorized"
-        const val TEXT_SIZE_LIMIT = 80
-        const val BIG_TEXT_SIZE = 23F
-        const val SMALL_TEXT_SIZE = 18F
-    }
-
     private val factCatalog = mutableListOf<Fact>()
 
     fun updateFactCatalog(facts: List<Fact>) {
@@ -99,5 +92,12 @@ internal class FactCatalogAdapter(private val shareUrl: ((String) -> Unit)?) :
                 }
             }
         }
+    }
+
+    internal companion object {
+        const val UNCATEGORIZED = "uncategorized"
+        const val TEXT_SIZE_LIMIT = 80
+        const val BIG_TEXT_SIZE = 23F
+        const val SMALL_TEXT_SIZE = 18F
     }
 }

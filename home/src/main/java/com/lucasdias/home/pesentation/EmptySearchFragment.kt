@@ -9,15 +9,15 @@ import com.lucasdias.home.R
 
 class EmptySearchFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = EmptySearchFragment()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_empty_search, container, false)
+    }
+
+    companion object {
+        fun newInstance() = EmptySearchFragment()
     }
 }

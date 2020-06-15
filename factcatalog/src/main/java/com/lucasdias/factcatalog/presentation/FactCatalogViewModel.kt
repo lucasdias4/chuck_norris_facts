@@ -22,29 +22,28 @@ internal class FactCatalogViewModel(
     /**
      * Variáveis como var e internal, por conta dos testes unitários
      **/
-    internal var showAnErrorScreenLiveData = MutableLiveData<Unit>()
-    internal var showAnEmptySearchScreenLiveData = MutableLiveData<Unit>()
-    internal var turnOnLoadingLiveData = MutableLiveData<Unit>()
-    internal var turnOffLoadingLiveData = MutableLiveData<Unit>()
-
+    internal var _showAnErrorScreen = MutableLiveData<Unit>()
+    internal var _showAnEmptySearchScreen = MutableLiveData<Unit>()
+    internal var _turnOnLoading = MutableLiveData<Unit>()
+    internal var _turnOffLoading = MutableLiveData<Unit>()
     private var hasNetworkConnectivity = true
 
+    fun showAnErrorScreen(): LiveData<Unit> = _showAnErrorScreen
+    fun showAnEmptySearchScreen(): LiveData<Unit> = _showAnEmptySearchScreen
+    fun turnOnLoading(): LiveData<Unit> = _turnOnLoading
+    fun turnOffLoadingLiveData(): LiveData<Unit> = _turnOffLoading
     fun deleteAllFacts() = deleteAllFactsFromDatabase()
     fun updateFactsLiveData(): LiveData<List<Fact>> = getAllFactsFromDatabase()
-    fun showAnErrorScreenLiveData(): LiveData<Unit> = showAnErrorScreenLiveData
-    fun showAnEmptySearchScreenLiveData(): LiveData<Unit> = showAnEmptySearchScreenLiveData
-    fun turnOnLoadingLiveData(): LiveData<Unit> = turnOnLoadingLiveData
-    fun turnOffLoadingLiveData(): LiveData<Unit> = turnOffLoadingLiveData
 
     fun searchFactsBySubject(subject: String) {
         if (subject.isEmpty()) return
         if (hasNetworkConnectivity.not()) return
 
         viewModelScope.launch(coroutineContext) {
-            turnOnLoadingLiveData.postValue(Unit)
+            _turnOnLoading.postValue(Unit)
             val requestStatus = searchFactsBySubjectFromApi.invoke(subject)
             requestStatusHandler(requestStatus = requestStatus)
-            turnOffLoadingLiveData.postValue(Unit)
+            _turnOffLoading.postValue(Unit)
         }
     }
 
@@ -53,10 +52,10 @@ internal class FactCatalogViewModel(
 
             is RequestStatus.Success -> {}
             is RequestStatus.SuccessWithoutData -> {
-                showAnEmptySearchScreenLiveData.postValue(Unit)
+                _showAnEmptySearchScreen.postValue(Unit)
             }
             else -> {
-                showAnErrorScreenLiveData.postValue(Unit)
+                _showAnErrorScreen.postValue(Unit)
             }
         }
     }
