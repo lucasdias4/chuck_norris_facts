@@ -2,10 +2,9 @@ package com.lucasdias.search.presentation
 
 import android.view.KeyEvent
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus
 import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.Success
+import com.lucasdias.core_components.base.presentation.BaseViewModel
 import com.lucasdias.search.domain.usecase.GetRandomCategoriesFromDatabase
 import com.lucasdias.search.domain.usecase.GetSearchHistoric
 import com.lucasdias.search.domain.usecase.IsCategoryCacheEmpty
@@ -21,7 +20,7 @@ internal class SearchViewModel(
     internal val searchCategoriesFromApi: SearchCategoriesFromApi,
     internal val getRandomCategoriesFromDatabase: GetRandomCategoriesFromDatabase,
     internal val isCategoryCacheEmpty: IsCategoryCacheEmpty
-) : ViewModel() {
+) : BaseViewModel(coroutineContext) {
 
     /**
      * Variáveis como var e internal, por conta dos testes unitários
@@ -40,7 +39,7 @@ internal class SearchViewModel(
     fun doASearch() = _doASearch
 
     fun searchCategories() {
-        viewModelScope.launch(coroutineContext) {
+        launch {
             var categories: List<String>? = null
             var requestStatus: RequestStatus = Success()
 

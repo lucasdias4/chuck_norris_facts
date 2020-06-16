@@ -2,22 +2,20 @@ package com.lucasdias.factcatalog.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus
+import com.lucasdias.core_components.base.presentation.BaseViewModel
 import com.lucasdias.factcatalog.domain.model.Fact
 import com.lucasdias.factcatalog.domain.usecase.DeleteAllFactsFromDatabase
 import com.lucasdias.factcatalog.domain.usecase.GetAllFactsFromDatabase
 import com.lucasdias.factcatalog.domain.usecase.SearchFactsBySubjectFromApi
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.launch
 
 internal class FactCatalogViewModel(
     internal val getAllFactsFromDatabase: GetAllFactsFromDatabase,
     private val searchFactsBySubjectFromApi: SearchFactsBySubjectFromApi,
     private val deleteAllFactsFromDatabase: DeleteAllFactsFromDatabase,
     private val coroutineContext: CoroutineDispatcher
-) : ViewModel() {
+) : BaseViewModel(coroutineContext) {
 
     /**
      * Variáveis como var e internal, por conta dos testes unitários
@@ -39,7 +37,7 @@ internal class FactCatalogViewModel(
         if (subject.isEmpty()) return
         if (hasNetworkConnectivity.not()) return
 
-        viewModelScope.launch(coroutineContext) {
+        launch {
             _turnOnLoading.postValue(Unit)
             val requestStatus = searchFactsBySubjectFromApi.invoke(subject)
             requestStatusHandler(requestStatus = requestStatus)
