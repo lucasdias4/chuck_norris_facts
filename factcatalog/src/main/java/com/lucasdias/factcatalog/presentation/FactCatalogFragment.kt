@@ -25,10 +25,6 @@ import org.koin.core.qualifier.named
 
 class FactCatalogFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = FactCatalogFragment()
-    }
-
     private val viewModel by viewModel<FactCatalogViewModel>(named(FACT_CATALOG_VIEW_MODEL))
     private val adapter by inject<FactCatalogAdapter>(named(FACT_CATALOG_ADAPTER)) {
         parametersOf(
@@ -56,8 +52,8 @@ class FactCatalogFragment : Fragment() {
         initConnectivityObserver()
     }
 
-    fun showAnErrorScreenLiveData() = viewModel.showAnErrorScreenLiveData()
-    fun showAnEmptySearchLiveData() = viewModel.showAnEmptySearchScreenLiveData()
+    fun showAnErrorScreenLiveData() = viewModel.showAnErrorScreen()
+    fun showAnEmptySearchLiveData() = viewModel.showAnEmptySearchScreen()
 
     fun updateSearch(searchText: String) {
         viewModel.apply {
@@ -78,7 +74,7 @@ class FactCatalogFragment : Fragment() {
             updateFactsLiveData().observe(viewLifecycleOwner, Observer { facts ->
                 adapter.updateFactCatalog(facts = facts)
             })
-            turnOnLoadingLiveData().observe(viewLifecycleOwner, Observer {
+            turnOnLoading().observe(viewLifecycleOwner, Observer {
                 recyclerView?.gone()
                 recyclerViewPlaceHolder?.visible()
             })
@@ -103,5 +99,9 @@ class FactCatalogFragment : Fragment() {
                 .setText(url)
                 .startChooser()
         }
+    }
+
+    companion object {
+        fun newInstance() = FactCatalogFragment()
     }
 }

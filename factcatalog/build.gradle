@@ -59,6 +59,6 @@ dependencies {
     androidTestImplementation Dependencies.Testing.espresso_intents
     androidTestImplementation Dependencies.Testing.junit_android
     androidTestImplementation Dependencies.Testing.koin
-    androidTestImplementation Dependencies.Testing.mockk
+    androidTestImplementation Dependencies.Testing.mockk_android
     androidTestImplementation Dependencies.Testing.test_runner
 }

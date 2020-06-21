@@ -2,10 +2,9 @@ package com.lucasdias.search.presentation
 
 import android.view.KeyEvent
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.lucasdias.search.domain.sealedclass.RequestStatus
-import com.lucasdias.search.domain.sealedclass.Success
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.Success
+import com.lucasdias.core_components.base.presentation.BaseViewModel
 import com.lucasdias.search.domain.usecase.GetRandomCategoriesFromDatabase
 import com.lucasdias.search.domain.usecase.GetSearchHistoric
 import com.lucasdias.search.domain.usecase.IsCategoryCacheEmpty
@@ -21,56 +20,52 @@ internal class SearchViewModel(
     internal val searchCategoriesFromApi: SearchCategoriesFromApi,
     internal val getRandomCategoriesFromDatabase: GetRandomCategoriesFromDatabase,
     internal val isCategoryCacheEmpty: IsCategoryCacheEmpty
-) : ViewModel() {
-
-    private companion object {
-        const val SEARCH_MINIMUM_SIZE = 3
-    }
+) : BaseViewModel(coroutineContext) {
 
     /**
      * Variáveis como var e internal, por conta dos testes unitários
      **/
-    internal var randomCategories = MutableLiveData<List<String>?>()
-    internal var errorToLoadCategories = MutableLiveData<Unit>()
-    internal var showSuggestionAndHistoricViews = MutableLiveData<Unit>()
-    private var searchMustBeLongerThanTwoCharacters = MutableLiveData<Unit>()
-    private var doASearch = MutableLiveData<String>()
+    internal var _randomCategories = MutableLiveData<List<String>?>()
+    internal var _errorToLoadCategories = MutableLiveData<Unit>()
+    internal var _showSuggestionAndHistoricViews = MutableLiveData<Unit>()
+    private var _searchMustBeLongerThanTwoCharacters = MutableLiveData<Unit>()
+    private var _doASearch = MutableLiveData<String>()
 
     fun getHistoric() = getSearchHistoric()
-    fun getRandomCategories() = randomCategories
-    fun errorToLoadCategories() = errorToLoadCategories
-    fun showSuggestionAndHistoricViews() = showSuggestionAndHistoricViews
-    fun searchMustBeLongerThanTwoCharacters() = searchMustBeLongerThanTwoCharacters
-    fun doASearch() = doASearch
+    fun getRandomCategories() = _randomCategories
+    fun errorToLoadCategories() = _errorToLoadCategories
+    fun showSuggestionAndHistoricViews() = _showSuggestionAndHistoricViews
+    fun searchMustBeLongerThanTwoCharacters() = _searchMustBeLongerThanTwoCharacters
+    fun doASearch() = _doASearch
 
     fun searchCategories() {
-        viewModelScope.launch(coroutineContext) {
+        launch {
             var categories: List<String>? = null
-            var requestStatus: RequestStatus = Success
+            var requestStatus: RequestStatus = Success()
 
             val categoryCacheIsEmpty = isCategoryCacheEmpty()
             if (categoryCacheIsEmpty) requestStatus = searchCategoriesFromApi()
 
-            showSuggestionAndHistoricViews.postValue(Unit)
+            _showSuggestionAndHistoricViews.postValue(Unit)
 
-            if (requestStatus == Success) categories = getRandomCategoriesFromDatabase()
-            else errorToLoadCategories.postValue(Unit)
-            if (categories.isNullOrEmpty().not()) randomCategories.postValue(categories)
+            if (requestStatus is Success) categories = getRandomCategoriesFromDatabase()
+            else _errorToLoadCategories.postValue(Unit)
+            if (categories.isNullOrEmpty().not()) _randomCategories.postValue(categories)
         }
     }
 
     fun setSearch(search: String) {
         if (search.length < SEARCH_MINIMUM_SIZE) return
-        setSearchHistoric(search = search)
+        setSearchHistoric(search)
     }
 
     fun userWantsToSearch(search: String?) {
         search?.let {
             if (it.length < SEARCH_MINIMUM_SIZE) {
-                searchMustBeLongerThanTwoCharacters.postValue(Unit)
+                _searchMustBeLongerThanTwoCharacters.postValue(Unit)
                 return
             }
-            doASearch.postValue(search)
+            _doASearch.postValue(search)
         }
     }
 
@@ -81,5 +76,9 @@ internal class SearchViewModel(
         if (userHitEnterButton) {
             userWantsToSearch(search = searchText)
         }
+    }
+
+    private companion object {
+        const val SEARCH_MINIMUM_SIZE = 3
     }
 }

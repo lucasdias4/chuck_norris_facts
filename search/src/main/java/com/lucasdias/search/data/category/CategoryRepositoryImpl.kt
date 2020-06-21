@@ -1,90 +1,41 @@
 package com.lucasdias.search.data.category
 
-import com.github.kittinunf.result.coroutines.SuspendableResult
-import com.lucasdias.core_components.log.LogApp
+import com.lucasdias.core_components.base.data.repository.SuspendableRepositoryImpl
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus
+import com.lucasdias.core_components.base.data.response.RemoteResponse
+import com.lucasdias.extensions.itemsTypeAre
 import com.lucasdias.search.data.category.local.CategoryCache
 import com.lucasdias.search.data.category.remote.CategoryService
 import com.lucasdias.search.domain.repository.CategoryRepository
-import com.lucasdias.search.domain.sealedclass.Error
-import com.lucasdias.search.domain.sealedclass.RequestStatus
-import com.lucasdias.search.domain.sealedclass.Success
 import retrofit2.Response
 
+@Suppress("UNCHECKED_CAST")
 internal class CategoryRepositoryImpl(
     private val categoryService: CategoryService,
     private val categoryCache: CategoryCache
-) : CategoryRepository {
-
-    private companion object {
-        private const val MIN_RESPONSE_CODE = 200
-        private const val MAX_RESPONSE_CODE = 299
-    }
+) : SuspendableRepositoryImpl(), CategoryRepository {
 
     override fun isCategoryCacheEmpty(): Boolean = categoryCache.isCategoryCacheEmpty()
     override fun getCategories(): List<String>? = categoryCache.getCategories()
 
-    override suspend fun searchCategoriesFromApi(): RequestStatus {
-        val result: SuspendableResult<Response<List<String>>, Exception> =
-            SuspendableResult.of {
+    override suspend fun fetch(parameter: String?): RequestStatus {
+        val response: RemoteResponse<Response<List<String>>, Exception> =
+            RemoteResponse.of {
                 categoryService.searchFactsBySubjectFromApi()
             }
 
-        val resultCode = result.component1()?.code()
-        val resultException = result.component2()
-        val resultBody = result.component1()?.body()
-        val status = resultStatusHandler(
-            resultCode = resultCode, resultException = resultException
+        return responseHandler(
+            data = response.value()?.body(),
+            requestCode = response.value()?.code(),
+            exception = response.error()
         )
-
-        if (status == Success) {
-            onSuccess(
-                categories = resultBody
-            )
-        } else if (status == Error) {
-            val exception = result.component2()
-            logRequestException(exception = exception, resultCode = resultCode)
-        }
-
-        return status
     }
 
-    private fun onSuccess(
-        categories: List<String>?
-    ) {
-        categoryCache.setCategories(categories = categories)
-        logRequestInfo(categories = categories)
-    }
-
-    private fun resultStatusHandler(
-        resultCode: Int?,
-        resultException: java.lang.Exception?
-    ): RequestStatus {
-        if (resultCode in MIN_RESPONSE_CODE..MAX_RESPONSE_CODE) {
-            val isAnException = resultException != null
-
-            if (isAnException) return Error
-            return Success
-        } else {
-            return Error
+    override fun <Data> onSuccess(data: List<Data>?) {
+        if (data.itemsTypeAre<String>()) {
+            categoryCache.setCategories(categories = data as List<String>?)
         }
     }
 
-    private fun logRequestInfo(
-        categories: List<String>?
-    ) {
-        LogApp.i("Search", "Request response START ---------->")
-        categories?.forEach { category ->
-            LogApp.i(
-                "Search",
-                "\nCategories: $category"
-            )
-        }
-        LogApp.i("Search", "Request response END <----------")
-    }
-
-    private fun logRequestException(exception: java.lang.Exception?, resultCode: Int?) {
-        LogApp.i("Search", "Request exception START ---------->")
-        LogApp.i("Search", "Exception or ErrorCode: ${exception ?: resultCode}")
-        LogApp.i("Search", "Request exception END <----------")
-    }
+    override fun onFail(exception: java.lang.Exception?, resultCode: Int?) {}
 }

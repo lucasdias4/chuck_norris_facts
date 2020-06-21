@@ -4,11 +4,6 @@ import android.content.SharedPreferences
 
 class UserFirstTimeCache(private val sharedPreferences: SharedPreferences) {
 
-    private companion object {
-        private const val IS_USER_FIRST_TIME = "IS_USER_FIRST_TIME"
-        private const val DEFAULT_VALUE = true
-    }
-
     fun setIsNotFirstTime() {
         val isNotFirstTime = false
         val editor = sharedPreferences.edit()
@@ -18,5 +13,10 @@ class UserFirstTimeCache(private val sharedPreferences: SharedPreferences) {
 
     fun getIfIsUserFirstTime(): Boolean {
         return sharedPreferences.getBoolean(IS_USER_FIRST_TIME, DEFAULT_VALUE)
+    }
+
+    private companion object {
+        private const val IS_USER_FIRST_TIME = "IS_USER_FIRST_TIME"
+        private const val DEFAULT_VALUE = true
     }
 }

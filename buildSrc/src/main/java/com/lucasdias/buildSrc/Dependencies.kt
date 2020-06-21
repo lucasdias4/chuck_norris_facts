@@ -150,6 +150,8 @@ object Dependencies {
          */
         const val mockk: String = "io.mockk:mockk:" + Versions.mockk
 
+        const val mockk_android: String = "io.mockk:mockk-android:" + Versions.mockk
+
         const val support_espresso_core: String =
             "com.android.support.test.espresso:espresso-core:" +
                     Versions.espresso

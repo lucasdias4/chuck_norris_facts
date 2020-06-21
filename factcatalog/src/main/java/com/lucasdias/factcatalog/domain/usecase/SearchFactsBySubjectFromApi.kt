@@ -1,11 +1,13 @@
 package com.lucasdias.factcatalog.domain.usecase
 
+import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus
+import com.lucasdias.core_components.base.domain.usecase.SuspendableUseCase
 import com.lucasdias.factcatalog.domain.repository.FactCatalogRepository
-import com.lucasdias.factcatalog.domain.sealedclass.RequestStatus
 
 internal class SearchFactsBySubjectFromApi(
     private val factCatalogRepository: FactCatalogRepository
-) {
-    suspend operator fun invoke(subject: String): RequestStatus =
-        factCatalogRepository.searchFactsBySubjectFromApi(subject = subject)
+) : SuspendableUseCase<String, RequestStatus> {
+
+    override suspend operator fun invoke(parameter: String?): RequestStatus =
+            factCatalogRepository.fetch(parameter)
 }

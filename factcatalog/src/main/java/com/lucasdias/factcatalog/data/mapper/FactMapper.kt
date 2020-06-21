@@ -1,7 +1,7 @@
 package com.lucasdias.factcatalog.data.mapper
 
 import com.lucasdias.factcatalog.data.local.model.FactData
-import com.lucasdias.factcatalog.data.remote.model.FactListResponse
+import com.lucasdias.factcatalog.data.remote.model.FactResponse
 import com.lucasdias.factcatalog.domain.model.Fact
 
 internal class FactMapper {
@@ -11,10 +11,10 @@ internal class FactMapper {
         private const val HTTP = "http://"
         private const val HTTPS = "https://"
 
-        fun mapRemoteToLocal(factListResponse: FactListResponse): List<FactData> {
+        fun mapRemoteToLocal(factListResponse: List<FactResponse>): List<FactData> {
 
             val localFacts = mutableListOf<FactData>()
-            factListResponse.facts.map { remoteFact ->
+            factListResponse.map { remoteFact ->
                 val httpsUrl = makeSureTheUrlHasHttps(url = remoteFact.url)
                 val hasCategories = remoteFact.categories.isNotEmpty()
                 val categoryListAsString =

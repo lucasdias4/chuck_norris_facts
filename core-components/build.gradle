@@ -32,5 +32,7 @@ dependencies {
 
     implementation Dependencies.Core.appcompat
     implementation Dependencies.Core.core_ktx
+    implementation Dependencies.Core.coroutines_core
     implementation Dependencies.Core.kotlin_stdlib_jdk7
+    implementation Dependencies.Core.lifecycle
 }

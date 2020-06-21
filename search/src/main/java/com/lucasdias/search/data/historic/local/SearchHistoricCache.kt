@@ -4,11 +4,6 @@ import android.content.SharedPreferences
 
 internal class SearchHistoricCache(private val sharedPreferences: SharedPreferences) {
 
-    private companion object {
-        const val SEARCH_HISTORIC_KEY = "SEARCH_HISTORIC_KEY"
-        const val EMPTY_STRING = ""
-    }
-
     fun setHistoricAsString(historicAsString: String?) {
         val editor = sharedPreferences.edit()
         editor.putString(SEARCH_HISTORIC_KEY, historicAsString)
@@ -18,5 +13,10 @@ internal class SearchHistoricCache(private val sharedPreferences: SharedPreferen
     fun getHistoricAsString(): String? {
         val historicAsString = sharedPreferences.getString(SEARCH_HISTORIC_KEY, EMPTY_STRING)
         return historicAsString
+    }
+
+    private companion object {
+        const val SEARCH_HISTORIC_KEY = "SEARCH_HISTORIC_KEY"
+        const val EMPTY_STRING = ""
     }
 }
