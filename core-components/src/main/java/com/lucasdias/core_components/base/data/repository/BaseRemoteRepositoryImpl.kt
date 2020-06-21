@@ -1,8 +1,8 @@
 package com.lucasdias.core_components.base.data.repository
 
-import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus
-import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatusHandler
 import com.lucasdias.core_components.log.LogApp
+import com.lucasdias.core_components.request.statushandler.RequestStatus
+import com.lucasdias.core_components.request.statushandler.RequestStatusHandler
 
 abstract class BaseRemoteRepositoryImpl {
 

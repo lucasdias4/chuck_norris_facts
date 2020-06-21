@@ -3,8 +3,8 @@ package com.lucasdias.factcatalog.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.lucasdias.core_components.base.data.repository.BaseRemoteRepositoryImpl
-import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus
-import com.lucasdias.core_components.base.data.response.RemoteResponse
+import com.lucasdias.core_components.request.statushandler.RequestStatus
+import com.lucasdias.core_components.request.response.RequestResponse
 import com.lucasdias.extensions.itemsTypeAre
 import com.lucasdias.factcatalog.data.local.FactCatalogDao
 import com.lucasdias.factcatalog.data.local.model.FactData
@@ -30,8 +30,8 @@ internal class FactCatalogRepositoryImpl(
     override fun deleteAllFacts() = factCatalogDao.deleteAllFacts()
 
     override suspend fun fetch(parameter: String?): RequestStatus {
-        val response: RemoteResponse<Response<FactListResponse>, Exception> =
-            RemoteResponse.of {
+        val response: RequestResponse<Response<FactListResponse>, Exception> =
+            RequestResponse.of {
                 factCatalogService.searchFactsBySubjectFromApi(
                     subject = parameter
                 )

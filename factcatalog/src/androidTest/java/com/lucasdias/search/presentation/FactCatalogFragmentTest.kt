@@ -9,8 +9,8 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.internal.runner.junit4.statement.UiThreadStatement.runOnUiThread
-import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.Success
 import com.lucasdias.core_components.connectivity.Connectivity
+import com.lucasdias.core_components.request.statushandler.RequestStatus.Success
 import com.lucasdias.factcatalog.R
 import com.lucasdias.factcatalog.di.FACT_CATALOG_ADAPTER
 import com.lucasdias.factcatalog.di.FACT_CATALOG_CONNECTIVITY

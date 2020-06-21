@@ -2,16 +2,15 @@ package com.lucasdias.search.presentation
 
 import android.view.KeyEvent
 import androidx.lifecycle.MutableLiveData
-import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus
-import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus.Success
 import com.lucasdias.core_components.base.presentation.BaseViewModel
+import com.lucasdias.core_components.request.statushandler.RequestStatus
+import com.lucasdias.core_components.request.statushandler.RequestStatus.Success
 import com.lucasdias.search.domain.usecase.GetRandomCategoriesFromDatabase
 import com.lucasdias.search.domain.usecase.GetSearchHistoric
 import com.lucasdias.search.domain.usecase.IsCategoryCacheEmpty
 import com.lucasdias.search.domain.usecase.SearchCategoriesFromApi
 import com.lucasdias.search.domain.usecase.SetSearchHistoric
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.launch
 
 internal class SearchViewModel(
     internal val coroutineContext: CoroutineDispatcher,

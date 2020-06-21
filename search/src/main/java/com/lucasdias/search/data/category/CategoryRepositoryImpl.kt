@@ -1,8 +1,8 @@
 package com.lucasdias.search.data.category
 
 import com.lucasdias.core_components.base.data.repository.BaseRemoteRepositoryImpl
-import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus
-import com.lucasdias.core_components.base.data.response.RemoteResponse
+import com.lucasdias.core_components.request.response.RequestResponse
+import com.lucasdias.core_components.request.statushandler.RequestStatus
 import com.lucasdias.extensions.itemsTypeAre
 import com.lucasdias.search.data.category.local.CategoryCache
 import com.lucasdias.search.data.category.remote.CategoryService
@@ -19,8 +19,8 @@ internal class CategoryRepositoryImpl(
     override fun getCategories(): List<String>? = categoryCache.getCategories()
 
     override suspend fun fetch(parameter: String?): RequestStatus {
-        val response: RemoteResponse<Response<List<String>>, Exception> =
-            RemoteResponse.of {
+        val response: RequestResponse<Response<List<String>>, Exception> =
+            RequestResponse.of {
                 categoryService.searchFactsBySubjectFromApi()
             }
 

@@ -1,7 +1,7 @@
 package com.lucasdias.search.domain.usecase
 
-import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus
 import com.lucasdias.core_components.base.domain.usecase.BaseSuspendableUseCase
+import com.lucasdias.core_components.request.statushandler.RequestStatus
 import com.lucasdias.search.domain.repository.CategoryRepository
 
 internal class SearchCategoriesFromApi(
