@@ -4,19 +4,18 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
-import android.net.NetworkInfo
 import android.net.NetworkRequest
 import android.os.Build
 import androidx.annotation.RequiresPermission
 import androidx.lifecycle.LiveData
 
 /**
- * Esta classe pertence ao artigo de nome "ConnectivityLiveData", do autor "Alistair Sykes"
+ * Esta classe foi inspirada no artigo de nome "ConnectivityLiveData", do autor "Alistair Sykes".
  *
  * Link: https://android.jlelse.eu/connectivitylivedata-6861b9591bcc
  *
- * Ela não foi alterada pois, já que entrega um bom resultado, houve o entendimento de que não há
- * necessidade.
+ * A classe original foi refatorada e alterada para lidar com seus métodos deprecados.
+ *
  **/
 
 class Connectivity internal constructor(
@@ -31,20 +30,34 @@ class Connectivity internal constructor(
 
     private val networkCallback = object : ConnectivityManager.NetworkCallback() {
         override fun onAvailable(network: Network?) {
-            postValue(true)
+            postValue(CONNECTED)
         }
 
         override fun onLost(network: Network?) {
-            postValue(false)
+            postValue(DISCONNECTED)
         }
     }
 
     override fun onActive() {
         super.onActive()
+        notifyNetworkStatus()
+        registerNetworkCallback()
+    }
 
-        val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
-        postValue(activeNetwork?.isConnectedOrConnecting == true)
+    override fun onInactive() {
+        super.onInactive()
+        connectivityManager.unregisterNetworkCallback(networkCallback)
+    }
 
+    private fun notifyNetworkStatus() {
+        if (connectivityManager.deviceHasInternetConnection()) {
+            this.postValue(CONNECTED)
+        } else {
+            this.postValue(DISCONNECTED)
+        }
+    }
+
+    private fun registerNetworkCallback() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             connectivityManager.registerDefaultNetworkCallback(networkCallback)
         } else {
@@ -53,8 +66,16 @@ class Connectivity internal constructor(
         }
     }
 
-    override fun onInactive() {
-        super.onInactive()
-        connectivityManager.unregisterNetworkCallback(networkCallback)
+    private fun ConnectivityManager.deviceHasInternetConnection(): Boolean {
+        val hasInternetConnection =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) this.activeNetwork != null
+            else this.activeNetworkInfo?.isConnectedOrConnecting ?: DISCONNECTED
+
+        return hasInternetConnection
+    }
+
+    private companion object {
+        const val CONNECTED = true
+        const val DISCONNECTED = false
     }
 }
