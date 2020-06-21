@@ -11,7 +11,7 @@ abstract class BaseViewModel(
     private val coroutineContext: CoroutineDispatcher
 ) : ViewModel() {
 
-    fun launch(
+    fun ViewModel.launch(
         context: CoroutineContext = coroutineContext,
         block: suspend CoroutineScope.() -> Unit
     ) = viewModelScope.launch(context, block = block)
