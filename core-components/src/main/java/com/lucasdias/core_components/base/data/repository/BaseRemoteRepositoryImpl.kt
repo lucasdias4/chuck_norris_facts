@@ -4,7 +4,7 @@ import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatu
 import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatusHandler
 import com.lucasdias.core_components.log.LogApp
 
-abstract class SuspendableRepositoryImpl {
+abstract class BaseRemoteRepositoryImpl {
 
     abstract fun <Data : Any?> onSuccess(data: List<Data>?)
     abstract fun onFail(exception: java.lang.Exception?, resultCode: Int?)

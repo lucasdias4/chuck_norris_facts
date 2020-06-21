@@ -1,6 +1,6 @@
 package com.lucasdias.search.data.category
 
-import com.lucasdias.core_components.base.data.repository.SuspendableRepositoryImpl
+import com.lucasdias.core_components.base.data.repository.BaseRemoteRepositoryImpl
 import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus
 import com.lucasdias.core_components.base.data.response.RemoteResponse
 import com.lucasdias.extensions.itemsTypeAre
@@ -13,7 +13,7 @@ import retrofit2.Response
 internal class CategoryRepositoryImpl(
     private val categoryService: CategoryService,
     private val categoryCache: CategoryCache
-) : SuspendableRepositoryImpl(), CategoryRepository {
+) : BaseRemoteRepositoryImpl(), CategoryRepository {
 
     override fun isCategoryCacheEmpty(): Boolean = categoryCache.isCategoryCacheEmpty()
     override fun getCategories(): List<String>? = categoryCache.getCategories()

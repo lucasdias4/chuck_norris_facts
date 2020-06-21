@@ -1,8 +1,8 @@
 package com.lucasdias.search.domain.repository
 
-import com.lucasdias.core_components.base.domain.repository.SuspendableRepository
+import com.lucasdias.core_components.base.domain.repository.BaseRemoteRepository
 
-interface CategoryRepository : SuspendableRepository {
+interface CategoryRepository : BaseRemoteRepository {
     fun getCategories(): List<String>?
     fun isCategoryCacheEmpty(): Boolean
 }

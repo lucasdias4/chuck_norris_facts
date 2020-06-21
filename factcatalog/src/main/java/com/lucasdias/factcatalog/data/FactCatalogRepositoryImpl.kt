@@ -2,7 +2,7 @@ package com.lucasdias.factcatalog.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.lucasdias.core_components.base.data.repository.SuspendableRepositoryImpl
+import com.lucasdias.core_components.base.data.repository.BaseRemoteRepositoryImpl
 import com.lucasdias.core_components.base.data.requeststatushandler.RequestStatus
 import com.lucasdias.core_components.base.data.response.RemoteResponse
 import com.lucasdias.extensions.itemsTypeAre
@@ -20,7 +20,7 @@ import retrofit2.Response
 internal class FactCatalogRepositoryImpl(
     private val factCatalogService: FactCatalogService,
     private val factCatalogDao: FactCatalogDao
-) : SuspendableRepositoryImpl(), FactCatalogRepository {
+) : BaseRemoteRepositoryImpl(), FactCatalogRepository {
 
     override fun getAllFacts(): LiveData<List<Fact>> =
         Transformations.map(factCatalogDao.getAllFacts()) {
