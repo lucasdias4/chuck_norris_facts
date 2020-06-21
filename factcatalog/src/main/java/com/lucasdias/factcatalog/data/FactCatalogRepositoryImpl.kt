@@ -3,8 +3,8 @@ package com.lucasdias.factcatalog.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.lucasdias.core_components.base.data.repository.BaseRemoteRepositoryImpl
-import com.lucasdias.core_components.request.statushandler.RequestStatus
 import com.lucasdias.core_components.request.response.RequestResponse
+import com.lucasdias.core_components.request.statushandler.RequestStatus
 import com.lucasdias.extensions.itemsTypeAre
 import com.lucasdias.factcatalog.data.local.FactCatalogDao
 import com.lucasdias.factcatalog.data.local.model.FactData
