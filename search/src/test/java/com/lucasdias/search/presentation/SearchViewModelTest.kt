@@ -45,7 +45,7 @@ class SearchViewModelTest {
     private var showSuggestionAndHistoricViews: MutableLiveData<Unit> = mockk()
 
     @Test
-    fun `IF the application needs to display a list of categories THAN always calls the isCategoryCacheEmpty method to find out if the application already has a list in the cache`() {
+    fun `IF the application needs to display a list of categories THEN always calls the isCategoryCacheEmpty method to find out if the application already has a list in the cache`() {
         searchCategoriesMethodSetup()
 
         coEvery {
@@ -54,7 +54,7 @@ class SearchViewModelTest {
 
         coEvery {
             viewModel.searchCategoriesFromApi(any())
-        } returns ClientError()
+        } returns Success()
 
         coroutinesTestRule.testDispatcher.runBlockingTest {
             viewModel.searchCategories()
